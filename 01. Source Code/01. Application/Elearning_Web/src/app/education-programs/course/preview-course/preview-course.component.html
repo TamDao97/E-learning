@@ -1,0 +1,128 @@
+<div class="modal-header">
+    <h4 class="modal-title text-uppercase" style="line-height: 20px;">{{modalInfo.title}}</h4>
+    <a href="javascript:;" style="outline: none; color: white;" (click)="closeModal(true)">
+        <i class="fa fa-close"></i>
+    </a>
+</div>
+<form name="form" #f="ngForm" novalidate>
+    <div class="modal-body">
+        <section class="menu-header-detail">
+            <div class="wrapper">
+                <div class="row">
+                    <header class="col-xl-12 col-lg-12">
+                        <h1>Khóa học: <span style="color: #2a70b8; font-weight: bolder;">{{model.name}}</span></h1>
+                    </header>
+                </div>
+            </div>
+        </section>
+        <div class="wrapper">
+            <div class="row">
+                <header class="col-xl-12 col-lg-12">
+                    <div class="td-module-meta-info">
+                        <span class="fontsize">
+                            <time class="entry-date updated td-module-date" datetime="2020-12-06T15:09:24+00:00"></time>
+                            <i class="fas fa-calendar" aria-hidden="true"></i>
+                            &nbsp;{{model.startDate|date:'dd-MM-yyyy'}}
+                        </span>
+                    </div>
+                </header>
+            </div>
+
+            <div class="row">
+                <div class="col-xl-9 col-lg-9">
+                    <section class="ftco-section" id="contentLesson">
+                        <h2> Giới thiệu khóa học</h2>
+                        <p>{{model.description}}</p>
+                        <h2 class="course-detail-stitle">
+                            <span>Nội dung khóa học</span>
+                        </h2>
+                        <p [innerHTML]="model.content | safeHtml"></p>
+                    </section>
+                </div>
+                <div class="col-xl-3 col-lg-3 text-center">
+                    <section class="ftco-section">
+                        <h2>Giảng viên</h2>
+                        <br />
+                        <div class="row  pb-5" *ngFor="let item of listMentor">
+                            <div class="col-xl-12 col-lg-12 ">
+                                <img class="rounded-circle" width="150px" height="150px"
+                                    src="{{config.ServerApi + item.avatar}}" alt="" />
+                            </div>
+                            <div class="col-xl-12 col-lg-12 mt-1">
+                                <strong class="d-block">
+                                    <span>
+                                        <i class="fas fa-book">
+                                            {{item.numberOfCourse}} khóa học
+                                        </i>
+                                    </span>
+                                </strong>
+                            </div>
+                            <div class="col-lg-12 col-xl-12 mt-3">
+                                <h4 style="font-size: 15px;">{{item.name}}</h4>
+                                <p class="text-limit-3row" style="font-size: 13px;">{{item.description}}</p>
+                                <p>{{item.workUnit}}</p>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                    <section class="ftco-section">
+                        <a style="color:white;" class="course-title">Nội dung bài học</a>
+                        <div class="course-content">
+                            <div id="learn-outline-section-1072239"
+                                class="col-xl-12 col-lg-12 col-md-12 col-sm-12 learn-outline-list">
+                                <div class="learn-outline-item" *ngFor="let item of listLesson;let i = index">
+                                    <a id=" scorm-right-link-wr-94656"
+                                        class="learn-lesson-wr scorm-right-link-wr  scorm-free"
+                                        (click)="previewLesson(item.lessonId,item.type)" title="{{item.name}}">
+                                        <div class="lesson-process-wr">
+                                            <span class="lesson-process-percent"><i class="fa "></i></span>
+                                        </div>
+                                        <h4 class="scorm-right-name visible">
+                                            <span class="fontsize15 scorm-right-link">Bài {{i+1}}:
+                                                {{item.name}}</span>
+                                        </h4>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <ng-container *ngIf="model.approvalStatus===0 || model.approvalStatus===3 || model.approvalStatus===4">
+            <button *appUipermission="['F000105']" type="button" class="btn btn-info" (click)="requestCourse()">
+                <i class="fas fa-share"></i>&nbsp;
+                <span>Yêu cầu duyệt</span>
+            </button>
+        </ng-container>
+        <ng-container *ngIf="model.approvalStatus===1">
+            <button *appUipermission="['F000106']" type="button" class="btn btn-success" (click)="approvalCourse()">
+                <i class="fas fa-check"></i>&nbsp;
+                <span>Duyệt</span>
+            </button>
+        </ng-container>
+        <ng-container *ngIf="model.approvalStatus===1">
+            <button *appUipermission="['F000106']" type="button" class="btn btn-danger" (click)="notApprovalCourse()">
+                <i class="fas fa-exclamation"></i>&nbsp;
+                <span>Không duyệt</span>
+            </button>
+        </ng-container>
+        <ng-container *ngIf="model.approvalStatus===2">
+            <button *appUipermission="['F000106']" type="button" class="btn btn-danger" (click)="canceCourse()">
+                <i class="fas fa-ban"></i>&nbsp;
+                <span>Hủy duyệt</span>
+            </button>
+        </ng-container>
+        <button type="button" class="btn btn-danger" (click)="closeModal(false)">
+            <i class="fa fa-power-off"></i> &nbsp;
+            <span>
+                Đóng
+            </span>
+        </button>
+    </div>
+</form>

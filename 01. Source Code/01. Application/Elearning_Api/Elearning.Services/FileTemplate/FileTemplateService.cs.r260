@@ -1,0 +1,143 @@
+﻿using Elearning.Model.Models.FileTemplate;
+using Elearning.Models;
+using Elearning.Models.Entities;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
+using NTS.Common;
+using NTS.Common.Files;
+using NTS.Common.Resource;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Elearning.Services.FileTemplate
+{
+    public class FileTemplateService : IFileTemplateService
+    {
+        private readonly ElearningContext sqlContext;
+        private readonly IUploadFileService uploadFileService;
+        public FileTemplateService(ElearningContext sqlContext, IUploadFileService uploadFileService)
+        {
+            this.sqlContext = sqlContext;
+            this.uploadFileService = uploadFileService;
+        }
+
+        public async Task CreateAsync(FileTemplateModel model, string userId)
+        {
+            bool isExistCode = await sqlContext.FileTemplate.AsNoTracking().AnyAsync(r => r.Code.Equals(model.Code));
+
+            if (isExistCode)
+            {
+                throw NTSException.CreateInstance(MessageResourceKey.MSG0037, "Mã mẫu");
+            }
+
+            Model.Entities.FileTemplate fileTemplate = new Model.Entities.FileTemplate
+            {
+                Id = Guid.NewGuid().ToString(),
+                Code = model.Code,
+                Name = model.Name,
+                FilePath = model.FilePath,
+                Index = model.Index,
+                Description = model.Description,
+                CreateBy = userId,
+                CreateDate = DateTime.Now,
+                Type = true
+            };
+
+            try
+            {
+                sqlContext.FileTemplate.Add(fileTemplate);
+                sqlContext.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public async Task DeleteAsync(string id, string userId)
+        {
+            var modelDelete = await sqlContext.FileTemplate.FindAsync(id);
+
+            if (modelDelete == null)
+            {
+                throw NTSException.CreateInstance(MessageResourceKey.MSG0019, "Mẫu");
+            }
+
+            sqlContext.Remove(modelDelete);
+            try
+            {
+                sqlContext.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public async Task<Model.Entities.FileTemplate> GetByIdAsync(string id)
+        {
+            Model.Entities.FileTemplate model = await sqlContext.FileTemplate.FindAsync(id);
+
+            if (model == null)
+            {
+                throw NTSException.CreateInstance(MessageResourceKey.MSG0019, "Mẫu");
+            }
+
+            return model;
+        }
+
+        public async Task<List<FileTemplateModel>> SearchAsync()
+        {
+            List<FileTemplateModel> listData = await sqlContext.FileTemplate.AsNoTracking()
+                .Where(r => r.Type.Value).Select(r => new FileTemplateModel
+                {
+                    Id = r.Id,
+                    Code = r.Code,
+                    Name = r.Name,
+                    Description = r.Description,
+                    FilePath = r.FilePath,
+                    CreateBy = r.CreateBy,
+                    UpdateDate = r.UpdateDate
+                }).ToListAsync();
+
+            return listData;
+        }
+
+        public async Task UpdateAsync(FileTemplateModel model, string userId)
+        {
+            var modelEdit = sqlContext.FileTemplate.Find(model.Id);
+
+            bool isExistCode = await sqlContext.FileTemplate.AsNoTracking().AnyAsync(r => r.Code.Equals(model.Code) && !modelEdit.Code.Equals(model.Code));
+
+            if (isExistCode)
+            {
+                throw NTSException.CreateInstance(MessageResourceKey.MSG0037, "Mã mẫu");
+            }
+
+            modelEdit.Code = model.Code;
+            modelEdit.Name = model.Name;
+            modelEdit.Description = model.Description;
+            modelEdit.Index = model.Index;
+            modelEdit.Type = model.Type;
+            modelEdit.UpdateBy = userId;
+            modelEdit.UpdateDate = model.UpdateDate;
+
+            if (!modelEdit.FilePath.Contains(model.FilePath))
+            {
+                modelEdit.FilePath = model.FilePath;
+            }
+
+            try
+            {
+                sqlContext.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+    }
+}

@@ -1,0 +1,164 @@
+<div class='content-wrapper'>
+    <section class="box">
+        <div class="content-body">
+            <form name="searchForm" #f="ngForm">
+                <div class="row">
+                    <div class="col-xl-8 col-lg-8 col-md-8">
+                        <nts-search-bar [(options)]="searchOptions" [(ngModel)]="model" name="searchModel" (change)="searchUserExpert()">
+                        </nts-search-bar>
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-4 text-right">
+                        <button class="btn btn-success" (click)="searchUserExpert()">
+                            <i class="fa fa-search"></i> &nbsp;Tìm kiếm</button>
+                        <button class="btn btn-secondary" (click)="clear()">
+                            <i class="fas fa-redo-alt"></i> &nbsp;Làm mới</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="content-body">
+            <div class="row margin-bottom-10">
+                <div class="col-md-6 text-left">
+                    <label class="form-label" style="line-height:35px;">Tổng số
+                        <span class="bold text-danger font-weight-bold">{{model.TotalItems}}</span> tài khoản chuyên gia</label>
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-6 text-right">
+                    <button *appUipermission="['F000451']" type="button" class="btn btn-success" (click)="showCreate(2)" container="body">
+                        <i class="fa fa-plus"></i>
+                        Thêm mới
+                    </button>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-lg-12">
+                    <perfect-scrollbar [config]="constant.ScrollXConfig" style="height:auto; width:100%;">
+                        <table class="table table-bordered table-hover" style="min-width:1900px">
+                            <thead>
+                                <tr>
+                                    <th width="50px" class="text-center">STT</th>
+                                    <th width="220px" class="text-center">Xử lý</th>
+                                    <th width="120px" class="text-center">Tình trạng</th>
+                                    <th width="80px" class="text-center">Avatar</th>
+                                    <th width="150px" class="text-center">Tên tài khoản</th>
+                                    <th width="150px" class="text-center">Họ và tên</th>
+                                    <th width="100px" class="text-center">Giới tính</th>
+                                    <th width="100px" class="text-center">Ngày sinh</th>
+                                    <th width="100px" class="text-center">Email</th>
+                                    <th width="120px" class="text-center">Số điện thoại</th>
+                                    <th width="150px" class="text-center">Đơn vị</th>
+                                    <th width="150px" class="text-center">Nơi công tác</th>
+                                    <th width="200px" class="text-center">Địa chỉ</th>
+                                    <th style="min-width: 100px;" class="text-center">Mô tả</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let row of listData; let i = index">
+                                    <td class="text-center">{{startIndex+i}}</td>
+                                    <td>
+                                        <ng-container>
+                                            <button *appUipermission="['F000454']" name="refeshpassword" class="btn btn-xs btn-success" (click)="showViewUser(row.id, 2)" placement="bottom" ngbTooltip="Xem thông tin">
+                                                <span class="fas fa-eye" aria-hidden="true"></span>
+                                            </button>
+                                        </ng-container>
+                                        <ng-container>
+                                            <button *appUipermission="['F000457']" name="refeshpassword" class="btn btn-xs btn-info" (click)="showRefreshPassword(row.id)" placement="bottom" ngbTooltip="Đặt lại mật khẩu">
+                                                <span class="fas fa-sync-alt" aria-hidden="true"></span>
+                                            </button>
+                                        </ng-container>
+
+                                        <ng-container *ngIf="row.isDisable ==false && row.id != userId">
+                                            <button *appUipermission="['F000455']" name="disable" class="btn btn-xs btn-success" (click)="showConfirmLockUser(row.userId)" placement="bottom" ngbTooltip="Khóa tài khoản ">
+                                                <span class="fas fa-lock-open" aria-hidden="true"></span>
+                                            </button>
+                                        </ng-container>
+
+                                        <ng-container *ngIf="row.isDisable==true && row.id != userId">
+                                            <button *appUipermission="['F000456']" name="disableopen" class="btn btn-xs btn-danger" (click)="showConfirmUnLockUser(row.id)" placement="bottom" ngbTooltip="Mở khóa tài khoản">
+                                                <span class="fas fa-lock" aria-hidden="true"></span>
+                                            </button>
+                                        </ng-container>
+
+                                        <button *appUipermission="['F000452']" type="button" (click)='showUpdate(row.id,2)' class="btn btn-xs btn-warning" placement="bottom" ngbTooltip="Cập nhật" container="body">
+                                            <span class="fa fa-edit" aria-hidden="true"></span>
+                                        </button>
+                                        <ng-container *ngIf="userId != row.id">
+                                            <button *appUipermission="['F000453']" class="btn btn-xs btn-danger" (click)="showConfirmDelete(row.id)" placement="bottom" ngbTooltip="Xóa" container="body">
+                                            <span class="fas fa-trash-alt" aria-hidden="true"></span>
+                                        </button>
+                                        </ng-container>
+
+                                    </td>
+                                    <td>
+                                        <nts-status-badge [items]="constant.statusUserAdmin" [value]="row.isDisable">
+                                        </nts-status-badge>
+                                    </td>
+                                    <td> <img class="card-img-top" [src]="row.avatar==null || row.avatar=='' ? '/assets/img/noavatar.gif':config.ServerApi + row.avatar"></td>
+                                    <td>{{row.userName}}</td>
+                                    <td>{{row.name}}</td>
+                                    <td>{{row.gender}}</td>
+                                    <td>{{row.birthday| date:'dd-MM-yyyy'}}</td>
+                                    <td>{{row.email}}</td>
+                                    <td>{{row.phoneNumber}}</td>
+                                    <td>{{row.managerUnitName}}</td>
+                                    <td>{{row.workUnit}}</td>
+                                    <td>{{row.address}}</td>
+                                    <td>{{row.description|limitTo:60}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </perfect-scrollbar>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-12 d-flex justify-content-start">
+                    <div class="controls ">
+                        <select class="form-control" style="border: 1px solid #ddd;" [(ngModel)]="model.PageSize" (ngModelChange)="searchUserExpert()" name="pageSize">
+                            <option *ngFor="let item of constant.ListPageSize" [value]="item">{{item}}</option>
+                        </select>
+                    </div>
+                    <label class="form-label " style="padding: 4px;">bản ghi/Trang</label>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12  d-flex justify-content-end">
+                    <ngb-pagination [collectionSize]="model.TotalItems" [(page)]="model.PageNumber" (pageChange)="searchUserExpert()" [pageSize]="model.PageSize" [maxSize]="5" [rotate]="true" [boundaryLinks]="true"></ngb-pagination>
+                </div>
+            </div>
+
+
+            <hr />
+            <div class="row">
+                <div class="col-md-12">
+                    <button class="btn btn-view btn-success">
+                        <i class="fas fa-eye"></i>
+                    </button>&nbsp;
+                    <small class="padding-right-20">Xem thông tin</small>
+                    <button class="btn btn-view btn-info">
+                        <i class="fas fa-sync-alt"></i>
+                    </button>&nbsp;
+                    <small class="padding-right-20">Đặt lại mật khẩu</small>
+
+                    <button class="btn btn-view btn-success">
+                        <i class="fas fa-lock-open"></i>
+                    </button>&nbsp;
+                    <small class="padding-right-20">Khóa tài khoản</small>
+
+                    <button class="btn btn-view btn-danger">
+                        <i class="fas fa-lock"></i>
+                    </button>&nbsp;
+                    <small class="padding-right-20">Mở khóa tài khoản</small>
+
+                    <button class="btn btn-view btn-warning">
+                        <i class="fa fa-edit"></i>
+                    </button>&nbsp;
+                    <small class="padding-right-20">Chỉnh sửa tài khoản</small>
+
+                    <button class="btn btn-view btn-danger">
+                        <i class="fas fa-trash-alt"></i>
+                    </button>&nbsp;
+                    <small class="padding-right-20">Xóa tài khoản</small>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

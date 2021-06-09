@@ -1,0 +1,67 @@
+app-home-silder {
+    .bodycontainer {
+        min-width: 100%;
+        margin-right: auto;
+        margin-left: auto;
+    }
+
+    @media (max-width: 575px) {
+        .bodycontainer {
+            max-width: 540px;
+            padding-top: 150px;
+        }
+    }
+
+    @media (min-width: 576px) {
+        .bodycontainer {
+            max-width: 540px;
+            padding-top: 150px;
+        }
+    }
+
+    @media (min-width: 768px) {
+        .bodycontainer {
+            max-width: 1000px;
+            padding-top: 0px;
+        }
+    }
+
+    @media (min-width: 992px) {
+        .bodycontainer {
+            max-width: 1200px;
+            padding-top: 0px;
+        }
+    }
+
+    @media (min-width: 1200px) {
+        .bodycontainer {
+            max-width: 1600px;
+            padding-top: 0px;
+        }
+    }
+
+    @media (min-width: 576px) {
+        .img {
+            min-width: 100% !important;
+            min-height: 80% !important;
+        }
+    }
+    @media (min-width: 768px) {
+        .img {
+            min-width: 100% !important;
+            min-height: 80% !important;
+        }
+    }
+    @media (min-width: 992px) {
+        .img {
+            min-width: 100% !important;
+            min-height: 80% !important;
+        }
+    }
+    @media (min-width: 1200px) {
+        .img {
+            min-width: 100% !important;
+            min-height: 80% !important;
+        }
+    }
+}

@@ -1,0 +1,95 @@
+<div class="modal-header">
+    <h4 class="modal-title text-uppercase">Chọn giảng viên</h4>
+    <a href="javascript:;" style="outline: none; color: white" (click)="closeModal()">
+        <i class="fa fa-close"></i>
+    </a>
+</div>
+<div class="modal-body padding-10">
+    <form name="outerForm" class="tab-form-demo">
+        <div class="row">
+            <div class="col-xl-8 col-lg-8 col-md-8">
+                <nts-search-bar [(options)]="searchOptions" [(ngModel)]="model" name="searchModel" (change)="search()">
+                </nts-search-bar>
+            </div>
+            <div class="col-xl-4 col-lg-4 col-md-4 text-right">
+                <button class="btn btn-success" (click)="search()">
+                    <i class="fa fa-search"></i> &nbsp;Tìm kiếm</button>
+                <button class="btn btn-secondary" (click)="clear()">
+                    <i class="fas fa-redo-alt"></i> &nbsp;Làm mới</button>
+            </div>
+        </div>
+        <div class="row margin-bottom-10">
+            <div class="col-md-6 text-left">
+                <label class="form-label" style="line-height:35px;">Tổng số
+                    <span class="bold text-danger">{{model.TotalItems}}</span> giảng viên</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <perfect-scrollbar [config]="constant.ScrollXConfig" style="height:auto; width:100%;">
+                    <table class="table table-bordered table-hover" style="min-width:1300px">
+                        <thead>
+                            <tr>
+                                <th width="20px"></th>
+                                <th width="20px" class="text-center">STT</th>
+                                <th width="100px" class="text-center">Họ tên</th>
+                                <th width="150px" class="text-center">Đơn vị</th>
+                                <th width="100px" class="text-center">Địa chỉ</th>
+                                <th width="100px" class="text-center">Email</th>
+                                <th width="200px" class="text-center">Số điện thoại</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let row of listData; let i = index">
+                                <td width="20px">
+                                    <div>
+                                        <input type="checkbox" [id]="'phonenumber'+i" [(ngModel)]="row.isChecked" [ngModelOptions]="{standalone: true}" (change)="selectChange($event, row)">
+                                    </div>
+                                </td>
+                                <td class="text-center">{{startIndex+i}}</td>
+                                <td>{{row.name}}</td>
+                                <td>
+                                    <span *ngIf="row.logo!=null && row.logo!=''">
+                                        <img width="45px" height="45px" class="img-list"
+                                            [src]="config.ServerApi+row.logo">
+                                    </span> {{row.manageUnit}}
+                                </td>
+                                <td>{{row.address}}</td>
+                                <td>{{row.email}}</td>
+                                <td>{{row.phoneNumber}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </perfect-scrollbar>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-12 d-flex justify-content-start">
+                <div class="controls ">
+                    <select class="form-control" style="border: 1px solid #ddd;" [(ngModel)]="model.PageSize" (ngModelChange)="search()" name="pageSize">
+                        <option *ngFor="let item of listPageSize" [value]="item">{{item}}</option>
+                    </select>
+                </div>
+                <label class="form-label " style="padding: 4px;"> bản ghi/Trang</label>
+            </div>
+            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12  d-flex justify-content-end">
+                <ngb-pagination [collectionSize]="model.TotalItems" [(page)]="model.PageNumber" (pageChange)="search()" [pageSize]="model.PageSize" [maxSize]="5" [rotate]="true" [boundaryLinks]="true"></ngb-pagination>
+            </div>
+        </div>
+    </form>
+</div>
+
+<!-- Footer -->
+<div class="modal-footer">
+    <ng-container>
+        <button type="button" class="btn btn-success" (click)="save()">
+            <i class="fa fa-save"></i>&nbsp;
+            <span>Lưu</span>
+        </button>
+    </ng-container>
+    <button type="button" class="btn btn-danger" (click)="closeModal()">
+        <i class="fa fa-power-off"></i> &nbsp;
+        <span>Hủy</span>
+    </button>
+</div>

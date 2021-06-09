@@ -1,0 +1,86 @@
+app-registration-user {
+    .fb-social {
+        background: url(../../../assets/img/fb-39.png) no-repeat;
+    }
+
+    .facebook-link,
+    .google-link {
+        background: url(../../../assets/img/facebook.png) #4267b2 no-repeat 10px 12px;
+        color: #fff;
+        font-weight: bold;
+        padding: 12px 20px 12px 35px;
+        text-align: center;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .google-social {
+        background: url(../../../assets/img/google-39.png) no-repeat;
+    }
+
+    .google-link {
+        background: url(../../../assets/img/google.png) #dc4e41 no-repeat 10px 12px;
+    }
+
+    .signupforms .password-hold-left {
+        width: 48%;
+        float: left;
+    }
+
+    .signupforms #passwordtxt, .signupforms #repaswordtxt {
+        width: 100%;
+    }
+
+    .signupforms input {
+        border: 1px solid #e2e2e2;
+        display: table-cell;
+        position: relative;
+        z-index: 2;
+        float: left;
+        width: 100%;
+        margin-bottom: 0;
+        height: 34px;
+        padding: 6px 12px;
+        font-size: 14px;
+        line-height: 1.42857143;
+        color: #555;
+        background-color: #fff;
+        border: 1px solid #9f978e;
+        border-radius: 4px;
+    }
+
+    .signupforms .password-hold-right {
+        width: 48%;
+        float: right;
+    }
+
+    .signupforms #passwordtxt, .signupforms #repaswordtxt {
+        width: 100%;
+    }
+
+    .signupforms input {
+        border: 1px solid #e2e2e2;
+    }
+
+    .signupforms input {
+        display: table-cell;
+        position: relative;
+        z-index: 2;
+        float: left;
+        width: 100%;
+        margin-bottom: 0;
+        height: 34px;
+        padding: 6px 12px;
+        font-size: 14px;
+        line-height: 1.42857143;
+        color: #555;
+        background-color: #fff;
+        border: 1px solid #9f978e;
+        border-radius: 4px;
+    }
+
+    input[type="password" i] {
+        -webkit-text-security: disc !important;
+        padding: 1px 2px;
+    }
+}

@@ -1,0 +1,34 @@
+<div class="modal-header">
+    <h4 class="modal-title text-uppercase" style="line-height: 20px;">{{modalInfo.Title}}</h4>
+    <a href="javascript:;" style="outline: none; color: white" (click)="closeModal()">
+        <i class="fa fa-close"></i>
+    </a>
+</div>
+<form name="form" #f="ngForm" novalidate>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-xl-12 col-md-12 col-lg-12 col-sm-12">
+                <div class="form-group ">
+                    <label class="form-label">Nội dung</label>
+                    <textarea type="text" class="form-control" name="content" [(ngModel)]="content" rows="5"
+                        required></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer -->
+    <div class="modal-footer">
+        <ng-container>
+            <button type="button" class="btn btn-success" [hidden]="!f.form.valid" (click)="save()">
+                <i class="fa fa-save"></i>&nbsp;
+                <span>Lưu</span>
+            </button>
+        </ng-container>
+        <button type="button" class="btn btn-danger" (click)="closeModal()">
+            <i class="fa fa-power-off"></i> &nbsp;
+            <span>
+                Đóng
+            </span>
+        </button>
+    </div>
+</form>

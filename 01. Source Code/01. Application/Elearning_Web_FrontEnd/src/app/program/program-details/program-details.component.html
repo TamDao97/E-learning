@@ -1,0 +1,108 @@
+<section class="menu-header-detail">
+    <div class="wrapper">
+        <div class="row">
+            <header class="col-xl-12 col-lg-12">
+                <h1> Chương trình: <span style="color: #2a70b8; font-weight: bolder;">{{model.name}}</span></h1>
+            </header>
+        </div>
+    </div>
+</section>
+<div class="wrapper">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="d-flex flex-row bd-highlight">
+                <div class="bd-highlight">
+                    <span class="fontsize">
+                        <i class="fa fa-graduation-cap"></i> {{totalCourse}} khóa học
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xl-9 col-lg-9 col-md-9 col-sm-12">
+            <section class="ftco-section">
+                <h2> Giới thiệu chương trình đào tạo</h2>
+                <p>{{model.description}}</p>
+                <h2> Nội dung chương trình</h2>
+                <p [innerHTML]="model.content"></p>
+            </section>
+        </div>
+        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 text-center">
+            <section class="ftco-section">
+                <h2>Các chương trình đào tạo</h2>
+                <br />
+                <div class="row  pb-5" *ngFor="let item of listProgram">
+                    <div *ngIf="item.imagePath!=null && item.imagePath!=''" class="col-xl-12 col-lg-12 ">
+                        <img class="rounded-circle" width="150px" height="150px" src="{{config.ServerApi + item.imagePath}}" alt="" />
+                    </div>
+                    <div *ngIf="item.imagePath==null && item.imagePath==''" class="col-xl-12 col-lg-12 ">
+                        <img class="rounded-circle" width="150px" height="150px" style="background-image: url('/assets/img/noavatar.gif');" alt="" />
+                    </div>
+                    <div class="col-lg-12 col-xl-12 mt-3">
+                        <h4 style="font-size: 15px;"><a [href]="['#/chi-tiet-chuong-trinh/'+item.slug]" (click)="routerLink(item.slug)">{{item.name}}</a></h4>
+                        <p class="text-limit-3row" style="font-size: 13px;">{{item.description}}</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+            <section class="ftco-section">
+                <div style="margin-left: -5px; margin-right: -5px;">
+                    <a style="color:white;" class="course-title">Các khóa học</a>
+                </div>
+                <div class="row justify-content-center course-content" style="margin-left: -5px; margin-right: -5px;">
+                    <div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 course course-detail card shadow-sm p-2" *ngFor="let a of model.listCourse;let i = index">
+                        <span *ngIf="a.imagePath!=null && a.imagePath!=''" style="margin-top: 10px;">
+                            <div class="img align-self-stretch"
+                                style="background-image: url({{config.ServerApi+a.imagePath}});"></div>
+                        </span>
+                        <span *ngIf="a.imagePath==null || a.imagePath==''" style="margin-top: 15px;">
+                            <div class="img align-self-stretch" style="background-image: url('/assets/img/noavatar.gif');">
+                            </div>
+                        </span>
+                        <div class="text pt-4">
+                            <p class="meta d-flex">
+                                <span style="width: 60%;"><i class="fas fa-user mr-2"></i>
+                                    <div class="dropdown d-inline">
+                                        <span class="dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown"
+                                            aria-haspopup="true" aria-expanded="false">Chuyên gia(
+                                            {{a.listEmployeeName.length}}
+                                            )
+                                        </span>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <p class="dropdown-item" *ngFor="let b of a.listEmployeeName;">{{b}}</p>
+                                </div>
+                        </div>
+                        </span>
+                        <span style="width: 20%;"><i class="fas fa-book mr-2"
+                                        title="Bài học"></i>{{a.numberOfLesson}}</span>
+                        <span style="width: 20%;"><i class="fas fa-users mr-2"
+                                        title="Số người đăng"></i>{{a.numberOfLearner}}</span>
+                        </p>
+                        <h3 style="height: 54px;" class="text-limit-2row"><a [href]="['#/chi-tiet-khoa-hoc/'+a.slug]">{{a.name}}</a>
+                        </h3>
+                        <p style="height: 51px;" class="text-limit-2row">{{a.description}}</p>
+                        <p *ngIf="isLogin==false"><a href="javascript:void(0)" class="btn btn-primary" (click)="handling(a.id,a.isLearned,a.finishDate,a.slug)" class="btn btn-primary">Đăng ký</a>
+                        </p>
+
+                        <p *ngIf="isLogin==true&&a.isLearned==false&&dateNow.getTime()<= dateUntil.getTimetoDateString(a.finishDate)">
+                            <a href="javascript:void(0)" class="btn btn-primary" (click)="handling(a.id,a.isLearned,a.finishDate)" class="btn btn-primary">Đăng ký</a>
+                        </p>
+
+                        <p *ngIf="isLogin==true&&a.isLearned==true"><a [href]="['#/chi-tiet-khoa-hoc/'+a.slug]" class="btn btn-success" class="btn btn-success">Vào học</a>
+                        </p>
+
+                        <p *ngIf="dateNow.getTime()> dateUntil.getTimetoDateString(a.finishDate) &&isLogin==true&&a.isLearned==false" style="pointer-events: none;">
+                            <a href="javascript:void(0)" class="btn btn-primary" class="btn btn-dark">Kết thúc</a>
+                        </p>
+                    </div>
+                </div>
+        </div>
+
+        </section>
+    </div>
+</div>
+</div>

@@ -1,0 +1,121 @@
+<div class="content-wrapper">
+    <section class="box">
+        <div class="content-body">
+            <div class="row margin-bottom-10">
+                <div class="col-md-6 text-left">
+                    <h3>Cấu hình thông số</h3>
+                </div>
+                <div class="col-md-6 text-right">
+                    <button type="button" class="btn btn-success" (click)="update()" container="body">
+                        <i class="fa fa-plus"></i>
+                        Cập nhật
+                    </button>
+                </div>
+            </div>
+            <div class="row margin-bottom-10">
+                <ng-container *ngIf="listData.length > 0">
+                    <ng-container *ngFor="let row of listData; let i = index">
+                        <ng-container *ngIf="row.controlType==1">
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                                <div class="form-group dr">
+                                    <label
+                                        class="form-label col-xl-5 col-lg-5 col-md-5 col-sm-6">{{row.displayName}}</label>
+                                    <div class="controls">
+                                        <input type="text" class="form-control" [(ngModel)]="row.paramValue"
+                                            [name]="row.paramName+i">
+                                    </div>
+                                </div>
+                            </div>
+                        </ng-container>
+                        <ng-container *ngIf="row.controlType==2">
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                                <div class="form-group dr">
+                                    <label
+                                        class="form-label col-xl-5 col-lg-5 col-md-5 col-sm-6">{{row.displayName}}</label>
+                                    <div class="controls">
+                                        <textarea type="text" class="form-control" rows="3"
+                                            [(ngModel)]="row.paramValue" [name]="row.paramName+i"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </ng-container>
+                        <ng-container *ngIf="row.controlType==3">
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                                <div class="form-group dr">
+                                    <label
+                                        class="form-label col-xl-5 col-lg-5 col-md-5 col-sm-6">{{row.displayName}}</label>
+                                    <div class="controls">
+                                        <input currencyMask
+                                            [options]="{align:'left', prefix: '', thousands: ',', decimal: '.', precision: 0}"
+                                            type="text" class="form-control" [(ngModel)]="row.paramValue"
+                                            [name]="row.paramName+i">
+                                    </div>
+                                </div>
+                            </div>
+                        </ng-container>
+                        <ng-container *ngIf="row.controlType==4">
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                                <div class="form-group dr">
+                                    <label
+                                        class="form-label col-xl-5 col-lg-5 col-md-5 col-sm-6">{{row.displayName}}</label>
+                                    <div class="controls">
+                                        <label class="switch">
+                                            <input type="checkbox" [checked]="row.paramValue"
+                                                [(ngModel)]="row.paramValue" [name]="row.paramName+i">
+                                            <span class="slider round"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </ng-container>
+                        <ng-container *ngIf="row.controlType==5">
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                                <div class="form-group dr">
+                                    <label
+                                        class="form-label col-xl-5 col-lg-5 col-md-5 col-sm-6">{{row.displayName}}</label>
+                                    <div class="input-group">
+                                        <input disabled class="form-control" placeholder="dd/mm/yyyy"
+                                            [name]="row.paramName+i" [(ngModel)]="row.paramValue" ngbDatepicker
+                                            #df="ngbDatepicker">
+                                        <div class="input-group-append">
+                                            <span class="input-group-text pointer" (click)="df.toggle()">
+                                                <i class="far fa-calendar-alt" style="color: #999;"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </ng-container>
+                        <ng-container *ngIf="row.controlType==6">
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                                <div class="form-group dr">
+                                    <label
+                                        class="form-label col-xl-5 col-lg-5 col-md-5 col-sm-6">{{row.displayName}}</label>
+                                    <div class="custom-control custom-radio custom-control-inline">
+                                        <input type="radio" class="custom-control-input" id="defaultInline1"
+                                            [name]="row.paramName+i" [(ngModel)]="row.paramValue" [value]="'1'">
+                                        <label class="custom-control-label" style="line-height: 25px;"
+                                            for="defaultInline1">SMS</label>
+                                    </div>
+                                    <div class="custom-control custom-radio custom-control-inline">
+                                        <input type="radio" class="custom-control-input" id="defaultInline2"
+                                            [name]="row.paramName+i" [(ngModel)]="row.paramValue" [value]="'2'">
+                                        <label class="custom-control-label" style="line-height: 25px;"
+                                            for="defaultInline2">Email</label>
+                                    </div>
+                                    <div class="custom-control custom-radio custom-control-inline">
+                                        <input type="radio" class="custom-control-input" id="defaultInline3"
+                                            [name]="row.paramName+i" [(ngModel)]="row.paramValue" [value]="'3'">
+                                        <label class="custom-control-label" style="line-height: 25px;"
+                                            for="defaultInline3">Tất
+                                            cả</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </ng-container>
+                    </ng-container>
+                </ng-container>
+            </div>
+        </div>
+    </section>
+</div>

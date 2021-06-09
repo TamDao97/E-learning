@@ -1,0 +1,816 @@
+﻿{
+  "Groups": [
+    {
+      "Id": "GF0001",
+      "Code": "GF0001",
+      "Name": "Dashboard",
+      "Index": "1"
+    },
+    {
+      "Id": "GF0002",
+      "Code": "GF0002",
+      "Name": "Chương trinh đào tạo",
+      "Index": "2"
+    },
+    {
+      "Id": "GF0003",
+      "Code": "GF0003",
+      "Name": "Quản lý khóa học",
+      "Index": "3"
+    },
+    {
+      "Id": "GF0004",
+      "Code": "GF0004",
+      "Name": "Quản lý người học",
+      "Index": "4"
+    },
+    {
+      "Id": "GF0005",
+      "Code": "GF0005",
+      "Name": "Quản lý tiến độ",
+      "Index": "5"
+    },
+    {
+      "Id": "GF0006",
+      "Code": "GF0006",
+      "Name": "Quản lý bình luận",
+      "Index": "6"
+    },
+    {
+      "Id": "GF0007",
+      "Code": "GF0007",
+      "Name": "Quản lý bài giảng",
+      "Index": "7"
+    },
+    {
+      "Id": "GF0008",
+      "Code": "GF0008",
+      "Name": "Quản lý tài khoản quản trị",
+      "Index": "8"
+    },
+    {
+      "Id": "GF0009",
+      "Code": "GF0009",
+      "Name": "Quản lý ngân hàng câu hỏi",
+      "Index": "9"
+    },
+    {
+      "Id": "GF0010",
+      "Code": "GF0010",
+      "Name": "Quản lý chuyên gia",
+      "Index": "10"
+    },
+    {
+      "Id": "GF0011",
+      "Code": "GF0011",
+      "Name": "Quản lý người hướng dẫn",
+      "Index": "11"
+    },
+    {
+      "Id": "GF0012",
+      "Code": "GF0012",
+      "Name": "Thống kê người đăng ký",
+      "Index": "12"
+    },
+    {
+      "Id": "GF0013",
+      "Code": "GF0013",
+      "Name": "Thống kê thông tin người học",
+      "Index": "13"
+    },
+    {
+      "Id": "GF0014",
+      "Code": "GF0014",
+      "Name": "Thống kê kết quả hoàn thành",
+      "Index": "14"
+    },
+    {
+      "Id": "GF0015",
+      "Code": "GF0015",
+      "Name": "Thống kê số người đăng ký theo khóa học",
+      "Index": "15"
+    },
+    {
+      "Id": "GF0016",
+      "Code": "GF0016",
+      "Name": "Thiết lập trang chủ",
+      "Index": "16"
+    },
+    {
+      "Id": "GF0017",
+      "Code": "GF0017",
+      "Name": "Quản lý lời tựa",
+      "Index": "17"
+    },
+    {
+      "Id": "GF0018",
+      "Code": "GF0018",
+      "Name": "Slide bar",
+      "Index": "18"
+    },
+    {
+      "Id": "GF0019",
+      "Code": "GF0019",
+      "Name": "Cấu hình chuyên gia",
+      "Index": "19"
+    },
+    {
+      "Id": "GF0020",
+      "Code": "GF0020",
+      "Name": "Quản lý mẫu chứng chỉ",
+      "Index": "20"
+    },
+    {
+      "Id": "GF0021",
+      "Code": "GF0021",
+      "Name": "Quản lý mẫu văn bản",
+      "Index": "21"
+    },
+    {
+      "Id": "GF0022",
+      "Code": "GF0022",
+      "Name": "Giới thiệu",
+      "Index": "22"
+    },
+	{
+      "Id": "GF0023",
+      "Code": "GF0023",
+      "Name": "Cấu hình thông số",
+      "Index": "23"
+    }
+  ],
+  "Functions": [
+    {
+      "Id": "F000000",
+      "Code": "F000000",
+      "GroupId": "GF0001",
+      "Name": "Xem Dashboard",
+      "ScreenCode": "F000000",
+      "Index": "1"
+    },
+    {
+      "Id": "F000051",
+      "Code": "F000051",
+      "GroupId": "GF0002",
+      "Name": "Thêm chương trình đào tạo",
+      "ScreenCode": "F000050",
+      "Index": "1"
+    },
+    {
+      "Id": "F000052",
+      "Code": "F000052",
+      "GroupId": "GF0002",
+      "Name": "Sửa chương trinh đào tạo",
+      "ScreenCode": "F000050",
+      "Index": "2"
+    },
+    {
+      "Id": "F000053",
+      "Code": "F000053",
+      "GroupId": "GF0002",
+      "Name": "Xóa chương trình đào tạo",
+      "ScreenCode": "F000050",
+      "Index": "3"
+    },
+    {
+      "Id": "F000101",
+      "Code": "F000101",
+      "GroupId": "GF0003",
+      "Name": "Thêm khóa học",
+      "ScreenCode": "F000100",
+      "Index": "1"
+    },
+    {
+      "Id": "F000102",
+      "Code": "F000102",
+      "GroupId": "GF0003",
+      "Name": "Sửa khóa học",
+      "ScreenCode": "F000100",
+      "Index": "2"
+    },
+    {
+      "Id": "F000103",
+      "Code": "F000103",
+      "GroupId": "GF0003",
+      "Name": "Xóa khóa học",
+      "ScreenCode": "F000100",
+      "Index": "3"
+    },
+    {
+      "Id": "F000104",
+      "Code": "F000104",
+      "GroupId": "GF0003",
+      "Name": "Yêu cầu duyệt",
+      "ScreenCode": "F000100",
+      "Index": "4"
+    },
+    {
+      "Id": "F000105",
+      "Code": "F000105",
+      "GroupId": "GF0003",
+      "Name": "Duyệt",
+      "ScreenCode": "F000100",
+      "Index": "5"
+    },
+    {
+      "Id": "F000106",
+      "Code": "F000106",
+      "GroupId": "GF0003",
+      "Name": "Hiển thị khóa học",
+      "ScreenCode": "F000100",
+      "Index": "6"
+    },
+    {
+      "Id": "F000107",
+      "Code": "F000107",
+      "GroupId": "GF0003",
+      "Name": "Ẩn khóa học",
+      "ScreenCode": "F000100",
+      "Index": "7"
+    },
+
+    {
+      "Id": "F000255",
+      "Code": "F000255",
+      "GroupId": "GF0006",
+      "Name": "Chỉnh sửa bình luận",
+      "ScreenCode": "",
+      "Index": "5"
+    },
+    {
+      "Id": "F000151",
+      "Code": "F000151",
+      "GroupId": "GF0004",
+      "Name": "Khóa tài khoản",
+      "ScreenCode": "F000150",
+      "Index": "1"
+    },
+    {
+      "Id": "F000152",
+      "Code": "F000152",
+      "GroupId": "GF0004",
+      "Name": "Xem chi tiết tài khoản",
+      "ScreenCode": "F000150",
+      "Index": "2"
+    },
+    {
+      "Id": "F000153",
+      "Code": "F000153",
+      "GroupId": "GF0004",
+      "Name": "Mở khóa tài khoản",
+      "ScreenCode": "F000150",
+      "Index": "3"
+    },
+    {
+      "Id": "F000200",
+      "Code": "F000200",
+      "GroupId": "GF0005",
+      "Name": "Xem danh sách tiến độ của người học theo từng khóa học",
+      "ScreenCode": "F000200",
+      "Index": "1"
+    },
+    {
+      "Id": "F000251",
+      "Code": "F000251",
+      "GroupId": "GF0006",
+      "Name": "Phê duyệt bình luận",
+      "ScreenCode": "F000250",
+      "Index": "1"
+    },
+    {
+      "Id": "F000252",
+      "Code": "F000252",
+      "GroupId": "GF0006",
+      "Name": "Xóa bình luận",
+      "ScreenCode": "F000250",
+      "Index": "2"
+    },
+    {
+      "Id": "F000253",
+      "Code": "F000253",
+      "GroupId": "GF0006",
+      "Name": "Ẩn bình luận",
+      "ScreenCode": "F000250",
+      "Index": "3"
+    },
+    {
+      "Id": "F000254",
+      "Code": "F000254",
+      "GroupId": "GF0006",
+      "Name": "Phản hồi",
+      "ScreenCode": "F000250",
+      "Index": "4"
+    },
+    {
+      "Id": "F000301",
+      "Code": "F000301",
+      "GroupId": "GF0007",
+      "Name": "Thêm mới bài giảng",
+      "ScreenCode": "F000300",
+      "Index": "1"
+    },
+    {
+      "Id": "F000302",
+      "Code": "F000302",
+      "GroupId": "GF0007",
+      "Name": "Chỉnh sửa  bài giảng",
+      "ScreenCode": "F000300",
+      "Index": "2"
+    },
+    {
+      "Id": "F000303",
+      "Code": "F000303",
+      "GroupId": "GF0007",
+      "Name": "Xóa bài giảng",
+      "ScreenCode": "F000300",
+      "Index": "3"
+    },
+    {
+      "Id": "F000304",
+      "Code": "F000304",
+      "GroupId": "GF0007",
+      "Name": "Chỉnh sửa trạng thái hiển thị bài giảng",
+      "ScreenCode": "F000300",
+      "Index": "4"
+    },
+    {
+      "Id": "F000305",
+      "Code": "F000305",
+      "GroupId": "GF0007",
+      "Name": "Yêu cầu duyệt",
+      "ScreenCode": "F000300",
+      "Index": "5"
+    },
+    {
+      "Id": "F000306",
+      "Code": "F000306",
+      "GroupId": "GF0007",
+      "Name": "Duyệt bài giảng",
+      "ScreenCode": "F000300",
+      "Index": "6"
+    },
+    {
+      "Id": "F000351",
+      "Code": "F000351",
+      "GroupId": "GF0008",
+      "Name": "Thêm mới tài khoản quản trị",
+      "ScreenCode": "F000350",
+      "Index": "1"
+    },
+    {
+      "Id": "F000352",
+      "Code": "F000352",
+      "GroupId": "GF0008",
+      "Name": "Chỉnh sửa tài khoản quản trị",
+      "ScreenCode": "F000350",
+      "Index": "2"
+    },
+    {
+      "Id": "F000353",
+      "Code": "F000353",
+      "GroupId": "GF0008",
+      "Name": "Xóa tài khoản quản trị",
+      "ScreenCode": "F000350",
+      "Index": "3"
+    },
+    {
+      "Id": "F000354",
+      "Code": "F000354",
+      "GroupId": "GF0008",
+      "Name": "Xem thông tin tài khoản quản trị",
+      "ScreenCode": "F000350",
+      "Index": "4"
+    },
+    {
+      "Id": "F000355",
+      "Code": "F000355",
+      "GroupId": "GF0008",
+      "Name": "Khóa tài khoản",
+      "ScreenCode": "F000350",
+      "Index": "5"
+    },
+    {
+      "Id": "F000356",
+      "Code": "F000356",
+      "GroupId": "GF0008",
+      "Name": "Mở khóa tài khoản",
+      "ScreenCode": "F000350",
+      "Index": "6"
+    },
+    {
+      "Id": "F000357",
+      "Code": "F000357",
+      "GroupId": "GF0008",
+      "Name": "Refresh Password",
+      "ScreenCode": "F000350",
+      "Index": "7"
+    },
+
+    {
+      "Id": "F000401",
+      "Code": "F000401",
+      "GroupId": "GF0009",
+      "Name": "Thêm mới câu hỏi",
+      "ScreenCode": "F000400",
+      "Index": "1"
+    },
+    {
+      "Id": "F000402",
+      "Code": "F000402",
+      "GroupId": "GF0009",
+      "Name": "Sửa câu hỏi",
+      "ScreenCode": "F000400",
+      "Index": "2"
+    },
+    {
+      "Id": "F000403",
+      "Code": "F000403",
+      "GroupId": "GF0009",
+      "Name": "Xóa câu hỏi",
+      "ScreenCode": "F000400",
+      "Index": "3"
+    },
+    {
+      "Id": "F000404",
+      "Code": "F000404",
+      "GroupId": "GF0009",
+      "Name": "Xem câu hỏi",
+      "ScreenCode": "F000400",
+      "Index": "4"
+    },
+    {
+      "Id": "F000405",
+      "Code": "F000405",
+      "GroupId": "GF0009",
+      "Name": "Cập nhập trạng thái của câu hỏi",
+      "ScreenCode": "F000400",
+      "Index": "5"
+    },
+    {
+      "Id": "F000406",
+      "Code": "F000406",
+      "GroupId": "GF0009",
+      "Name": "Yêu cầu duyệt",
+      "ScreenCode": "F000400",
+      "Index": "6"
+    },
+    {
+      "Id": "F000407",
+      "Code": "F000407",
+      "GroupId": "GF0009",
+      "Name": "Duyệt câu hỏi",
+      "ScreenCode": "F000400",
+      "Index": "7"
+    },
+    {
+      "Id": "F000451",
+      "Code": "F000451",
+      "GroupId": "GF0010",
+      "Name": "Thêm mới tài khoản chuyên gia",
+      "ScreenCode": "F000450",
+      "Index": "1"
+    },
+    {
+      "Id": "F000452",
+      "Code": "F000452",
+      "GroupId": "GF0010",
+      "Name": "Chỉnh sửa tài khoản chuyên gia",
+      "ScreenCode": "F000450",
+      "Index": "2"
+    },
+    {
+      "Id": "F000453",
+      "Code": "F000453",
+      "GroupId": "GF0010",
+      "Name": "Xóa tài khoản chuyên gia",
+      "ScreenCode": "F000450",
+      "Index": "3"
+    },
+    {
+      "Id": "F000454",
+      "Code": "F000454",
+      "GroupId": "GF0010",
+      "Name": "Xem thông tin tài khoản chuyên gia",
+      "ScreenCode": "F000450",
+      "Index": "4"
+    },
+    {
+      "Id": "F000455",
+      "Code": "F000455",
+      "GroupId": "GF0010",
+      "Name": "Khóa tài khoản",
+      "ScreenCode": "F000450",
+      "Index": "5"
+    },
+    {
+      "Id": "F000456",
+      "Code": "F000456",
+      "GroupId": "GF0010",
+      "Name": "Mở khóa tài khoản",
+      "ScreenCode": "F000450",
+      "Index": "6"
+    },
+    {
+      "Id": "F000457",
+      "Code": "F000457",
+      "GroupId": "GF0010",
+      "Name": "Refresh Password",
+      "ScreenCode": "F000450",
+      "Index": "7"
+    },
+
+    {
+      "Id": "F000501",
+      "Code": "F000501",
+      "GroupId": "GF0011",
+      "Name": "Thêm mới tài khoản người  hướng dẫn",
+      "ScreenCode": "F000500",
+      "Index": "1"
+    },
+    {
+      "Id": "F000502",
+      "Code": "F000502",
+      "GroupId": "GF0011",
+      "Name": "Chỉnh sửa tài khoản người hướng dẫn",
+      "ScreenCode": "F000500",
+      "Index": "2"
+    },
+    {
+      "Id": "F000503",
+      "Code": "F000503",
+      "GroupId": "GF0011",
+      "Name": "Xóa người hướng dẫn",
+      "ScreenCode": "F000500",
+      "Index": "3"
+    },
+    {
+      "Id": "F000504",
+      "Code": "F000504",
+      "GroupId": "GF0011",
+      "Name": "Xem thông tin tài khoản quản trị",
+      "ScreenCode": "F000500",
+      "Index": "4"
+    },
+    {
+      "Id": "F000505",
+      "Code": "F000505",
+      "GroupId": "GF0011",
+      "Name": "Khóa tài khoản",
+      "ScreenCode": "F000500",
+      "Index": "5"
+    },
+    {
+      "Id": "F000506",
+      "Code": "F000506",
+      "GroupId": "GF0011",
+      "Name": "Mở khóa tài khoản",
+      "ScreenCode": "F000500",
+      "Index": "6"
+    },
+    {
+      "Id": "F000507",
+      "Code": "F000507",
+      "GroupId": "GF0011",
+      "Name": "Refresh Password",
+      "ScreenCode": "F000500",
+      "Index": "7"
+    },
+    {
+      "Id": "F000551",
+      "Code": "F000551",
+      "GroupId": "GF0012",
+      "Name": "Xuất file Excel",
+      "ScreenCode": "F000550",
+      "Index": "1"
+    },
+    {
+      "Id": "F000552",
+      "Code": "F000552",
+      "GroupId": "GF0012",
+      "Name": "Xuất file Pdf",
+      "ScreenCode": "F000550",
+      "Index": "2"
+    },
+    {
+      "Id": "F000601",
+      "Code": "F000601",
+      "GroupId": "GF0013",
+      "Name": "Xuất file Excel",
+      "ScreenCode": "F000600",
+      "Index": "1"
+    },
+    {
+      "Id": "F000602",
+      "Code": "F000602",
+      "GroupId": "GF0013",
+      "Name": "Xuất file Pdf",
+      "ScreenCode": "F000600",
+      "Index": "2"
+    },
+    {
+      "Id": "F000651",
+      "Code": "F000651",
+      "GroupId": "GF0014",
+      "Name": "Xuất file Excel",
+      "ScreenCode": "F000650",
+      "Index": "1"
+    },
+    {
+      "Id": "F000652",
+      "Code": "F000652",
+      "GroupId": "GF0014",
+      "Name": "Xuất file Pdf",
+      "ScreenCode": "F000650",
+      "Index": "2"
+    },
+
+
+    {
+      "Id": "F000701",
+      "Code": "F000701",
+      "GroupId": "GF0015",
+      "Name": "Xuất file Excel",
+      "ScreenCode": "F000700",
+      "Index": "1"
+    },
+    {
+      "Id": "F000702",
+      "Code": "F000702",
+      "GroupId": "GF0015",
+      "Name": "Xuất file Pdf",
+      "ScreenCode": "F000700",
+      "Index": "2"
+    },
+
+
+    {
+      "Id": "F000750",
+      "Code": "F000750",
+      "GroupId": "GF0016",
+      "Name": "Cập nhập các thông tin trên trang chủ",
+      "ScreenCode": "F000750",
+      "Index": "1"
+    },
+
+
+    {
+      "Id": "F000801",
+      "Code": "F000801",
+      "GroupId": "GF0017",
+      "Name": "Thêm lời tựa",
+      "ScreenCode": "F000800",
+      "Index": "1"
+    },
+    {
+      "Id": "F000802",
+      "Code": "F000802",
+      "GroupId": "GF0017",
+      "Name": "Sửa lời tựa",
+      "ScreenCode": "F000800",
+      "Index": "2"
+    },
+    {
+      "Id": "F000803",
+      "Code": "F000803",
+      "GroupId": "GF0017",
+      "Name": "Xóa lời tựa",
+      "ScreenCode": "F000800",
+      "Index": "3"
+    },
+    {
+      "Id": "F000804",
+      "Code": "F000804",
+      "GroupId": "GF0017",
+      "Name": "Cập nhập trạng thái lời tựa",
+      "ScreenCode": "F000800",
+      "Index": "4"
+    },
+
+
+    {
+      "Id": "F000851",
+      "Code": "F000851",
+      "GroupId": "GF0018",
+      "Name": "Thêm ảnh",
+      "ScreenCode": "F000850",
+      "Index": "1"
+    },
+    {
+      "Id": "F000852",
+      "Code": "F000852",
+      "GroupId": "GF0018",
+      "Name": "Sửa ảnh",
+      "ScreenCode": "F000850",
+      "Index": "2"
+    },
+    {
+      "Id": "F000853",
+      "Code": "F000853",
+      "GroupId": "GF0018",
+      "Name": "Xóa ảnh",
+      "ScreenCode": "F000850",
+      "Index": "3"
+    },
+
+
+    {
+      "Id": "F000901",
+      "Code": "F000901",
+      "GroupId": "GF0019",
+      "Name": "Cập nhập",
+      "ScreenCode": "F000900",
+      "Index": "1"
+    },
+    {
+      "Id": "F000902",
+      "Code": "F000902",
+      "GroupId": "GF0019",
+      "Name": "Xóa chuyên gia",
+      "ScreenCode": "F000900",
+      "Index": "2"
+    },
+    {
+      "Id": "F000903",
+      "Code": "F000903",
+      "GroupId": "GF0019",
+      "Name": "Chọn chuyên gia",
+      "ScreenCode": "F000900",
+      "Index": "3"
+    },
+    {
+      "Id": "F000904",
+      "Code": "F000904",
+      "GroupId": "GF0019",
+      "Name": "Thay ảnh",
+      "ScreenCode": "F000900",
+      "Index": "4"
+    },
+
+
+    {
+      "Id": "F000951",
+      "Code": "F000951",
+      "GroupId": "GF0020",
+      "Name": "Thêm mẫu chứng chỉ",
+      "ScreenCode": "F000950",
+      "Index": "1"
+    },
+    {
+      "Id": "F000952",
+      "Code": "F000952",
+      "GroupId": "GF0020",
+      "Name": "Sửa mẫu chứng chỉ",
+      "ScreenCode": "F000950",
+      "Index": "2"
+    },
+    {
+      "Id": "F000953",
+      "Code": "F000953",
+      "GroupId": "GF0020",
+      "Name": "Xóa mẫu chứng chỉ",
+      "ScreenCode": "F000950",
+      "Index": "3"
+    },
+    {
+      "Id": "F000954",
+      "Code": "F000954",
+      "GroupId": "GF0020",
+      "Name": "Tải về mẫu chứng chỉ",
+      "ScreenCode": "F000950",
+      "Index": "4"
+    },
+
+    {
+      "Id": "F001001",
+      "Code": "F001001",
+      "GroupId": "GF0021",
+      "Name": "Sửa mẫu văn bản",
+      "ScreenCode": "F001000",
+      "Index": "1"
+    },
+    {
+      "Id": "F001002",
+      "Code": "F001002",
+      "GroupId": "GF0021",
+      "Name": "Tải về mẫu văn bản",
+      "ScreenCode": "F001000",
+      "Index": "2"
+    },
+    {
+      "Id": "F001050",
+      "Code": "F001050",
+      "GroupId": "GF0022",
+      "Name": "Xem thông tin người tạo ra website",
+      "ScreenCode": "F001050",
+      "Index": "1"
+    },
+    {
+      "Id": "F001100",
+      "Code": "F001100",
+      "GroupId": "GF0023",
+      "Name": "Cập nhật cấu hình thông số",
+      "ScreenCode": "F001100",
+      "Index": "1"
+    }
+  ]
+}

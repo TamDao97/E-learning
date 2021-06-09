@@ -1,0 +1,254 @@
+<div class="modal-header">
+    <h4 class="modal-title text-uppercase" style="line-height: 20px;">{{modalInfo.Title}}</h4>
+    <a href="javascript:;" style="outline: none; color: white" (click)="closeModal(true)">
+        <i class="fa fa-close"></i>
+    </a>
+</div>
+<form name="form" #f="ngForm" novalidate>
+    <div class="modal-body">
+        <ul ngbNav #nav="ngbNav" class="nav-tabs" [destroyOnHide]="false">
+            <li [ngbNavItem]="1">
+                <a ngbNavLink>Thông tin chung</a>
+                <ng-template ngbNavContent>
+                    <div class="row">
+                        <div class="col-md-10 col-lg-10 col-sm-12 col-xl-10">
+                            <div class="row">
+                                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
+                                    <div class="form-group ">
+                                        <label class="form-label">Tên khóa học
+                                            <span class='text-danger text-strong'>&nbsp;*</span>
+                                        </label>
+                                        <input type="text" class="form-control" [(ngModel)]="model.name" name="Name" maxlength="300" [disabled]="model.approvalStatus===2" required>
+
+                                    </div>
+                                </div>
+                                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
+                                    <div class="form-group ">
+                                        <label class="form-label">Chương trình đào tạo
+                                            <span class='text-danger text-strong'>&nbsp;*</span>
+                                        </label>
+                                        <ng-select [items]="listProgram" bindLabel="name" bindValue="id" [(ngModel)]="model.programId" name="programId" [disabled]="model.approvalStatus===2" required>
+                                        </ng-select>
+                                    </div>
+                                </div>
+                                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
+                                    <div class="form-group ">
+                                        <label class="form-label">Tình trạng
+                                            <span class='text-danger text-strong'>&nbsp;*</span>
+                                        </label>
+                                        <br>
+                                        <div class="custom-control custom-radio custom-control-inline">
+                                            <input type="radio" class="custom-control-input" id="defaultInline1" name="inlineDefaultRadiosExample" [(ngModel)]="model.status" required [value]="true" [disabled]="model.approvalStatus===2">
+                                            <label class="custom-control-label" for="defaultInline1">Hiển thị</label>
+                                        </div>
+                                        <div class="custom-control custom-radio custom-control-inline">
+                                            <input type="radio" class="custom-control-input" id="defaultInline2" name="inlineDefaultRadiosExample" [(ngModel)]="model.status" required [value]="false" [disabled]="model.approvalStatus===2">
+                                            <label class="custom-control-label" for="defaultInline2">Không hiển
+                                                thị</label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
+                                    <div class="form-group">
+                                        <label class="form-label">Ngày bắt đầu</label>
+                                        <span class='text-danger text-strong'>&nbsp;*</span>
+                                        <div class="controls">
+                                            <div class="input-group">
+                                                <input class="form-control" placeholder="dd/mm/yyyy" name="startDate" [(ngModel)]="startDate" ngbDatepicker #d="ngbDatepicker" readonly required [disabled]="model.approvalStatus===2">
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text pointer" (click)="d.toggle();$event.stopPropagation();">
+                                                        <i class="far fa-calendar-alt" style="color: #999;"></i>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
+                                    <div class="form-group">
+                                        <label class="form-label">Ngày kết thúc</label>
+                                        <span class='text-danger text-strong'>&nbsp;*</span>
+                                        <div class="controls">
+                                            <div class="input-group">
+                                                <input class="form-control" placeholder="dd/mm/yyyy" name="finishDate" [(ngModel)]="finishDate" ngbDatepicker #d3="ngbDatepicker" readonly required [disabled]="model.approvalStatus===2">
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text pointer" (click)="d3.toggle();$event.stopPropagation();">
+                                                        <i class="far fa-calendar-alt" style="color: #999;"></i>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
+                                    <div class="form-group ">
+                                        <label class="form-label">Thứ tự hiển thị
+                                            <span class='text-danger text-strong'>&nbsp;*</span>
+                                        </label>
+                                        <div class="controls">
+                                            <ng-select [items]="listOrder" bindLabel="order" bindValue="order" [(ngModel)]="model.displayIndex" name="displayIndex" required>
+                                            </ng-select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
+                                    <div class="form-group ">
+                                        <label class="form-label">Mẫu chứng chỉ
+                                            <span class='text-danger text-strong'>&nbsp;</span>
+                                        </label>
+                                        <ng-select [items]="listTemplate" bindLabel="name" bindValue="id" [(ngModel)]="model.certificateTemplateId" name="templateId" [disabled]="model.approvalStatus===2">
+                                        </ng-select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2 col-lg-2 col-sm-12 col-xl-2" style="text-align: center">
+                            <div class="col-md-12 img-avata" style="position: relative;min-height: 100px;">
+                                <img class="img-thumbnail" [src]="fileImage && fileImage.Data?fileImage.Data: (filedata?filedata:'/assets/img/noavatar.gif')">
+                            </div>
+                            <div class="col-md-12" style="position: absolute; padding-right: 45px;">
+                                <i class="box_toggle material-icons actions-camera btn-file padding-top-5" ngbTooltip="Thay ảnh">
+                                    photo_camera
+                                    <input type="file" id="fileInput" #fileInput accept="image/*"
+                                        (change)="onFileChange($event)" [disabled]="model.approvalStatus===2" />
+                                </i>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                            <div class="form-group">
+                                <label class="form-label">Mô tả
+                                    <span class='text-danger text-strong'></span>
+                                </label>
+                                <textarea class="form-control" [(ngModel)]="model.description" name="Description" maxlength="500" [readonly]="model.approvalStatus===2">
+                                    </textarea>
+                            </div>
+                        </div>
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="form-group ">
+                                <label class="form-label">Nội dung
+                                </label>
+                                <div class="controls">
+                                    <ng-container *ngIf="statusTinymce">
+                                        <nts-app-tinymce name="content" [config]="discoveryConfig" [(ngModel)]="model.content" [disabled]="model.approvalStatus===2">
+                                        </nts-app-tinymce>
+                                    </ng-container>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </ng-template>
+            </li>
+            <li [ngbNavItem]="2">
+                <a ngbNavLink>Nội dung</a>
+                <ng-template ngbNavContent>
+                    <app-tab-content [(ngModel)]="modelLesson" [status]="model.approvalStatus" [courseId]="id" [items]="listLesson" name="lessonCourses"></app-tab-content>
+                </ng-template>
+            </li>
+            <li [ngbNavItem]="3">
+                <a ngbNavLink>Giảng viên</a>
+                <ng-template ngbNavContent>
+                    <app-mentor-manage [listMentor]="listMentor" [status]="model.approvalStatus" [(ngModel)]="listMentor" name="employeeCourses">
+                    </app-mentor-manage>
+                </ng-template>
+            </li>
+            <li [ngbNavItem]="4" *ngIf="id">
+                <a ngbNavLink>Người học</a>
+                <ng-template ngbNavContent>
+                    <app-learner-manage [listLeaner]="listLeaner" [status]="model.approvalStatus" [course]="course" [templateId]="model.certificateTemplateId" [(ngModel)]="listLeaner" name="learnerCourses">
+                    </app-learner-manage>
+                </ng-template>
+            </li>
+            <li [ngbNavItem]="5" *ngIf="id">
+                <a ngbNavLink>Lịch sử</a>
+                <ng-template ngbNavContent>
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-lg-12">
+                            <div #scrollHeaderHistory style="height: auto; width:100%;overflow: hidden">
+                             
+                                <table class="table table-bordered mb-0"
+                                    style="word-wrap: break-word ;min-width:870px;">
+                                    <thead>
+                                        <tr>
+                                            <th width="50px" class="text-center">STT</th>
+                                            <th width="120px" class="text-center">Tình trạng</th>
+                                            <th width="300px" class="text-center">Hoạt động</th>
+                                            <th min-width="200px" class="text-center">Nội dung</th>
+                                            <th width="200px" class="text-center">Thời gian</th>
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                            <perfect-scrollbar [config]="constant.ScrollConfig" [style.max-height.px]="500">
+                                <table class="table table-bordered table-fixed table-hover" style="min-width:870px;">
+                                    <tbody>
+                                        <tr *ngFor="let row of listHistory; let i = index">
+                                            <td width="50px" class="text-center">{{i+1}}</td>
+                                            <td width="120px" class="text-center">
+                                                <nts-status-badge [items]="constant.approvalStatus" [value]="row.approvalStatus">
+                                                </nts-status-badge>
+                                            </td>
+                                            <td width="300px">{{row.action}}</td>
+                                            <td min-width="200px">{{row.content}}</td>
+                                            <td width="200px" class="text-center">{{row.processingDate|date:'dd/MM/yyyy HH:mm:ss'}}
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                    <tfoot>
+                                    </tfoot>
+                                </table>
+                            </perfect-scrollbar>
+                        </div>
+                    </div>
+                </ng-template>
+            </li>
+        </ul>
+        <div [ngbNavOutlet]="nav"></div>
+
+    </div>
+    <div class="modal-footer">
+        <ng-container *ngIf="model.approvalStatus===0 || model.approvalStatus===3 || model.approvalStatus===4">
+            <button *appUipermission="['F000104']" type="button" class="btn btn-info" (click)="requestCourse()">
+                <i class="fas fa-share"></i>&nbsp;
+                <span>Yêu cầu duyệt</span>
+            </button>
+        </ng-container>
+        <ng-container *ngIf="model.approvalStatus===1">
+            <button *appUipermission="['F000105']" type="button" class="btn btn-success" (click)="approvalCourse()">
+                <i class="fas fa-check"></i>&nbsp;
+                <span>Duyệt</span>
+            </button>
+        </ng-container>
+        <ng-container *ngIf="model.approvalStatus===1">
+            <button *appUipermission="['F000105']" type="button" class="btn btn-danger" (click)="notApprovalCourse()">
+                <i class="fas fa-exclamation"></i>&nbsp;
+                <span>Không duyệt</span>
+            </button>
+        </ng-container>
+        <ng-container *ngIf="model.approvalStatus===2">
+            <button *appUipermission="['F000105']" type="button" class="btn btn-danger" (click)="canceCourse()">
+                <i class="fas fa-ban"></i>&nbsp;
+                <span>Hủy duyệt</span>
+            </button>
+        </ng-container>
+        <ng-container>
+            <button type="button" class="btn btn-success" [disabled]="!f.form.valid" (click)="save(false)">
+                <i class="fa fa-save"></i>&nbsp;
+                <span>Lưu</span>
+            </button>
+        </ng-container>
+        <ng-container *ngIf="id== null || id == ''">
+            <button type="button" class="btn btn-success" [disabled]="!f.form.valid" (click)="saveAndContinue()">
+                <i class="fa fa-save"></i>&nbsp;
+                <span>Lưu & tiếp tục</span>
+            </button>
+        </ng-container>
+        <button type="button" class="btn btn-danger" (click)="closeModal(false)">
+            <i class="fa fa-power-off"></i> &nbsp;
+            <span>
+                Đóng
+            </span>
+        </button>
+    </div>
+</form>

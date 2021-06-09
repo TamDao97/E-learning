@@ -1,0 +1,116 @@
+<div class="content-wrapper">
+    <section class="box">
+        <div class="content-body">
+            <form name="form" #f="ngForm" novalidate>
+                <div class="row">
+                    <div class="col-xl-12 col-md-12 col-lg-12 col-sm-12">
+                        <div class="form-group ">
+                            <label class="form-label">Tiêu đề
+                                <span class='text-danger text-strong'>&nbsp;*</span>
+                            </label>
+                            <input type="text" maxlength="300" class="form-control" name="Title" [(ngModel)]="model.title" required>
+                        </div>
+                    </div>
+                    <div class="col-xl-12 col-md-12 col-lg-12 col-sm-12">
+                        <div class="form-group ">
+                            <label class="form-label">Mô tả
+                                <span class='text-danger text-strong'>&nbsp;</span>
+                            </label>
+                            <textarea type="text" maxlength="500" class="form-control" name="description" [(ngModel)]="model.description"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="content-body">
+            <div class="row">
+                <div class="col-md-6 text-left">
+                    <label class="form-label" style="line-height:35px;">Tổng số
+                        <span class="bold text-danger">{{listData.length}}</span> chuyên gia</label>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text-right">
+                    <button *appUipermission="['F000903']" class="btn btn-success btn-upload" (click)="selectLesson()">
+                        <i class="fas fa-plus"> &nbsp;</i>Chọn chuyên gia
+                    </button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <perfect-scrollbar [config]="constant.ScrollXConfig" style="height:auto; width:100%;">
+                        <table class="table table-bordered table-fixed" style="min-width:1490px">
+                            <thead>
+                                <tr>
+                                    <th width="40px">STT</th>
+                                    <th class="text-center" width="120px">Xử lý</th>
+                                    <th width="80px">Ảnh</th>
+                                    <th width="200px">Tên chuyên gia</th>
+                                    <th width="150px">Facebook</th>
+                                    <th width="150px">Lotus</th>
+                                    <th width="150px">Twitter</th>
+                                    <th width="150px">Instagram</th>
+                                    <th min-width="150px">Mô tả</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let row of listData; ; let i = index">
+                                    <td width="40px" class="text-center">{{i+1}}</td>
+                                    <td width="120px" class="text-center">
+                                        <button *appUipermission="['F000902']" type="button" (click)="showConfirmDelete(row)" class="btn  btn-xs btn-danger" ngbTooltip="Xóa" container="body">
+                                            <span class="fas fa-trash-alt" aria-hidden="true"></span>
+                                        </button> &nbsp;
+
+                                        <button *appUipermission="['F000904']" type="button" ngbTooltip="Thay ảnh" style="padding-left: 1px;" class="btn btn-xs btn-secondary" container="body">
+                                            <i class="box_toggle material-icons actions-camera btn-file padding-top-5">
+                                                photo_camera
+                                                <input type="file" title="" id="fileInput" #fileInput accept="image/*"
+                                                    (change)="onFileChange($event, row)" />
+                                            </i>
+                                        </button>
+
+                                    </td>
+                                    <td width="80px">
+                                        <img class="card-img-top" [src]="row.avartar==null || row.avartar=='' ? '/assets/img/noavatar.gif':config.ServerApi + row.avartar">
+                                    </td>
+                                    <td width="200px">{{row.name}}</td>
+                                    <td width="150px"> <input type="text" [(ngModel)]="row.facebook" class="form-control text-left" [name]="'Facebook'+i"></td>
+                                    <td width="150px"> <input type="text" [(ngModel)]="row.lotus" class="form-control text-left" [name]="'Lotus'+i"></td>
+                                    <td width="150px"> <input type="text" [(ngModel)]="row.twitter" class="form-control text-left" [name]="'Twitter'+i"></td>
+                                    <td width="150px"> <input type="text" [(ngModel)]="row.instagram" class="form-control text-left" [name]="'Instagram'+i"></td>
+                                    <td min-width="150px">
+                                        <input type="text" [(ngModel)]="row.description" class="form-control text-left" [name]="'description'+i"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </perfect-scrollbar>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12 text-right">
+                    <ng-container>
+                        <button *appUipermission="['F000901']" type="button" class="btn btn-success" [disabled]="!f.form.valid" (click)="save()">
+                            <i class="fa fa-save"></i>&nbsp;
+                            <span>Lưu</span>
+                        </button>
+                    </ng-container>
+                </div>
+            </div>
+
+            <hr />
+            <div class="row">
+                <div class="col-md-12">
+                    <button *appUipermission="['F000902']" class="btn btn-view btn-danger">
+                        <i class="fas fa-trash-alt"></i>
+                    </button>&nbsp;
+                    <small class="padding-right-20">Xóa cấu hình chuyên gia</small>
+                    <button *appUipermission="['F000904']" type="button" style="padding-left: 1px;" class="btn btn-view btn-secondary" container="body">
+                        <i class="material-icons" style="font-size: 13px;">
+                            photo_camera
+                        </i>
+                    </button>&nbsp;
+                    <small class="padding-right-20">Thay ảnh</small>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

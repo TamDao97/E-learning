@@ -1,0 +1,44 @@
+<div class="modal-header">
+    <h4 class="modal-title text-uppercase" style="line-height: 20px;">Chọn loại bài giảng</h4>
+    <a href="javascript:;" style="outline: none; color: white" (click)="closeModal()">
+        <i class="fa fa-close"></i>
+    </a>
+</div>
+<form name="form" #f="ngForm" novalidate>
+    <div class="modal-body">
+        <div class="o_w_slide_upload_modal_container">
+            <div class="row p-1 mt-4">
+                <div class="col-6 col-md-4">
+                    <a href="javascript:void(0)" data-slide-type="webpage" (click)="clickType(1)"
+                        class="content-type d-flex flex-column align-items-center mb-4 o_wslides_select_type btn rounded border text-600 p-3">
+                        <i class="fa fa-file-text mb-2 fa-3x"></i>
+                        Web Page
+                    </a>
+                </div>
+                <div class="col-6 col-md-4">
+                    <a href="javascript:void(0)" data-slide-type="video" (click)="clickType(3)"
+                        class="content-type d-flex flex-column align-items-center mb-4 o_wslides_select_type btn rounded border text-600 p-3">
+                        <i class="fa fa-video-camera mb-2 fa-3x"></i>
+                        Video
+                    </a>
+                </div>
+                <div class="col-6 col-md-4">
+                    <a href="javascript:void(0)" data-slide-type="quiz" (click)="clickType(2)"
+                        class="content-type d-flex flex-column align-items-center mb-4 o_wslides_select_type btn rounded border text-600 p-3">
+                        <i class="fa fa-question-circle mb-2 fa-3x"></i>
+                        Câu hỏi
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer -->
+    <div class="modal-footer">
+        <button type="button" class="btn btn-danger" (click)="closeModal()">
+            <i class="fa fa-power-off"></i> &nbsp;
+            <span>
+                Đóng
+            </span>
+        </button>
+    </div>
+</form>

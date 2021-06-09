@@ -1,0 +1,71 @@
+<div class="content-wrapper">
+    <section class="box">
+        <div class="content-body">
+            <div class="row margin-bottom-10">
+                <div class="col-md-6 text-left">
+                    <h3>Thiết lập trang chủ</h3>
+                </div>
+                <div class="col-md-6 text-right">
+                    <ng-container *ngIf="model.id==''">
+                        <button type="button" class="btn btn-success" (click)="showCreateUpdate('')" container="body">
+                            <i class="fa fa-plus"></i>
+                           Thêm mới
+                          </button>
+                    </ng-container>
+                    <ng-container *ngIf="model.id!= ''">
+                        <button type="button" class="btn btn-success" (click)="showCreateUpdate(model.id)" container="body">
+                            <i class="fa fa-plus"></i>
+                           Cập nhập
+                          </button>
+                    </ng-container>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xl-12 col-md-12 col-sm-12 col-lg-12">
+                    <table class="table table-borderless" min-width="800px">
+                        <tr>
+                            <td width="400px">Logo</td>
+                            <td min-width="400px">
+                                <span *ngIf="model.logo!=null && model.logo!=''">
+                                    <img  height="100px" class="img-list" [src]="config.ServerApi+model.logo">
+                                  </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Địa chỉ</td>
+                            <td>{{model.address}}</td>
+                        </tr>
+                        <tr>
+                            <td>Điện thoại</td>
+                            <td>{{model.phone}}</td>
+                        </tr>
+                        <tr>
+                            <td>Gmail</td>
+                            <td>{{model.gmail}}</td>
+                        </tr>
+                        <tr>
+                            <td>Website</td>
+                            <td>{{model.website}}</td>
+                        </tr>
+                        <tr>
+                            <td>Liên kết Facebook</td>
+                            <td>{{model.linkFacebook}}</td>
+                        </tr>
+                        <tr>
+                            <td>Liên kết Google</td>
+                            <td>{{model.linkGoogle}}</td>
+                        </tr>
+                        <tr>
+                            <td>Liên kết Youtube</td>
+                            <td>{{model.linkYoutube}}</td>
+                        </tr>
+                        <tr>
+                            <td>Bản quyền</td>
+                            <td>{{model.copyright}}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

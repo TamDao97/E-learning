@@ -1,0 +1,87 @@
+<section class="ftco-section">
+    <div class="container-fluid px-4">
+        <form name="searchForm" #f="ngForm" (submit)="search()">
+            <div class="input-group justify-content-center" style="padding-top: 20px;">
+                <div class="form-outline">
+                    <input class="form-search focus_textbox form-control" name="search" placeholder="Tìm kiếm" [(ngModel)]="searchValue" />
+                </div>
+                <button type="button" (click)="search()" class="btn btn-primary button-radius">
+                  <i class="fas fa-search"></i>
+                </button>
+            </div>
+        </form>
+    </div>
+    <div class="container-fluid px-4">
+        <div class="row justify-content-center" *ngIf="totalItems>0">
+            <div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 course card shadow-sm" *ngFor="let a of listData;let i = index">
+                <span *ngIf="a.imagePath!=null && a.imagePath!=''" style="margin-top: 15px;">
+                                <div class="img align-self-stretch"
+                                    style="background-image: url({{config.ServerApi+a.imagePath}});"></div>
+                            </span>
+
+                <span *ngIf="a.imagePath==null || a.imagePath==''" style="margin-top: 15px;">
+                                <div class="img align-self-stretch" style="background-image: url('/assets/img/noavatar.gif');">
+                                </div>
+                            </span>
+                <div class="text pt-4">
+                    <p class="meta d-flex">
+                        <span style="width: 50%;"><i class="fas fa-user mr-2"></i>
+                                        <div class="dropdown d-inline">
+                                            <span class="dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown"
+                                                aria-haspopup="true" aria-expanded="false">Chuyên gia(
+                                                {{a.listEmployeeName.length}}
+                                                )
+                                            </span>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <p class="dropdown-item" *ngFor="let b of a.listEmployeeName;">{{b}}</p>
+                        </div>
+                </div>
+                </span>
+                <span style="width: 25%;"><i class="fas fa-book mr-2"
+                                            title="Bài học"></i>{{a.numberOfLesson}}</span>
+                <span style="width: 25%;"><i class="fas fa-users mr-2"
+                                            title="Số người đăng"></i>{{a.numberOfLearner}}</span>
+                </p>
+                <h3 style="height: 56px;" class="text"><a [href]="['#/chi-tiet-khoa-hoc/'+a.slug]">{{a.name}}</a>
+                </h3>
+                <p style="height: 72px;" class="text1">{{a.description}}</p>
+                <p *ngIf="isLogin==false"><a href="#" class="btn btn-primary" (click)="handling(a.id,a.isLearned,a.finishDate,a.slug)" class="btn btn-primary">Đăng ký</a>
+                </p>
+
+                <p *ngIf="isLogin==true&&a.isLearned==false&&dateNow.getTime()<= dateUntil.getTimetoDateString(a.finishDate)">
+                    <a href="#" class="btn btn-primary" (click)="handling(a.id,a.isLearned,a.finishDate,a.slug)" class="btn btn-primary">Đăng ký</a>
+                </p>
+
+                <p *ngIf="isLogin==true&&a.isLearned==true"><a [href]="['#/my-course/lesson/bai-giang-ly-thuyet/'+a.slug]" class="btn btn-success" class="btn btn-success">Vào học</a>
+                </p>
+
+                <p *ngIf="dateNow.getTime()> dateUntil.getTimetoDateString(a.finishDate) &&isLogin==true&&a.isLearned==false" style="pointer-events: none;">
+                    <a href="javascript:void(0)" class="btn btn-primary" class="btn btn-dark">Kết thúc</a>
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-center" style="height: 387px;" *ngIf="totalItems==0">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="error-template">
+                    <h1>
+                        Oops!</h1>
+                    <h2>
+                        Không có khóa học nào được tìm thấy</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</section>
+<style>
+    .focus_textbox:focus {
+        border: 1px solid #ccc;
+    }
+    
+    .error-template {
+        padding: 40px 15px;
+        text-align: center;
+    }
+</style>

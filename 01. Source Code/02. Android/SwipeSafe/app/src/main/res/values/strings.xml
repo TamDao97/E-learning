@@ -1,0 +1,14 @@
+<resources>
+    <string name="title_home" translatable="false">Home</string>
+    <string name="title_dashboard" translatable="false">Dashboard</string>
+    <string name="title_notifications" translatable="false">Notifications</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
+    <string name="help" translatable="false">Nhập đầy đủ thông tin cho các trường bôi đỏ để tiếp tục báo cáo sự vụ.</string>
+
+    <string name="facebook_app_id" translatable="false">3485269614889173</string>
+    <string name="fb_login_protocol_scheme" translatable="false">fb3485269614889173</string>
+
+    <string name="error_gif" translatable="false">x or y bound size should be at least %1$dpx and file size should be no more than %2$sM</string>
+</resources>

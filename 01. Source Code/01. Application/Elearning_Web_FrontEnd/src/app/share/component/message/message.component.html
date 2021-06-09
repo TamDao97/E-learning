@@ -1,0 +1,23 @@
+<div class="modal-header">
+  <h4 class="modal-title text-uppercase">THÔNG BÁO</h4>
+  <a href="javascript:;" style="outline: none; color: white" (click)="closeModal()">
+    <i class="fa fa-close"></i>
+  </a>
+</div>
+<ng-container *ngIf="!isList">
+  <div class="modal-body" style="font-size: 18px">
+    <p>{{message}}</p>
+  </div>
+</ng-container>
+<ng-container *ngIf="isList">
+  <div class="modal-body" style="font-size: 18px">
+    <p *ngFor="let message of messages">
+      {{message}}
+    </p>
+  </div>
+</ng-container>
+<div class="modal-footer">
+  <button type="button" ngbAutofocus class="btn btn-danger" (click)="closeModal()" style="height:40px;">
+    <span>Đóng</span>
+  </button>
+</div>

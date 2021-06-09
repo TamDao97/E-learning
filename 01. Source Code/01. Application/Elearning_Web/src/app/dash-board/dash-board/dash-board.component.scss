@@ -1,0 +1,101 @@
+body {
+    padding: 0 !important;
+    margin: 0 !important;
+    font-family: Open Sans, Arial, Helvetica, sans-serif !important;
+    background-color: var(--body-background) !important;
+    color: #262626 !important;
+    font-size: var(--body-fontsize) !important;
+}
+
+app-dash-board {
+    .gradient-scooter {
+        background: #4facfe;
+        background: -webkit-linear-gradient(45deg, #4facfe 0%, #00f2fe 100%) !important;
+        background: linear-gradient(45deg, #4facfe 0%, #00f2fe 100%) !important;
+    }
+    .gradient-bloody {
+        background: #f54ea2;
+        background: -webkit-linear-gradient(45deg, #f54ea2, #ff7676) !important;
+        background: linear-gradient(45deg, #f54ea2, #ff7676) !important;
+    }
+    .gradient-quepal {
+        background: #11998e;
+        background: -webkit-linear-gradient(45deg, #11998e, #38ef7d) !important;
+        background: linear-gradient(45deg, #11998e, #38ef7d) !important;
+    }
+    .gradient-blooker {
+        background: #fa709a;
+        background: -webkit-linear-gradient(45deg, #fa709a 0%, #fee140 100%) !important;
+        background: linear-gradient(45deg, #fa709a 0%, #fee140 100%) !important;
+    }
+
+    .extra-small-font {
+        font-size: 15px;
+    }
+
+    .btn-outline-primary {
+        color: rgb(10, 0, 0);
+        background-color: #fff;
+        border-color: #fff;
+    }
+
+    .dropdown-toggle::after {
+        display: inline-block !important;
+        margin-left: 0.255em !important;
+        vertical-align: 0.255em !important;
+        content: none;
+        border-top: 0.3em solid !important;
+        border-right: 0.3em solid transparent !important;
+        border-bottom: 0 !important;
+        border-left: 0.3em solid transparent !important;
+    }
+
+    .aligns {
+        float: left;
+    }
+
+    .box header {
+        width: 100%;
+        display: flex;
+        position: relative;
+        background: #0056ac;
+        padding: 8px 15px;
+        justify-content: space-between;
+        border-radius: 0;
+        align-items: center;
+    }
+
+    .box header .actions,
+    .box header .title {
+        color: var(--box-header-color);
+    }
+
+    .box header .title {
+        font-size: 18px;
+        margin: 0;
+        text-transform: uppercase;
+        line-height: 18px;
+    }
+
+    .h1,
+    .h2,
+    .h3,
+    .h4,
+    .h5,
+    .h6,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        margin-bottom: 0.5rem;
+        font-weight: 500;
+        line-height: 1.2;
+    }
+
+    .course {
+        background-color: #fff;
+        border: 0 solid rgba(0, 0, 0, 0.12);
+    }
+}

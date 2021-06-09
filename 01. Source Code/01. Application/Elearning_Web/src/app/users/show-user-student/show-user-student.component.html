@@ -1,0 +1,200 @@
+<div class="content-wrapper">
+    <div class="content-body">
+        <div class="row mt-3">
+            <div class="col-md-8 col-lg-8 col-sm-12 col-xl-8">
+                <div class="row">
+
+                    <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+                        <div class="form-group ">
+                            <label class="form-label">Họ và tên
+                                <span class='text-danger text-strong'>&nbsp;</span>
+                            </label>
+                            <div class="controls">
+                                <input readonly type="text" class="form-control" name="Name" [(ngModel)]="model.name"
+                                    maxlength="100" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+                        <div class="form-group ">
+                            <label class="form-label">Ngày sinh
+                                <span class='text-danger text-strong'>&nbsp;</span>
+                            </label>
+                            <div class="input-group">
+                                <input readonly class="form-control" placeholder="dd/mm/yyyy" name="DateOfBirth"
+                                    [(ngModel)]="dateOfBirth" ngbDatepicker #DateOfBirth="ngbDatepicker">
+                                <div class="input-group-append">
+                                    <span readonly class="input-group-text pointer"
+                                        (click)="DateOfBirth.toggle(); $event.stopPropagation();" name="DateOfBirth">
+                                        <i class="far fa-calendar-alt" style="color: #999;"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 radio">
+                        <div class="form-group ">
+                            <label class="form-label">Giới tính
+                                <span class='text-danger text-strong'>&nbsp;</span>
+                            </label>
+                            <div class="controls">
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input disabled type="radio" id="customRadioInline1" [(ngModel)]="model.gender"
+                                        required name="gender" [value]='false' class="custom-control-input">
+                                    <label class="custom-control-label" for="customRadioInline1">Nam</label>
+                                </div>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input disabled type="radio" id="customRadioInline2" [(ngModel)]="model.gender"
+                                        required name="gender" [value]='true' class="custom-control-input">
+                                    <label class="custom-control-label" for="customRadioInline2">Nữ</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+                        <div class="form-group ">
+                            <label class="form-label">Tỉnh
+                                <span class='text-danger text-strong'></span>
+                            </label>
+                            <div class="controls">
+                                <input disabled type="text" class="form-control" name="ProvinceName"
+                                    [(ngModel)]="model.provinceName" maxlength="500">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+                        <div class="form-group ">
+                            <label class="form-label">Huyện
+                                <span class='text-danger text-strong'></span>
+                            </label>
+                            <div class="controls">
+                                <input disabled type="text" class="form-control" name="districtName"
+                                    [(ngModel)]="model.districtName" maxlength="500">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+                        <div class="form-group ">
+                            <label class="form-label">Xã
+                                <span class='text-danger text-strong'></span>
+                            </label>
+                            <div class="controls">
+                                <input disabled type="text" class="form-control" name="WardName"
+                                    [(ngModel)]="model.wardName" maxlength="500">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+                        <div class="form-group ">
+                            <label class="form-label">Dân tộc
+                                <span class='text-danger text-strong'></span>
+                            </label>
+                            <div class="controls">
+                                <input disabled type="text" class="form-control" name="NationName"
+                                    [(ngModel)]="model.nationName" maxlength="500">
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+                        <div class="form-group ">
+                            <label class="form-label">Địa chỉ
+                                <span class='text-danger text-strong'></span>
+                            </label>
+                            <div class="controls">
+                                <input disabled type="text" class="form-control" name="Address"
+                                    [(ngModel)]="model.address" maxlength="500">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+                        <div class="form-group ">
+                            <label class="form-label">Email
+                                <span class='text-danger text-strong'>&nbsp;</span>
+                            </label>
+                            <div class="controls">
+                                <input disabled required type="email" class="form-control" [(ngModel)]="model.email"
+                                    name="email" maxlength="300">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+                        <div class="form-group ">
+                            <label class="form-label">Số điện thoại
+                                <span class='text-danger text-strong'></span>
+                            </label>
+                            <div class="controls">
+                                <input type="text" disabled class="form-control" name="PhoneNumber"
+                                    [(ngModel)]="model.phoneNumber" maxlength="50" ntsNumberInt>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+                        <div class="form-group ">
+                            <label class="form-label">Hình thức đăng ký
+                                <span class='text-danger text-strong'></span>
+                            </label>
+                            <div class="controls">
+                                <input disabled type="text" class="form-control" readonly name="workUnit"
+                                    [(ngModel)]="model.provider">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="col-md-4 col-lg-4 col-sm-12 col-xl-4">
+                <div class="content-body">
+                    <div class="row margin-bottom-10">
+                        <div class="col-md-6 text-left">
+                            <label class="form-label" style="line-height:35px;">Tổng số
+                                <span class="bold text-danger font-weight-bold">{{listData.length}}</span> khóa học</label>
+                        </div>
+                    </div>
+        
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-lg-12">
+                            <perfect-scrollbar [config]="constant.ScrollConfig" style="height:500px; width:100%;">
+                                <table class="table table-bordered table-hover" style="min-width:250">
+                                    <thead>
+                                        <tr>
+                                            <th width="50px" class="text-center">STT</th>
+                                            <th min-width="200px" class="text-center">Tên khóa học</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let row of listData; let i = index">
+                                            <td class="text-center">{{i+1}}</td>
+                                            <td>{{row.name}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </perfect-scrollbar>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="content-body">
+        <div class="content-body  padding-15 text-right">
+            <button type="button" class="btn btn-danger" (click)="closeModal(false)">
+                <i class="fa fa-power-off"></i> &nbsp;
+                <span>
+                    Đóng
+                </span>
+            </button>
+        </div>
+    </div>
+</div>

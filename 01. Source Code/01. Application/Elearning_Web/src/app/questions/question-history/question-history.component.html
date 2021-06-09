@@ -1,0 +1,54 @@
+<div class="modal-header">
+    <h4 class="modal-title text-uppercase" style="line-height: 20px;">{{modalInfo.title}}</h4>
+    <a href="javascript:;" style="outline: none; color: white;" (click)="closeModal(true)">
+        <i class="fa fa-close"></i>
+    </a>
+</div>
+<form name="form" #f="ngForm" novalidate>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-lg-12">
+                <div #scrollHeaderQuestion style="height: auto; width:100%;overflow: hidden">
+                    <table class="table table-bordered mb-0" style="word-wrap: break-word ;min-width:870px;">
+                        <thead>
+                            <tr>
+                                <th width="50px" class="text-center">STT</th>
+                                <th width="120px" class="text-center">Tình trạng</th>
+                                <th width="300px" class="text-center">Hoạt động</th>
+                                <th min-width="200px" class="text-center">Nội dung</th>
+                                <th width="200px" class="text-center">Thời gian</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+                <perfect-scrollbar [config]="constant.ScrollConfig" [style.max-height.px]="500">
+                    <table class="table table-bordered table-fixed table-hover" style="min-width:870px;">
+                        <tbody>
+                            <tr *ngFor="let row of listQuestion; let i = index">
+                                <td width="50px" class="text-center">{{i+1}}</td>
+                                <td width="120px" class="text-center">
+                                    <nts-status-badge [items]="constant.approvalStatus" [value]="row.approvalStatus">
+                                    </nts-status-badge>
+                                </td>
+                                <td width="300px">{{row.action}}</td>
+                                <td min-width="200px">{{row.content}}</td>
+                                <td width="200px" class="text-center">{{row.processingDate|date:'dd/MM/yyyy HH:mm:ss'}}
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                        </tfoot>
+                    </table>
+                </perfect-scrollbar>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-danger" (click)="closeModal(false)">
+            <i class="fa fa-power-off"></i> &nbsp;
+            <span>
+                Đóng
+            </span>
+        </button>
+    </div>
+</form>

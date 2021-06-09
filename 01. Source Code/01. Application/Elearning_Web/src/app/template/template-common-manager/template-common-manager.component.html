@@ -1,0 +1,68 @@
+<div class="content-wrapper">
+    <section class="box">
+        <div class="content-body">
+            <div class="row margin-bottom-10">
+                <div class="col-md-6 text-left">
+                    <label class="form-label" style="line-height:35px;">Tổng số
+                        <span class="font-weight-bold text-danger">{{listData.length}}</span> mẫu văn bản</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xl-12 col-md-12 col-sm-12 col-lg-12">
+                    <perfect-scrollbar [config]="constant.ScrollXConfig" style="height:auto; width:100%;">
+                        <table class="table table-bordered" style="min-width:1200px">
+                            <thead>
+                                <tr>
+                                    <th class="text-center" width="50px">STT</th>
+                                    <th class="text-center" width="100px">Xử lý</th>
+                                    <th class="text-center" width="150px">Mã mẫu</th>
+                                    <th class="text-center" min-width="300px">Tên mẫu</th>
+                                    <th class="text-center" width="300px">Mô tả</th>
+                                    <th class="text-center" width="150px">Ngày cập nhập</th>
+                                    <th class="text-center" width="150px">Người cập nhập</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let row of listData; let i = index">
+                                    <td class="text-center">{{startIndex+i}}</td>
+                                    <td style="text-align: center">
+                                        <button *appUipermission="['F001001']" type="button" (click)="showCreateUpdate(row.id)" class="btn btn-warning btn-xs" placement="bottom" ngbTooltip="Cập nhật" container="body">
+                                            <span class="fas fa-edit" aria-hidden="true"></span>
+                                        </button>
+                                        <button *appUipermission="['F001002']" type="button" (click)="download(row)" class="btn btn-secondary btn-xs" placement="bottom" ngbTooltip="Tải xuống mẫu" container="body">
+                                            <span class="fas fa-download" aria-hidden="true"></span>
+                                        </button>
+                                    </td>
+                                    <td>{{row.code}}</td>
+                                    <td>{{row.name}}</td>
+                                    <td>{{row.description}}</td>
+                                    <td class="text-center">{{row.updateDate|date:'dd/MM/yyyy'}}</td>
+                                    <td class="text-center">{{row.createBy}}</td>
+                                </tr>
+                            </tbody>
+                            <tfoot *ngIf="listData.length == 0">
+                                <tr class="bold">
+                                    <td colspan="9" min-width="300px" class="text-center" style="height: 300px; font-size: 20px;">Không có dữ liệu</td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </perfect-scrollbar>
+                </div>
+            </div>
+            <br>
+            <hr />
+            <div class="row">
+                <div class="col-md-12">
+                    <button *appUipermission="['F001001']" class="btn btn-view btn-warning">
+                        <i class="fas fa-pen-square"></i>
+                    </button>&nbsp;
+                    <small *appUipermission="['F001001']" class="padding-right-20">Cập nhập</small>
+                    <button *appUipermission="['F001002']" class="btn btn-view btn-secondary">
+                        <i class="fas fa-download"></i>
+                    </button>&nbsp;
+                    <small *appUipermission="['F001002']" class="padding-right-20">Tải xuống mẫu</small>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

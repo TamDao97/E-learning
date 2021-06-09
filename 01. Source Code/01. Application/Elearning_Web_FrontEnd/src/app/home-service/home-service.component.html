@@ -1,0 +1,26 @@
+<section class="ftco-services ftco-no-pb">
+    <div class="container-wrap">
+        <div class="row no-gutters">
+
+            <div *ngFor="let item of listData; let i = index" [ngClass]="[(number == 1 ? 'col-md-12' : (number == 2 ? 'col-md-6' : (number == 3? 'col-md-4' :'col-md-3'))), (i % 2 ==0 ? 'd-flex services align-self-stretch py-5 px-4 ftco-animate bg-primarys fadeInUp ftco-animated' : 'd-flex services align-self-stretch py-5 px-4 ftco-animate bg-darken fadeInUp ftco-animated')]">
+                <div class="media block-6 d-block text-center">
+                    <div class="icon d-flex justify-content-center align-items-center" style="height: 120px;width: 120px;">
+                        <span *ngIf="item.imagePath!=null && item.imagePath!=''">
+                            <div class="img align-self-stretch"
+                                style="background-image: url({{confg.ServerApi+item.imagePath}});height: 120px;width: 120px;"></div>
+                        </span>
+
+                        <span *ngIf="item.imagePath==null || item.imagePath==''">
+                            <div class="img align-self-stretch" style="background-image: url('/assets/img/noavatar.gif');">
+                            </div>
+                        </span>
+                    </div>
+                    <div class="media-body p-2 mt-3">
+                        <h3 class="heading">{{item.title}}</h3>
+                        <p class="text-limit-3row" style="height: 70px;">{{item.description}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

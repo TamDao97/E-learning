@@ -1,0 +1,50 @@
+app-home-program {
+    .custom-5-col {
+        width: 20%;
+        float: left;
+    }
+    .dropdown:hover>.dropdown-menu {
+        display: block;
+    }
+    .courses {
+        margin-bottom: 30px;
+    }
+    .courses .text p.meta span {
+        width: 100%;
+    }
+    .course .img {
+        width: 100%;
+        height: 200px;
+    }
+    .ftco-section {
+        padding-top: 15px;
+        padding-bottom: 15px;
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+    .text {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        /* number of lines to show */
+        -webkit-box-orient: vertical;
+    }
+    .text1 {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        /* number of lines to show */
+        -webkit-box-orient: vertical;
+    }
+    .new-label {
+        padding: 0;
+        display: block;
+        position: absolute;
+    }
+    .new-top-left {
+        right: 10px;
+        top: 3px;
+    }
+}

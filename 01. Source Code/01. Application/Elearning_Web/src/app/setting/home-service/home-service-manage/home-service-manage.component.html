@@ -1,0 +1,101 @@
+<div class="content-wrapper">
+    <section class="box">
+        <div class="content-body">
+            <form>
+                <div class="row">
+                    <div class="col-xl-8 col-lg-8 col-md-8">
+                        <nts-search-bar [(options)]="searchOptions" [(ngModel)]="model" name="searchModel" (change)="search()">
+                        </nts-search-bar>
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-4 text-right">
+                        <button class="btn btn-success" (click)="search()">
+                            <i class="fa fa-search"></i> &nbsp;Tìm kiếm</button>
+                        <button class="btn btn-secondary" (click)="clear()">
+                            <i class="fas fa-redo-alt"></i> &nbsp;Làm mới</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="content-body">
+            <div class="row margin-bottom-10">
+                <div class="col-md-6 text-left">
+                    <label class="form-label" style="line-height:35px;">Tổng số
+                        <span class="font-weight-bold text-danger">{{model.TotalItems}}</span> lời tựa</label>
+                </div>
+                <div class="col-md-6 text-right">
+                    <button *appUipermission="['F000801']" type="button" class="btn btn-success" (click)="showCreateUpdate('')" container="body">
+                        <i class="fa fa-plus"></i>
+                        Thêm mới
+                    </button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xl-12 col-md-12 col-sm-12 col-lg-12">
+                    <perfect-scrollbar [config]="constant.ScrollXConfig" style="height:auto; width:100%;">
+                        <table class="table table-bordered" style="min-width:725">
+                            <thead>
+                                <tr>
+                                    <th class="text-center" width="120px">Thứ tự ưu tiên</th>
+                                    <th class="text-center" width="150px">Xử lý</th>
+                                    <th class="text-center" width="100px">Ảnh</th>
+                                    <th class="text-center" width="250px">Tiêu đề</th>
+                                    <th class="text-center" min-width="100px">Mô tả</th>
+                                </tr>
+                            </thead>
+                            <tbody cdkDropList [cdkDropListData]="listData" class="example-list" (cdkDropListDropped)="drop($event)">
+                                <tr *ngFor="let row of listData; let i = index" cdkDrag>
+                                    <td class="text-center">{{row.displayIndex}}</td>
+                                    <td style="text-align: center">
+                                        <button *appUipermission="['F000802']" type="button" (click)="showCreateUpdate(row.id)" class="btn btn-warning btn-xs" placement="bottom" ngbTooltip="Cập nhật" container="body">
+                                            <span class="fas fa-edit" aria-hidden="true"></span>
+                                        </button>
+                                        <button *appUipermission="['F000803']" class="btn btn-danger btn-xs" container="body" (click)="showConfirmDelete(row.id)" ngbTooltip="Xóa">
+                                            <span class="fas fa-trash-alt" aria-hidden="true"></span>
+                                        </button> &nbsp;
+                                        <span *ngIf="row.status==true">
+                                            <button *appUipermission="['F000804']" type="button" (click)="UpdateStatus(row.id)"
+                                                class="btn btn-success btn-xs" placement="bottom" ngbTooltip="Hiển thị"
+                                                container="body">
+                                                <span class="fas fa-eye" aria-hidden="true"></span>
+                                        </button>
+                                        </span>
+                                        <span *ngIf="row.status==false">
+                                            <button *appUipermission="['F000804']" type="button" (click)="UpdateStatus(row.id)"
+                                                class="btn btn-secondary btn-xs" placement="bottom"
+                                                ngbTooltip="Không hiển thị" container="body">
+                                                <span class="fas fa-eye-slash" aria-hidden="true"></span>
+                                        </button>
+                                        </span>
+                                    </td>
+                                    <td class="text-center">
+                                        <img width="100%" height="50px" class="img-list" [src]="row.imagePath == null || row.imagePath == '' ? '/assets/img/noavatar.gif':config.ServerApi + row.imagePath">
+                                    </td>
+                                    <td>{{row.title}}</td>
+                                    <td>{{row.description}}</td>
+                                </tr>
+                            </tbody>
+                            <tfoot *ngIf="listData.length == 0">
+                                <tr class="bold">
+                                    <td colspan="6" min-width="300px" class="text-center" style="height: 300px; font-size: 20px;">Không có dữ liệu</td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </perfect-scrollbar>
+                </div>
+            </div>
+            <hr />
+            <div class="row">
+                <div class="col-md-12">
+                    <button class="btn btn-view btn-warning">
+                        <i class="fas fa-pen-square"></i>
+                    </button>&nbsp;
+                    <small class="padding-right-20">Sửa lời tựa</small>
+                    <button class="btn btn-view btn-danger">
+                        <i class="fas fa-trash-alt"></i>
+                    </button>&nbsp;
+                    <small class="padding-right-20">Xóa lời tựa</small>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

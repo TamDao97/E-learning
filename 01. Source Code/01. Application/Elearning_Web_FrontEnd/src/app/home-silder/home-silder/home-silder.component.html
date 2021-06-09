@@ -1,0 +1,26 @@
+<section class="bodycontainer">
+    <ngb-carousel *ngIf="listImage">
+        <ng-container *ngIf="model.imagePath!=null">
+            <ng-template ngbSlide>
+                <div class="wrapper">
+                    <div class="img" style="background-image:url({{confg.ServerApi+model.imagePath}});height: 600px;">
+                    </div>
+                </div>
+                <div class="carousel-captions">
+                    <h3>{{model.title}}</h3>
+                    <p> {{model.description}} </p>
+                </div>
+            </ng-template>
+        </ng-container>
+        <ng-template ngbSlide *ngFor="let item of listImage; let i = index">
+            <div class="wrapper">
+                <div class="img" style="background-image:url({{confg.ServerApi+item.imagePath}}); height:600px;">
+                </div>
+            </div>
+            <div class="carousel-captions">
+                <h3>{{item.title}}</h3>
+                <p> {{item.description}} </p>
+            </div>
+        </ng-template>
+    </ngb-carousel>
+</section>

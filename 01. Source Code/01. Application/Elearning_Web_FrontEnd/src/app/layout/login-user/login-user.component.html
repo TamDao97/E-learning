@@ -1,0 +1,89 @@
+<div class="modal-header">
+    <div style="font-weight: bold;" *ngIf="type == 1">ĐĂNG NHẬP</div>
+    <div style="font-weight: bold;" *ngIf="type == 2">ĐĂNG KÝ</div>
+    <a style="color: brown" type="button" class="close" aria-label="Close" (click)="closeModal()">
+        <span aria-hidden="true">&times;</span>
+    </a>
+</div>
+<div class="modal-body">
+    <form name="form" class="form-validation signupforms" (ngSubmit)="f.form.valid" #f="ngForm" novalidate>
+        <div class="row-signup">
+            <div class="facebook-box" data-name="facebook" (click)="signInWithFB()" style="margin-bottom: 5px;">
+                <a class="fb-social">
+                    <div class="facebook-link" mat-flat-button>Facebook</div>
+                </a>
+            </div>
+            <div class="facebook-box" data-name="google" (click)="signInWithGoogle()" style="margin-bottom: 10px;">
+                <a class="google-social">
+                    <div class="google-link">Google</div>
+                </a>
+            </div>
+        </div>
+
+        <div class="row-signup mg30">
+            <div class="light-hight-left"></div><span class="or-txt"> Hoặc </span>
+            <div class="light-hight-right"></div>
+        </div>
+
+        <div class="clear-both"></div>
+
+        <div class="row-signup">
+            <input placeholder="name@example.com" type="email" name="email" [(ngModel)]="model.email" #email="ngModel"
+                required aria-required="true" aria-invalid="false" class="valid">
+        </div>
+
+        <div class="clear-both"></div>
+
+        <div class="row-signup" *ngIf="type == 2">
+            <input placeholder="Họ và tên" type="text" name="name" [(ngModel)]="model.name" #email="ngModel" required
+                aria-required="true" aria-invalid="false" class="valid">
+        </div>
+
+        <div class="clear-both"></div>
+
+        <div class="row-signup">
+            <div class="form-group">
+                <input oncopy="return false" oncut="return false" onpaste="return false" [type]="password"  id="password" [(ngModel)]="model.password" name="password"
+                    required placeholder="Mật khẩu" aria-required="true" aria-invalid="false">
+                <span  [ngClass]=" show ? 'fas fa-eye field-icon' : 'fas fa-eye-slash field-icon'" (click)="changeShowPassword()"></span>
+            </div>
+        </div>
+
+        <div class="clear-both"></div>
+
+        <div class="row-signup" *ngIf="type == 2">
+            <div class="form-group">
+                <input oncopy="return false" oncut="return false" onpaste="return false" [type]="passwordComfrim" (change)="checkPasswordComfrim(model.passwordComfrim)"  id="passwordComfrim" [(ngModel)]="model.passwordComfrim" name="passwordComfrim"
+                    required placeholder="Xác nhận mật khẩu" aria-required="true" aria-invalid="false">
+                <span  [ngClass]=" showComfrim ? 'fas fa-eye field-icon' : 'fas fa-eye-slash field-icon'" (click)="changeShowPasswordComfrim()"></span>
+            </div>
+        </div>
+        <p *ngIf="type == 2" style="color: red; text-align: center;">{{message}}</p>
+
+        <div class="clear-both"></div>
+        <div class="row-signup mg30">
+            <button [disabled]="!f.form.valid " *ngIf="type == 1" (click)="login()"
+                class="btn btn-accent btn-block submit register-btn">Đăng nhập</button>
+            <button [disabled]="!f.form.valid || model.password != model.passwordComfrim" *ngIf="type == 2" (click)="save()"
+                class="btn btn-accent btn-block submit register-btn">Đăng ký</button>
+        </div>
+        <div class="row-signup mg30">
+            <div class="light-forgot">
+                <a class="loginv2-forgot" href="#" (click)="changeDoimatkhau()">Quên mật khẩu?</a>
+            </div>
+        </div>
+
+        <div class="row-signup mg30">
+            <div class="light-forgot" *ngIf="type == 1">
+                Bạn chưa có tài khoản ? <a class="loginv2-forgot" href="javascript:void(0)" (click)="changeDangky()">
+                    Đăng ký</a>
+            </div>
+
+            <div class="light-forgot" *ngIf="type == 2">
+                Bạn đã có tài khoản ? <a class="loginv2-forgot" href="javascript:void(0)" (click)="changeDangnhap()">
+                    Đăng nhập</a>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="modal-footer"></div>

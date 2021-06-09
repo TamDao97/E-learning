@@ -1,0 +1,172 @@
+<div class="content-wrapper">
+    <section class="box">
+        <div class="content-body">
+            <form>
+                <div class="row">
+                    <div class="col-xl-8 col-lg-8 col-md-8">
+                        <nts-search-bar [(options)]="searchOptions" [(ngModel)]="lessonModel" name="lessonModel"
+                            (change)="searchLesson()">
+                        </nts-search-bar>
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-4 text-right">
+                        <button class="btn btn-success" (click)="searchLesson()">
+                            <i class="fa fa-search"></i> &nbsp;Tìm kiếm</button>
+                        <button class="btn btn-secondary" (click)="clear()">
+                            <i class="fas fa-redo-alt"></i> &nbsp;Làm mới</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="content-body">
+            <div class="row margin-bottom-10">
+                <div class="col-md-6 text-left">
+                    <label class="form-label" style="line-height:35px;">Tổng số
+                        <span class="font-weight-bold text-danger">{{lessonModel.TotalItems}}</span> bài giảng</label>|
+                    <label class="form-label accton" style="line-height:35px;color:  #0073aa;"><a
+                            href="javascript:void(0)" [ngClass]="{'typeColor':lessonModel.ApprovalStatus==0}"
+                            (click)="searchStatus(0)">
+                            Đang tạo (<span
+                                class="bold text-danger">{{lessonModel.TotalCreating}}</span>)</a></label>&nbsp;|
+                    <label class="form-label accton" style="line-height:35px;color:  #0073aa;"><a
+                            href="javascript:void(0)" [ngClass]="{'typeColor':lessonModel.ApprovalStatus==1}"
+                            (click)="searchStatus(1)">
+                            Yêu cầu duyệt (<span
+                                class="bold text-danger">{{lessonModel.TotalRequest}}</span>)</a></label>&nbsp;|
+                    <label class="form-label accton" style="line-height:35px;color:  #0073aa;"><a
+                            href="javascript:void(0)" [ngClass]="{'typeColor':lessonModel.ApprovalStatus==2}"
+                            (click)="searchStatus(2)">
+                            Duyệt (<span
+                                class="bold text-danger">{{lessonModel.TotalApproval}}</span>)</a></label>&nbsp;|
+                    <label class="form-label accton" style="line-height:35px;color:  #0073aa;"><a
+                            href="javascript:void(0)" [ngClass]="{'typeColor':lessonModel.ApprovalStatus==4}"
+                            (click)="searchStatus(4)">
+                            Không duyệt (<span
+                                class="bold text-danger">{{lessonModel.TotalNotBrowse}}</span>)</a></label>&nbsp;|
+                    <label class="form-label accton" style="line-height:35px;color:  #0073aa;"><a
+                            href="javascript:void(0)" [ngClass]="{'typeColor':lessonModel.ApprovalStatus==3}"
+                            (click)="searchStatus(3)">
+                            Hủy duyệt (<span
+                                class="bold text-danger">{{lessonModel.TotalNotApproval}}</span>)</a></label>&nbsp;
+                </div>
+                <div class="col-md-6 text-right">
+                    <button *appUipermission="['F000301']" type="button" class="btn btn-success"
+                        (click)="showCreateUpdate('')" container="body">
+                        <i class="fa fa-plus"></i>
+                        Thêm mới
+                    </button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-lg-12">
+                    <perfect-scrollbar [config]="constant.ScrollXConfig" style="height:auto; width:100%;">
+                        <table class="table table-bordered table-hover" style="min-width:1560px">
+                            <thead>
+                                <tr>
+                                    <th width="50px" class="text-center">STT</th>
+                                    <th width="200px" class="text-center">Xử lý</th>
+                                    <th class="text-center" width="100px">Tình trạng</th>
+                                    <th width="200px" class="text-center">Danh mục</th>
+                                    <th min-width="250px" class="text-center">Tên bài giảng</th>
+                                    <th width="150px" class="text-center">Loại bài giảng</th>
+                                    <th width="150px" class="text-center">Người tạo</th>
+                                    <th width="150px" class="text-center">Thời gian tạo</th>
+                                    <th width="160px" class="text-center">Người cập nhật cuối</th>
+                                    <th width="150px" class="text-center">Cập nhật lần cuối</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let row of listData; let i = index">
+                                    <td class="text-center">{{startIndex+i}}</td>
+                                    <td class="text-center">
+                                        <button *appUipermission="['F000302']" type="button"
+                                            (click)="showCreateUpdate(row.id, row.statusApproval)"
+                                            class="btn btn-warning btn-xs" placement="bottom" ngbTooltip="Cập nhật"
+                                            container="body">
+                                            <span class="fas fa-edit" aria-hidden="true"></span>
+                                        </button>
+                                        <button *appUipermission="['F000303']" class="btn btn-danger btn-xs"
+                                            container="body" (click)="showConfirmDelete(row.id)" ngbTooltip="Xóa">
+                                            <span class="fas fa-trash-alt" aria-hidden="true"></span>
+                                        </button>
+                                        <!-- <span *ngIf="row.status==true && row.statusApproval!==2">
+                                            <button *appUipermission="['F000304']" style="margin-left: 10px;"
+                                                class="btn btn-success btn-xs" container="body" (click)="update(row.id)"
+                                                ngbTooltip="Hiển thị">
+                                                <span class="fas fa-eye" aria-hidden="true"></span>
+                                            </button>
+                                        </span>
+                                        <span *ngIf="row.status==false && row.statusApproval!==2">
+                                            <button *appUipermission="['F000304']" style="margin-left: 10px;"
+                                                (click)="update(row.id)" class="btn btn-secondary btn-xs"
+                                                placement="bottom" ngbTooltip="Không hiển thị" container="body">
+                                                <span class="fas fa-eye-slash" aria-hidden="true"></span>
+                                            </button>
+                                        </span> -->
+                                        <button style="margin-left: 10px;" (click)="previewLesson(row.id,row.type)"
+                                            class="btn btn-secondary btn-xs" placement="bottom"
+                                            ngbTooltip="Xem bài giảng" container="body">
+                                            <span class="fas fa-binoculars" aria-hidden="true"></span>
+                                        </button>
+                                        <button style="margin-left: 10px;" (click)="lessonHistory(row.id)"
+                                            class="btn btn-success btn-xs" placement="bottom" ngbTooltip="Lịch sử duyệt"
+                                            container="body">
+                                            <span class="fas fa-history" aria-hidden="true"></span>
+                                        </button>
+                                    </td>
+                                    <td class="text-center">
+                                        <nts-status-badge [items]="constant.approvalStatus"
+                                            [value]="row.statusApproval">
+                                        </nts-status-badge>
+                                    </td>
+                                    <td [ngbTooltip]="row.categoryName" container="body">{{row.categoryName|limitTo:45}}
+                                    </td>
+                                    <td>{{row.name}}</td>
+                                    <td>
+                                        <nts-status [value]="row.type" [items]="constant.LessonType">
+                                        </nts-status>
+                                    </td>
+                                    <td>{{row.createBy}}/{{row.manageUnitName}}</td>
+                                    <td>{{row.createDate|date:'dd/MM/yyyy HH:mm:ss'}}</td>
+                                    <td>{{row.updateBy}}/{{row.manageUnitName}}</td>
+                                    <td>{{row.updateDate|date:'dd/MM/yyyy HH:mm:ss'}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </perfect-scrollbar>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-12 d-flex justify-content-start">
+                    <div class="controls ">
+                        <select class="form-control" style="border: 1px solid #ddd;" [(ngModel)]="lessonModel.PageSize"
+                            (ngModelChange)="searchLesson()" name="pageSize">
+                            <option *ngFor="let item of constant.ListPageSize" [value]="item">{{item}}</option>
+                        </select>
+                    </div>
+                    <label class="form-label " style="padding: 4px;">bản ghi/Trang</label>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12  d-flex justify-content-end">
+                    <ngb-pagination [collectionSize]="totalItem" [(page)]="lessonModel.PageNumber"
+                        (pageChange)="searchLesson()" [pageSize]="lessonModel.PageSize" [maxSize]="5" [rotate]="true"
+                        [boundaryLinks]="true">
+                    </ngb-pagination>
+                </div>
+            </div>
+            <hr />
+            <div class="row">
+                <div class="col-md-12">
+                    <button class="btn btn-view btn-warning">
+                        <i class="fas fa-pen-square"></i>
+                    </button>&nbsp;
+                    <small class="padding-right-20">Sửa bài giảng</small>
+                    <button class="btn btn-view btn-danger">
+                        <i class="fas fa-trash-alt"></i>
+                    </button>&nbsp;
+                    <small class="padding-right-20">Xóa bài giảng</small>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

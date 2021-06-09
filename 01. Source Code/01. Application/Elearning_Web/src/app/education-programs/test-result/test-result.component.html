@@ -1,0 +1,50 @@
+<div class="modal-header">
+    <h4 class="modal-title text-uppercase">Tiến độ khóa học</h4>
+    <a href="javascript:;" style="outline: none; color: white" (click)="closeModal()">
+        <i class="fa fa-close"></i>
+    </a>
+</div>
+<div class="modal-body padding-10">
+    <form name="form" #f="ngForm" novalidate>
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <div class="card" *ngFor="let row of data; let i = index">
+                    <div class="card-header">
+                        <div class="row" id="accordion">
+                            <div class="col-md-9">
+                                <p><span>
+                                    <input type="radio" [value]="true" [(ngModel)]="row.isChecked"  [name]='row.lessonId'>
+                                </span> Bài {{row.displayIndex}}: {{row.lessonName}}</p>
+                            </div>
+                            <div class="col-md-3 text-right" *ngIf="row.results!=null&&row.results!=0">
+                                <span data-toggle="collapse" [attr.data-target]="'#lesson' + row.displayIndex" class="icon-check"><i class="fas fa-caret-down"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="lesson{{row.displayIndex}}" class="collapse" *ngIf="row.results!=null&&row.results!=0">
+                        <div class="card-body row" *ngFor="let i of row.results;">
+                            <div class="col-md-9">
+                                Ngày: {{i.testDate|date:'dd/MM/yyyy'}}
+                            </div>
+                            <div class="col-md-3 text-right" style="color: green; font-size: large; font-weight:700;" (click)="detailResult(i.testId)">
+                                {{i.totalCorrect}}/{{i.totalQuestion}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="data.length==0">
+                    <p class="text-center">Không có bản ghi nào</p>
+                </div>
+            </div>
+        </div>
+        <br>
+    </form>
+</div>
+
+<!-- Footer -->
+<div class="modal-footer">
+    <button type="button" class="btn btn-danger" (click)="closeModal()">
+        <i class="fa fa-power-off"></i> &nbsp;
+        <span>Đóng</span>
+    </button>
+</div>

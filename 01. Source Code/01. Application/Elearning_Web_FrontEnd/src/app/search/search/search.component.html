@@ -1,0 +1,56 @@
+<div class="bg-top navbar-light header" style="height: 70px;">
+    <div class="container headerheight">
+        <div class="row d-block  no-gutters d-flex align-items-center align-items-stretch">
+            <div class="col-md-8">
+                <div style="padding-top: 20px;">
+                    <marquee>
+                        <span *ngFor="let a of listData">
+                            <span><a style="font-size: large;" href="{{a.pageLink}}" target="_blank">{{a.title}}</a></span>&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
+                        </span>
+                    </marquee>
+                </div>
+            </div>
+            <div class="col-md-4 d-flex justify-content-end">
+                <form name="searchForm" #f="ngForm" (submit)="search()">
+                    <div class="input-group" style="padding-top: 15px;">
+                        <input class="form-search focus_textbox form-control" name="search" placeholder="Tìm kiếm" [(ngModel)]="searchValue" />
+                        <button type="button " (click)="search()" class="btn btn-primary button-radius">
+                          <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .dropdown-toggle::after {
+        content: initial;
+    }
+    
+    .focus_textbox:focus {
+        border: 1px solid #ccc;
+    }
+    
+    .form-search {
+        height: 38px !important;
+        width: 300px;
+        background: #fff !important;
+        color: #000000 !important;
+        font-size: 18px;
+        box-shadow: none !important;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        border-top-left-radius: 10px;
+        border-bottom-left-radius: 10px;
+        border-top-right-radius: 0px;
+        border-bottom-right-radius: 0px;
+    }
+    
+    .button-radius {
+        border-top-left-radius: 0px;
+        border-bottom-left-radius: 0px;
+        border-top-right-radius: 10px;
+        border-bottom-right-radius: 10px;
+    }
+</style>

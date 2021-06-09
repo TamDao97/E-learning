@@ -1,0 +1,792 @@
+.show-question-model .modal-dialog {
+    max-width: 100% !important;
+    width: 1000px !important;
+}
+
+app-show-question {
+    @media (max-width: 575px) {
+        .menu-header-detail {
+            max-width: 100%;
+            margin-top: 150px;
+        }
+        .wrapper {
+            margin: auto 20px;
+        }
+    }
+    @media (min-width: 576px) {
+        .menu-header-detail {
+            max-width: 100%;
+            margin-top: 150px;
+        }
+        .wrapper {
+            margin: auto 20px;
+        }
+        .position-lessoncourse {
+            overflow: hidden;
+            position: fixed;
+            width: 380px;
+            top: 150px;
+            height: auto;
+        }
+    }
+    @media (min-width: 768px) {
+        .menu-header-detail {
+            max-width: 100%;
+            margin-top: 0px;
+        }
+        .wrapper {
+            margin: auto 208px;
+        }
+        .position-lessoncourse {
+            overflow: hidden;
+            position: fixed;
+            width: 380px;
+            top: 150px;
+            height: auto;
+        }
+    }
+    @media (min-width: 992px) {
+        .menu-header-detail {
+            max-width: 100%;
+            margin-top: 0px;
+        }
+        .wrapper {
+            margin: auto 208px;
+        }
+        .position-lessoncourse {
+            overflow: hidden;
+            position: fixed;
+            width: 380px;
+            top: 150px;
+            height: auto;
+        }
+    }
+    @media (min-width: 1200px) {
+        .menu-header-detail {
+            max-width: 100%;
+            margin-top: 0px;
+        }
+        .wrapper {
+            margin: auto 208px;
+        }
+        .position-lessoncourse {
+            overflow: hidden;
+            position: fixed;
+            width: 380px;
+            top: 150px;
+            height: auto;
+        }
+    }
+    #contentLesson video {
+        width: 100% !important;
+    }
+    #contentLesson table {
+        width: 100% !important;
+    }
+    #contentLesson img {
+        width: 100% !important;
+    }
+    .row-actions {
+        display: inline;
+        margin-left: 10px;
+    }
+    .accton {
+        color: #0073aa;
+    }
+    .comment {
+        box-sizing: border-box;
+        display: block;
+        padding: 0 8px;
+        min-width: 24px;
+        height: auto;
+        border-radius: 5px;
+        background-color: #c9c9c9;
+        color: #262626;
+        font-size: 11px;
+        line-height: 1.9090909;
+        //text-align: center;
+        max-width: 100%;
+    }
+    .commnets {
+        border: 0;
+        clip: rect(1px, 1px, 1px, 1px);
+        -webkit-clip-path: inset(50%);
+        clip-path: inset(50%);
+        height: 1px;
+        margin: -1px;
+        overflow: hidden;
+        padding: 0;
+        position: absolute;
+        width: 1px;
+        word-wrap: normal !important;
+    }
+    .commnetss {
+        content: "";
+        position: absolute;
+        top: -9px;
+        left: 30px;
+        border-right: 10px solid transparent;
+        border-left: 10px solid transparent;
+        border-bottom: 10px solid #c9c9c9;
+    }
+    .image {
+        border-radius: 100px;
+    }
+    .hdv {
+        text-transform: uppercase;
+        color: #fff;
+        font-weight: normal;
+        font-size: 10px;
+        background: #d0011b;
+        padding: 1px 6px;
+        margin-left: 8px;
+    }
+    .titel-detail h1 {
+        font-size: 20px;
+        font-weight: 00;
+        margin: 0 0 15px 0;
+    }
+    .hm-player-header {
+        background: #fd5f00 none repeat scroll 0 0;
+        border-radius: 4px 4px 0 0;
+    }
+    .clearfix {
+        display: block;
+    }
+    .clearfix {
+        min-width: 0;
+    }
+    .struct-menu {
+        float: right;
+        position: relative;
+    }
+    .hm-player-header .struct-menu-title {
+        background: transparent none repeat scroll 0 0;
+        border-radius: 4px 4px 0 0;
+        color: #fff;
+        cursor: pointer;
+        display: block;
+        font-size: 13px;
+        height: 40px;
+        line-height: 40px;
+        padding: 0 20px 0 38px;
+        position: relative;
+    }
+    .struct-menu .playlist {
+        background: #fff none repeat scroll 0 0;
+        border-right: 1px solid #2a70b8;
+        border-top: 3px solid #2a70b8;
+        padding: 10px 10px 10px 20px;
+        position: absolute;
+        right: 0;
+        top: 100%;
+        width: 250px;
+        z-index: 9;
+        display: none;
+        max-height: 360px;
+        overflow: auto;
+    }
+    .main {
+        background-color: #eee;
+        // width: 320px;
+        position: relative;
+        //border-radius: 8px;
+        // box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        padding: 6px 0px 0px 0px;
+    }
+    .scroll {
+        overflow-y: scroll;
+        scroll-behavior: smooth;
+        height: 600px;
+        background-color: #e0d7d717;
+    }
+    ::-webkit-scrollbar {
+        width: 10px;
+        border-radius: 100px;
+    }
+    ::-webkit-scrollbar-track {
+        background: #eee;
+    }
+    ::-webkit-scrollbar-thumb {
+        background: #888;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+        background: #555;
+    }
+    .scroll-right {
+        background-color: #fff;
+        scroll-behavior: smooth;
+        height: auto;
+        overflow: auto;
+        //overflow-y: scroll;
+        //overflow-x: hidden;
+    }
+    //css
+    .sidebar-first,
+    .sidebar-second,
+    .fixsb {
+        height: 100%;
+        position: relative;
+        z-index: 2;
+    }
+    .sidebar-second {
+        float: right;
+        //width: 326px;
+    }
+    .course-outline-head {
+        color: #2a70b8;
+        font-weight: bold;
+        border-bottom: 2px solid;
+        background: rgb(0 123 255 / 8%);
+        text-align: center;
+        //padding: 8px;
+        height: 40px;
+        line-height: 40px;
+    }
+    .fa {
+        display: inline-block;
+        font: normal normal normal 14px/1 FontAwesome;
+        font-size: inherit;
+        text-rendering: auto;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+    .fa-list:before {
+        content: "\f03a";
+    }
+    :after,
+    :before {
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+    }
+    #scorm-status-helper {
+        font-size: 13px;
+        line-height: 18px;
+    }
+    #scorm-status-helper {
+        border-bottom: 1px solid #c3c3c3;
+        margin: 0 0 1px;
+        padding: 8px;
+    }
+    .clearfix {
+        display: block;
+    }
+    .clearfix {
+        min-width: 0;
+    }
+    .clearfix:before,
+    .clearfix:after {
+        display: block;
+    }
+    #scorm-status-helper > li {
+        margin-right: 5px;
+    }
+    #scorm-status-helper > li {
+        float: left;
+        list-style: outside none none;
+        margin-right: 40px;
+    }
+    #scorm-status-helper > li {
+        float: left;
+        list-style: outside none none;
+        margin-right: 40px;
+    }
+    #scorm-status-helper .lesson-process-wr {
+        display: inline-block;
+        float: left;
+        margin-left: 0;
+        margin-right: 5px;
+        position: static;
+    }
+    .lesson-process-wr {
+        background-color: #fff;
+        border: 1px solid #54b551;
+        border-radius: 10px;
+        display: block;
+        height: 20px;
+        left: 20px;
+        margin-left: -10px;
+        padding: 1px;
+        position: absolute;
+        top: 8px;
+        width: 20px;
+        z-index: 1;
+    }
+    .lesson-process-percent.percent-50 {
+        background-color: #54b551;
+        border-radius: 8px 0 0 8px;
+        width: 8px;
+    }
+    .lesson-process-percent {
+        background-color: #fff;
+        border-radius: 8px;
+        display: block;
+        height: 16px;
+        text-align: center;
+        width: 16px;
+    }
+    .lesson-process-percent.percent-100 {
+        background-color: #54b551;
+        border-radius: 8px;
+    }
+    .fa-check:before {
+        content: "\f00c";
+    }
+    .learn-lesson-wr .lesson-process-percent .fa,
+    .lesson-process-wr .lesson-process-percent .fa {
+        color: #fff;
+        display: block;
+        font-size: 11px;
+        line-height: 16px;
+    }
+    .learn-lesson-wr .lesson-process-percent .fa,
+    .lesson-process-wr .lesson-process-percent .fa {
+        color: #fff;
+        display: block;
+        font-size: 11px;
+        line-height: 16px;
+    }
+    .fa {
+        display: inline-block;
+        //font: normal normal normal 14px/1 FontAwesome;
+        font-size: inherit;
+        text-rendering: auto;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+    .fas {
+        display: inline-block;
+        //font: normal normal normal 14px/1 FontAwesome;
+        color: #fff;
+        font-size: inherit;
+        text-rendering: auto;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+    .learn-lesson-wr .lesson-process-percent .fa,
+    .lesson-process-wr .lesson-process-percent .fa {
+        color: #fff;
+        display: block;
+        font-size: 11px;
+        line-height: 16px;
+    }
+    .scroll-wrapper > .scroll-content {
+        border: none !important;
+        box-sizing: content-box !important;
+        height: auto;
+        left: 0;
+        margin: 0;
+        max-height: none;
+        max-width: none !important;
+        //overflow: scroll !important;
+        padding: 0;
+        position: relative !important;
+        top: 0;
+        width: auto !important;
+        scroll-behavior: smooth;
+        overflow-y: scroll;
+        overflow-x: hidden;
+    }
+    .course-outline-wr {
+        //height: 402px;
+        overflow-y: hidden;
+        background: #fff;
+    }
+    .scorm-section-right {
+        box-shadow: 2px 2px 3px 0 rgba(234, 232, 232, 0.75);
+    }
+    .section-right-name {
+        background: #e6e6e6 none repeat scroll 0 0;
+        border-bottom: 1px solid #d5d4d4;
+        font-size: 13px;
+        font-weight: bold;
+        margin: 0;
+        padding: 10px 20px 10px 10px;
+        position: relative;
+        z-index: 2;
+        cursor: pointer;
+    }
+    .h1,
+    .h2,
+    .h3,
+    .h4,
+    .h5,
+    .h6,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        line-height: 1.25;
+    }
+    .section-right-name:before {
+        background: rgba(0, 0, 0, 0) no-repeat scroll right center;
+        content: "";
+        display: block;
+        height: 11px;
+        margin-top: -5px;
+        position: absolute;
+        right: 6px;
+        top: 50%;
+        width: 11px;
+    }
+    .learn-outline-list {
+        font-size: 13px;
+        list-style: outside none none;
+        margin: 0;
+        padding: 0;
+    }
+    .learn-outline-item {
+        border-bottom: 1px solid #d5d4d4;
+        margin: 0;
+        padding: 0;
+    }
+    .learn-lesson-wr {
+        color: #4c4c4c;
+        display: block;
+        padding: 9px 10px 9px 40px;
+        position: relative;
+    }
+    a {
+        color: #2a70b8;
+        text-decoration: none;
+        outline: none;
+    }
+    .scorm-section-right-action:before,
+    .learn-lesson-wr:before {
+        background: #e6e5e5 none repeat scroll 0 0;
+        content: "";
+        display: block;
+        height: 100%;
+        left: 20px;
+        position: absolute;
+        top: 0;
+        width: 1px;
+    }
+    .lesson-process-percent_new_67914 {
+        width: 23px;
+        height: 21px;
+        //background: url(/mod/scorm/pix/percent.png) 0px 0;
+        position: absolute;
+        margin-left: -2px;
+        top: -1px;
+        padding-top: 5px;
+        font-size: 10px;
+        text-align: center;
+        color: #000;
+        font-weight: 300;
+    }
+    .scorm-right-name {
+        font-size: 16px;
+        font-weight: 500;
+        margin: 0 0 10px;
+    }
+    .scrollbar-inner > .scroll-element.scroll-x {
+        bottom: 2px;
+        height: 8px;
+        left: 0;
+        width: 100%;
+    }
+    .scrollbar-inner > .scroll-element,
+    .scrollbar-inner > .scroll-element div {
+        border: none;
+        margin: 0;
+        padding: 0;
+        position: absolute;
+        z-index: 10;
+    }
+    .scroll-element {
+        box-sizing: content-box;
+        display: none;
+    }
+    .scrollbar-inner > .scroll-element .scroll-element_outer,
+    .scrollbar-inner > .scroll-element .scroll-element_track,
+    .scrollbar-inner > .scroll-element .scroll-bar {
+        -webkit-border-radius: 8px;
+        -moz-border-radius: 8px;
+        border-radius: 8px;
+    }
+    .scrollbar-inner > .scroll-element .scroll-element_outer {
+        overflow: hidden;
+    }
+    .scrollbar-inner > .scroll-element div {
+        display: block;
+        height: 100%;
+        left: 0;
+        top: 0;
+        width: 100%;
+    }
+    .scrollbar-inner > .scroll-element,
+    .scrollbar-inner > .scroll-element div {
+        border: none;
+        margin: 0;
+        padding: 0;
+        position: absolute;
+        z-index: 10;
+    }
+    .scroll-element div {
+        box-sizing: content-box;
+    }
+    .scrollbar-inner > .scroll-element.scroll-x.scroll-scrolly_visible .scroll-element_size {
+        left: -12px;
+    }
+    .scrollbar-inner > .scroll-element div {
+        display: block;
+        height: 100%;
+        left: 0;
+        top: 0;
+        width: 100%;
+    }
+    .scrollbar-inner > .scroll-element,
+    .scrollbar-inner > .scroll-element div {
+        border: none;
+        margin: 0;
+        padding: 0;
+        position: absolute;
+        z-index: 10;
+    }
+    .scrollbar-inner > .scroll-element.scroll-x.scroll-scrolly_visible .scroll-element_track {
+        left: -12px;
+    }
+    .scrollbar-inner > .scroll-element .scroll-element_track {
+        background-color: #e0e0e0;
+    }
+    .scrollbar-inner > .scroll-element .scroll-element_track,
+    .scrollbar-inner > .scroll-element .scroll-bar {
+        -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=40)";
+        filter: alpha(opacity=40);
+        opacity: 0.4;
+    }
+    .scrollbar-inner > .scroll-element .scroll-element_outer,
+    .scrollbar-inner > .scroll-element .scroll-element_track,
+    .scrollbar-inner > .scroll-element .scroll-bar {
+        -webkit-border-radius: 8px;
+        -moz-border-radius: 8px;
+        border-radius: 8px;
+    }
+    .scrollbar-inner > .scroll-element div {
+        display: block;
+        height: 100%;
+        left: 0;
+        top: 0;
+        width: 100%;
+    }
+    .scrollbar-inner > .scroll-element,
+    .scrollbar-inner > .scroll-element div {
+        border: none;
+        margin: 0;
+        padding: 0;
+        position: absolute;
+        z-index: 10;
+    }
+    .scrollbar-inner > .scroll-element .scroll-bar {
+        background-color: #c2c2c2;
+    }
+    .scrollbar-inner > .scroll-element.scroll-y {
+        height: 100%;
+        right: 2px;
+        top: 0;
+        width: 8px;
+    }
+    .scroll-element.scroll-x.scroll-scrollx_visible,
+    .scroll-element.scroll-y.scroll-scrolly_visible {
+        display: block;
+    }
+    .scrollbar-inner > .scroll-element,
+    .scrollbar-inner > .scroll-element div {
+        border: none;
+        margin: 0;
+        padding: 0;
+        position: absolute;
+        z-index: 10;
+    }
+    .scroll-element {
+        box-sizing: content-box;
+        display: none;
+    }
+    .btn-group-vertical > .btn-group:after,
+    .btn-toolbar:after,
+    .clearfix:after,
+    .container-fluid:after,
+    .container:after,
+    .dl-horizontal dd:after,
+    .form-horizontal .form-group:after,
+    .modal-footer:after,
+    .nav:after,
+    .navbar-collapse:after,
+    .navbar-header:after,
+    .navbar:after,
+    .pager:after,
+    .panel-body:after,
+    .row:after {
+        clear: both;
+    }
+    .btn-group-vertical > .btn-group:after,
+    .btn-group-vertical > .btn-group:before,
+    .btn-toolbar:after,
+    .btn-toolbar:before,
+    .clearfix:after,
+    .clearfix:before,
+    .container-fluid:after,
+    .container-fluid:before,
+    .container:after,
+    .container:before,
+    .dl-horizontal dd:after,
+    .dl-horizontal dd:before,
+    .form-horizontal .form-group:after,
+    .form-horizontal .form-group:before,
+    .modal-footer:after,
+    .modal-footer:before,
+    .nav:after,
+    .nav:before,
+    .navbar-collapse:after,
+    .navbar-collapse:before,
+    .navbar-header:after,
+    .navbar-header:before,
+    .navbar:after,
+    .navbar:before,
+    .pager:after,
+    .pager:before,
+    .panel-body:after,
+    .panel-body:before,
+    .row:after,
+    .row:before {
+        display: table;
+        content: " ";
+    }
+    .course-title {
+        color: #fff;
+        background-color: #fd7e14;
+        border-radius: 5px 5px 0 0;
+        font-weight: 500;
+        font-size: 20px;
+        display: inline-block;
+        padding: 5px 15px;
+    }
+    .course-content {
+        border-top: 2px solid #fd7e14;
+    }
+
+    // Start css menu hearder page detail
+    .menu-header-detail {
+        background-color: aliceblue;
+        h1 {
+            color: #6b6b6b !important;
+            font-size: 22px;
+            font-weight: normal;
+            margin: 20px 0 15px;
+            text-transform: uppercase;
+        }
+    }
+
+    .fontsize {
+        font-size: 11px !important;
+    }
+
+    .fontsize15 {
+        font-size: 15px;
+    }
+
+    .ftco-section {
+        padding: 15px 0;
+        h2 {
+            font-size: 20px;
+        }
+    }
+
+    .text-limit-2row {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        /* number of lines to show */
+        -webkit-box-orient: vertical;
+    }
+
+    .text-limit-3row {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        /* number of lines to show */
+        -webkit-box-orient: vertical;
+    }
+
+    .course .img {
+        width: 100%;
+        height: 175px;
+    }
+
+    // End css menu hearder page detail
+    .categories li.active a,
+    .sidelink li.active a {
+        color: #000000;
+        font-style: italic;
+    }
+
+    #ftco-loader {
+        position: fixed;
+        width: 96px;
+        height: 96px;
+        left: 50%;
+        top: 50%;
+        -webkit-transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+        background-color: rgba(255, 255, 255, 0.9);
+        -webkit-box-shadow: 0px 24px 64px rgba(0, 0, 0, 0.24);
+        box-shadow: 0px 24px 64px rgba(0, 0, 0, 0.24);
+        border-radius: 16px;
+        opacity: 0;
+        visibility: hidden;
+        -webkit-transition: opacity 0.2s ease-out, visibility 0s linear 0.2s;
+        -o-transition: opacity 0.2s ease-out, visibility 0s linear 0.2s;
+        transition: opacity 0.2s ease-out, visibility 0s linear 0.2s;
+        z-index: 1000;
+    }
+
+    #ftco-loader.fullscreen {
+        padding: 0;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        -webkit-transform: none;
+        -ms-transform: none;
+        transform: none;
+        background-color: #fff;
+        border-radius: 0;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+    }
+
+    #ftco-loader.show {
+        -webkit-transition: opacity 0.4s ease-out, visibility 0s linear 0s;
+        -o-transition: opacity 0.4s ease-out, visibility 0s linear 0s;
+        transition: opacity 0.4s ease-out, visibility 0s linear 0s;
+        visibility: visible;
+        opacity: 1;
+    }
+
+    #ftco-loader .circular {
+        -webkit-animation: loader-rotate 2s linear infinite;
+        animation: loader-rotate 2s linear infinite;
+        position: absolute;
+        left: calc(50% - 24px);
+        top: calc(50% - 24px);
+        display: block;
+        -webkit-transform: rotate(0deg);
+        -ms-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+
+    #ftco-loader .path {
+        stroke-dasharray: 1, 200;
+        stroke-dashoffset: 0;
+        -webkit-animation: loader-dash 1.5s ease-in-out infinite;
+        animation: loader-dash 1.5s ease-in-out infinite;
+        stroke-linecap: round;
+    }
+}

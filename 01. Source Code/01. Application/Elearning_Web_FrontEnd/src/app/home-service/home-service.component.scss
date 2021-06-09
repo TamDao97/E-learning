@@ -1,0 +1,25 @@
+
+.bodycontainer {
+    width: 100%;
+}
+@media (min-width: 576px) {
+    .bodycontainer {
+        max-width: 540px;
+    }
+}
+@media (min-width: 768px) {
+    .bodycontainer {
+        max-width: 1000px;
+    }
+}
+@media (min-width: 992px) {
+    .bodycontainer {
+        max-width: 1200px;
+    }
+}
+@media (min-width: 1200px) {
+    .bodycontainer {
+        max-width: 1600px;
+    }
+}
+

@@ -1,0 +1,249 @@
+<section class="menu-header-detail">
+    <div class="wrapper">
+        <div class="row">
+            <header class="col-xl-12 col-lg-12">
+                <h1> khóa học: <span style="color: #2a70b8; font-weight: bolder;">{{model.name}}</span></h1>
+            </header>
+        </div>
+    </div>
+</section>
+
+<div class="wrapper">
+    <div class="row">
+        <header class="col-xl-12 col-lg-12">
+            <div class="td-module-meta-info">
+                <span class="fontsize">
+                    <time class="entry-date updated td-module-date" datetime="2020-12-06T15:09:24+00:00"></time>
+                    <i class="fas fa-calendar" aria-hidden="true"></i> &nbsp;{{model.startDate|date:'dd-MM-yyyy'}}
+                </span>
+            </div>
+        </header>
+    </div>
+
+    <div class="row">
+        <div class="col-xl-9 col-lg-9">
+            <section class="ftco-section">
+                <h2> Giới thiệu khóa học</h2>
+                <p>{{model.description}}</p>
+                <h2 class="course-detail-stitle">
+                    <span>Nội dung khóa học</span>
+                </h2>
+                <p [innerHTML]="model.content | safeHtml"></p>
+            </section>
+        </div>
+        <div class="col-xl-3 col-lg-3 text-center">
+            <section class="ftco-section">
+                <h2>Hướng dẫn viên</h2>
+                <br />
+                <div class="row  pb-5" *ngFor="let item of model.listEmployee">
+                    <div class="col-xl-12 col-lg-12 ">
+                        <img class="rounded-circle" width="150px" height="150px" src="{{config.ServerApi + item.avatar}}" alt="" />
+                    </div>
+                    <div class="col-xl-12 col-lg-12 mt-1">
+                        <strong class="d-block">
+                            <span>
+                                <i class="fas fa-book">
+                                    {{item.numberOfCourse}} khóa học
+                                </i>
+                            </span>
+                        </strong>
+                    </div>
+                    <div class="col-lg-12 col-xl-12 mt-3">
+                        <h4 style="font-size: 15px;">{{item.name}}</h4>
+                        <p class="text-limit-3row" style="font-size: 13px;">{{item.description}}</p>
+                        <p>{{item.workUnit}}</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+            <section class="ftco-section">
+                <a style="color:white;" class="course-title">Nội dung bài học</a>
+                <div class="course-content">
+                    <div id="learn-outline-section-1072239" class="col-xl-12 col-lg-12 col-md-12 col-sm-12 learn-outline-list">
+                        <div class="learn-outline-item" *ngFor="let item of model.listLesson;let i = index">
+                            <a id=" scorm-right-link-wr-94656" class="learn-lesson-wr scorm-right-link-wr  scorm-free" target="_top" [href]="['#/my-course/lesson/bai-giang-ly-thuyet/'+model.slug]+';lesson='+item.slug" (click)="showCourseDetail(item, i)" title="{{item.name}}">
+                                <div class="lesson-process-wr">
+                                    <span class="lesson-process-percent"><i class="fa "></i></span>
+                                </div>
+                                <h4 class="scorm-right-name visible">
+                                    <span class="fontsize15 scorm-right-link">Bài {{startIndex+i}}: {{item.name}}</span>
+                                </h4>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+            <section class="box">
+                <div class="content-body">
+                    <div class="row">
+                        <div class="col-xl-12 col-md-12 col-sm-12 col-lg-12" style="margin-top:20px">
+                            <div class="form-group ">
+                                <a style="color:white;" class="course-title">Hỏi đáp</a>
+                                <div class="course-content">
+                                    <textarea name="content" style="margin-top:20px" class="form-control" [(ngModel)]="commnetModel.content" rows="3" placeholder="Viết thắc mắc của bạn tại đây"></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-12 col-md-12 col-sm-12 col-lg-12 text-right" style="margin-top:20px">
+                            <button type="button" class="btn btn-success" container="body" (click)="create(null, null,null)">
+                                <!-- <i class="fa fa-plus"></i> -->
+                                Gửi câu hỏi
+                            </button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <ng-container *ngFor="let row of listData; let i = index">
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mt-2">
+                                <span>
+                                    <img width="30px" height="30px" class="img-list" style="border-radius: 100px;"
+                                        [src]="row.imagePath==null || row.imagePath=='' ? '/assets/img/noavatar.png':config.ServerApi + row.imagePath">
+                                </span>&nbsp;
+                                <span class="font-weight-bold" style="font-size: 16px;">{{row.acountName}}</span>&nbsp;
+                                <span style="color: #9b9b9b;">{{row.commentDate|date:'dd/MM/yyyy HH:mm:ss'}}</span>
+                            </div>
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12" style="font-size: 14px;">
+                                <span>{{row.content}}</span>
+                            </div>
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12" style="font-size: 13px;">
+                                <div class="row-actions">
+                                    <span class="accton mr-1"><a href="javascript:void(0)" (click)="reply(row)">Trả
+                                            lời</a></span>
+                                </div>
+                            </div>
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mt-2">
+                                <span style="display: block;margin-left: 10px;">
+                                    <span class="comments commnetss" *ngIf="row.listReply.length>0"></span>
+                                <div class="comment">
+                                    <ng-container *ngFor="let row1 of row.listReply; let j = index">
+                                        <div class="row">
+                                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                                                <span *ngIf="row1.objectType === 3">
+                                                        <img width="26px" height="26px" class="img-list"
+                                                            style="border-radius: 100px;"
+                                                            [ngClass]="{'image': row1.objectType === 3}"
+                                                            [src]="row1.imagePath==null || row1.imagePath=='' ? '/assets/img/noavatar.png':config.ServerApi + row1.imagePath">
+                                                    </span>
+                                                <span *ngIf="row1.objectType === 1">
+                                                        <img width="26px" height="26px" class="img-list"
+                                                            style="border-radius: 100px;"
+                                                            [ngClass]="{'image': row1.objectType === 1}"
+                                                            [src]="row1.imagePath==null || row1.imagePath=='' ? '/assets/img/noavatar.png':config.ServerApi + row1.imagePath">
+                                                    </span>&nbsp;
+
+                                                <span class="font-weight-bold" style="font-size: 16px;">{{row1.acountName}}</span>&nbsp;
+                                                <span class="hdv" *ngIf="row1.objectType === 3">HDV</span>
+                                                <span class="hdv" *ngIf="row1.objectType === 1">Admin</span>&nbsp;
+                                                <span style="color: #9b9b9b;font-size: 14px;">{{row.commentDate|date:'dd/MM/yyyy HH:mm:ss'}}</span>
+                                            </div>
+                                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12" style="font-size: 14px;">
+                                                <span>{{row1.content}}</span>
+                                            </div>
+                                        </div>
+                                    </ng-container>
+                                </div>
+                                </span>
+                                <ng-container *ngIf="row.repply">
+                                    <div class="row">
+                                        <div class="col-xl-12 col-md-12 col-sm-12 col-lg-12 mt-1">
+                                            <div class="form-group" style="margin-left: 10px;">
+                                                <textarea [name]="'contents'+i" class="form-control" [(ngModel)]="row.contentReply" rows="3" placeholder="Viết bình luận của bạn"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-12 col-md-12 col-sm-12 col-lg-12 text-right">
+                                            <button type="button" class="btn btn-success" container="body" (click)="create(row.id,row.contentReply,row)">
+                                                <!-- <i class="fa fa-plus"></i> -->
+                                                Gửi câu hỏi
+                                            </button>
+                                        </div>
+                                    </div>
+                                </ng-container>
+                            </div>
+                        </ng-container>
+                    </div>
+                    <ng-container *ngIf="searchModel.TotalItems > searchModel.PageSize">
+                        <br>
+                        <div class="row">
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 d-flex justify-content-center">
+                                <ngb-pagination [collectionSize]="searchModel.TotalItems" [(page)]="searchModel.PageNumber" (pageChange)="searchComment()" [pageSize]="searchModel.PageSize" [maxSize]="5" [rotate]="true" [boundaryLinks]="true"></ngb-pagination>
+                            </div>
+                        </div>
+                    </ng-container>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+            <section class="ftco-section">
+                <a style="color:white;" class="course-title">Khóa học liên quan</a>
+                <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                    <div class="row justify-content-center course-content">
+                        <div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 course course-detail card shadow-sm p-2" *ngFor="let a of model.listRelatedCourse;let i = index">
+                            <span *ngIf="a.imagePath!=null && a.imagePath!=''" style="margin-top: 5px;">
+                                <div class="img align-self-stretch"
+                                    style="background-image: url({{config.ServerApi+a.imagePath}});"></div>
+                            </span>
+
+                            <span *ngIf="a.imagePath==null || a.imagePath==''" style="margin-top: 15px;">
+                                <div class="img align-self-stretch"
+                                    style="background-image: url('/assets/img/noavatar.gif');">
+                                </div>
+                            </span>
+                            <div class="text pt-4">
+                                <p class="meta d-flex">
+                                    <span style="width: 60%;"><i class="fas fa-user mr-2"></i>
+                                        <div class="dropdown d-inline">
+                                            <span class="dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown"
+                                                aria-haspopup="true" aria-expanded="false">Chuyên gia(
+                                                {{a.listEmployeeName.length}}
+                                                )
+                                            </span>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <p class="dropdown-item" *ngFor="let b of a.listEmployeeName;">{{b}}</p>
+                                    </div>
+                            </div>
+                            </span>
+                            <span style="width: 20%;"><i class="fas fa-book mr-2"
+                                            title="Bài học"></i>{{a.numberOfLesson}}</span>
+                            <span style="width: 20%;"><i class="fas fa-users mr-2"
+                                            title="Số người đăng"></i>{{a.numberOfLearner}}</span>
+                            </p>
+                            <h3 style="height: 54px;" class="text-limit-2row"><a [href]="['#/chi-tiet-khoa-hoc/'+a.slug]" (click)="redirectToLink(a.slug)">{{a.name}}</a>
+                            </h3>
+                            <p style="height: 51px;" class="text-limit-2row">{{a.description}}</p>
+                            <p *ngIf="isLogin==false"><a href="javascript:void(0)" class="btn btn-primary" (click)="handling(a.id,a.isLearned,a.finishDate,a.slug)" class="btn btn-primary">Đăng
+                                        ký</a>
+                            </p>
+
+                            <p *ngIf="isLogin==true&&a.isLearned==false&&dateNow.getTime()<= dateUntil.getTimetoDateString(a.finishDate)">
+                                <a href="javascript:void(0)" class="btn btn-primary" (click)="handling(a.id,a.isLearned,a.finishDate, a.slug)" class="btn btn-primary">Đăng
+                                        ký</a>
+                            </p>
+
+                            <p *ngIf="isLogin==true&&a.isLearned==true"><a [href]="['#/my-course/lesson/bai-giang-ly-thuyet/'+a.slug]" class="btn btn-success" class="btn btn-success">Vào
+                                        học</a>
+                            </p>
+
+                            <p *ngIf="dateNow.getTime()> dateUntil.getTimetoDateString(a.finishDate) &&isLogin==true&&a.isLearned==false" style="pointer-events: none;">
+                                <a href="javascript:void(0)" class="btn btn-primary" class="btn btn-dark">Kết
+                                        thúc</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+        </div>
+
+        </section>
+    </div>
+</div>
+</div>

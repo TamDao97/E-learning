@@ -1,0 +1,627 @@
+<section class="ftco-section">
+    <div class="course-player-wrapper">
+        <div class="course-player">
+            <div class="course-player__player">
+                <div class="row">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12" *ngIf="type==2">
+                        <div class="row" style="margin-top:20px">
+                            <ng-container>
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                                    <div class="row">
+                                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                                            <label class="font-weight-bold">Bài giảng lý
+                                                thuyết:</label>&nbsp;<label>{{modelExam.name}}</label>
+                                        </div>
+                                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                                            <label class="font-weight-bold">Ngày làm
+                                                bài:</label>&nbsp;<label>{{date|date:'dd/MM/yyyy'}}</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 text-center">
+                                    <div class="row" *ngIf="listDataExam.length > 0">
+                                        <ng-container *ngIf="type== 2 && modelExam.finishDate == null ">
+                                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                                                <label class="font-weight-bold">Thời gian làm bài
+                                                    (phút)</label>
+                                            </div>
+                                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                                                <countdown *ngIf="type== 2 && modelExam.finishDate == null"
+                                                    class="countdownType" #cd [config]="{leftTime: modelExam.examTime}"
+                                                    (event)="handleEvent($event)">
+                                                </countdown>
+
+                                                <span
+                                                    *ngIf="type== 2 && modelExam.finishDate != null">{{modelExam.examTime}}</span>
+                                            </div>
+                                        </ng-container>
+                                    </div>
+                                </div>
+                            </ng-container>
+                        </div>
+                    </div>
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12" *ngIf="type==2">
+                        <div class="row" *ngIf="listDataExam.length > 0">
+                            <ng-container *ngIf="type==2">
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12" style="padding-top: 15px;">
+                                    <div class="row">
+                                        <div class="col-xl-7 col-lg-7 col-md-7 col-sm-12">
+                                            <ngb-pagination [collectionSize]="totalQuestion"
+                                                [(page)]="question.PageNumber" (pageChange)="clickQuestion()"
+                                                [pageSize]="question.PageSize" [maxSize]="10" [rotate]="true"
+                                                [boundaryLinks]="true">
+                                            </ngb-pagination>
+                                        </div>
+                                        <div class="col-xl-5 col-lg-5 col-md-5 col-sm-5 col-md-5 text-right">
+                                            <button type="button" class="btn btn-success" (click)="showConfirm()"
+                                                [disabled]="modelExam.finishDate != null" container="body">
+                                                Nộp bài
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </ng-container>
+                        </div>
+
+                        <div class="hm-player-header clearfix mt-2" style="height: 40px;">
+                            <p style="color: white; padding-top: 7px; padding-left: 10px; font-weight: bold;">
+                                Nội dung bài học
+                            </p>
+                        </div>
+                        <div class="main" id="main">
+                            <ng-container *ngIf="type==2">
+                                <div class="row">
+                                    <div class="px-2 scroll">
+                                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                                                <div *ngIf="listDataExam.length > 0"
+                                                    [innerHTML]="listDataExam[index].content">
+                                                </div>
+                                                <div *ngIf="listDataExam == null" [innerHTML]="">
+                                                </div>
+
+                                            </div>
+                                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12"
+                                                *ngIf="listDataExam.length > 0">
+                                                <div class="row example-list" cdkDropList
+                                                    [cdkDropListData]="listDataExam[index].listAnswer"
+                                                    (cdkDropListDropped)="drop($event)">
+
+                                                    <ng-container *ngIf="listDataExam[index].type===1">
+                                                        <ng-container
+                                                            *ngFor="let item of listDataExam[index].listAnswer; let j = index">
+                                                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+
+                                                                <div class="form-group">
+                                                                    <div
+                                                                        class="custom-control custom-radio custom-control-inline">
+                                                                        <input class="custom-control-input" [id]="j"
+                                                                            [name]="'check'" type="radio"
+                                                                            (ngModelChange)="onChangeRadio(item, listDataExam[index].listAnswer)"
+                                                                            [(ngModel)]="item.isCorrect" [value]="j">
+                                                                        <label class="custom-control-label"
+                                                                            [for]="j">{{item.answerLabel}}.&nbsp;{{item.answerContent}}</label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </ng-container>
+                                                    </ng-container>
+
+                                                    <ng-container *ngIf="listDataExam[index].type===2">
+                                                        <ng-container
+                                                            *ngFor="let item of listDataExam[index].listAnswer; let j = index">
+                                                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                                                                <div class="form-group">
+                                                                    <div
+                                                                        class="custom-control custtom-check custom-control-inline">
+                                                                        <input type="checkbox" class="form-check-input"
+                                                                            [(ngModel)]="item.isCorrect"
+                                                                            [name]="'checkboxtest'+j"
+                                                                            style="height:16px; width:16px;">
+                                                                        <label class="form-check-label"
+                                                                            style="padding-left: 5px;">{{item.answerLabel}}.&nbsp;{{item.answerContent}}</label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </ng-container>
+                                                    </ng-container>
+
+                                                    <ng-container *ngIf="listDataExam[index].type===3">
+
+                                                        <ng-container
+                                                            *ngFor="let item of listDataExam[index].listAnswer; let j = index">
+                                                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                                                                <div class="form-group">
+                                                                    <div
+                                                                        class="custom-control custom-radio custom-control-inline">
+                                                                        <input type="radio" class="custom-control-input"
+                                                                            [id]="j" [name]="'checker'" type="radio"
+                                                                            (ngModelChange)="onChangeRadio(item, listDataExam[index].listAnswer)"
+                                                                            [(ngModel)]="item.isCorrect"
+                                                                            [value]="'true'+j">
+                                                                        <label class="custom-control-label"
+                                                                            [for]="j">{{item.answerLabel}}</label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </ng-container>
+                                                    </ng-container>
+
+                                                    <ng-container *ngIf="listDataExam[index].type===4">
+                                                        <ng-container
+                                                            *ngFor="let item of listDataExam[index].listAnswer; let j = index">
+                                                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                                                                <div class="form-group">
+                                                                    <label class="form-label">{{item.answerLabel}}
+                                                                    </label>
+                                                                    <input type="text" class="form-control"
+                                                                        [name]="listDataExam[index].content+j"
+                                                                        [(ngModel)]="item.answerContent">
+                                                                </div>
+                                                            </div>
+                                                        </ng-container>
+                                                    </ng-container>
+
+                                                    <ng-container *ngIf="listDataExam[index].type===5">
+                                                        <ng-container
+                                                            *ngFor="let item of listDataExam[index].listAnswer; let j = index">
+                                                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 question-drack mt-2"
+                                                                *ngIf="listDataExam[index].type===5">
+                                                                <div id="smartwizard" class="sw-main" cdkDrag>
+                                                                    <a href="javascript:void(0)"
+                                                                        style="text-decoration: none;color: #ffffff;">{{item.answerLabel}}
+                                                                        : {{item.answerContent}}</a>
+                                                                </div>
+                                                            </div>
+                                                        </ng-container>
+
+                                                        <p style="color: red;margin-left: 10px;">
+                                                            (Thực hiện giữ đáp
+                                                            án
+                                                            và di
+                                                            chuyển lên xuống để sắp xếp đáp án cho
+                                                            đúng thứ tự!)</p>
+                                                    </ng-container>
+
+                                                </div>
+
+                                            </div>
+
+                                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12"
+                                                *ngIf="listDataExam.length  == null">
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </ng-container>
+                        </div>
+                    </div>
+                    <ng-container *ngIf="type==1">
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                            <div class="page-detail-text" id="contentLesson"
+                                [innerHTML]="lessonModel.content| safeHtml">
+                            </div>
+                        </div>
+                    </ng-container>
+                    <ng-container *ngIf="type==3 || type==4">
+                        <iframe width="100%" [height]="heightType" [src]="link" title="YouTube video player"
+                            frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen>
+                        </iframe>
+                    </ng-container>
+                </div>
+            </div>
+            <div class="course-player__nav">
+                <div class="course-player__nav-content">
+                    <div class="navigation">
+                        <div class="navigation-header">
+                            <div class="course-title">
+                                <h1 class="course-title__title u-mb-sm"><a class="course-title__link" target="_blank"
+                                        rel="noopener noreferrer">{{courseModel.name}}</a>
+                                </h1>
+                            </div>
+                            <div class="navigation-tabs">
+                                <div role="tablist" tabindex="0" data-css-zduid6="">
+                                    <div data-css-z1scix="" style="transform: translateX(0px);">
+                                        <button class="navigation-tabs__item " id="table-of-contents"
+                                            aria-selected="false" role="tab" tabindex="-1"
+                                            [ngClass]="{'css-197sg7a':tabIndex==1,'css-18spzod':tabIndex==2}"
+                                            (click)="clickTab(1)">
+                                            <div data-css-1cuoqce="" tabindex="-1">
+                                                <div data-css-3omctz="" tabindex="-1">Nội dung bài giảng</div><span
+                                                    data-css-kuoqk0=""></span>
+                                            </div>
+                                        </button>
+                                        <button class="navigation-tabs__item " id="notes" aria-selected="true"
+                                            role="tab" tabindex="-1" [disabled]="type==2"
+                                            [ngClass]="{'css-197sg7a':tabIndex==2,'css-18spzod':tabIndex==1}"
+                                            (click)="clickTab(2)">
+                                            <div data-css-1cuoqce="" tabindex="-1">
+                                                <div data-css-3omctz="" tabindex="-1">Bình luận</div><span
+                                                    data-css-kuoqk0=""></span>
+                                            </div>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="navigation-content">
+                            <ng-container *ngIf="tabIndex==1">
+                                <div role="tabpanel" aria-labelledby="table-of-contents">
+                                    <div class="table-of-contents">
+                                        <ng-container *ngFor="let row of courseModel.listLessonCourse; let i = index">
+                                            <div data-css-knxp45="" class="module">
+                                                <div [ngClass]="{'is-current-hearde':selectIndex==row.lessonId }">
+                                                    <div data-css-157tm1l>
+                                                        <div data-css-euzj8="">
+                                                            <div class="module-header u-flex u-align-items-center">
+                                                                <div class="mycourseright progress"
+                                                                    attr.data-percentage="{{row.percent}}">
+                                                                    <span class="progress-left">
+                                                                        <span class="progress-bar"></span>
+                                                                    </span>
+                                                                    <span class="progress-right">
+                                                                        <span class="progress-bar"></span>
+                                                                    </span>
+                                                                    <div class="progress-value">
+                                                                        <div>{{i+1}}</div>
+                                                                    </div>
+                                                                </div>&nbsp;
+                                                                <div class="u-py-md">
+                                                                    <h2
+                                                                        class="module-header__title u-m-0 u-p-0 u-ps-type-sm u-ps-type-weight-med">
+                                                                        <ng-container
+                                                                            *ngIf="row.type==2 || row.type==4">
+                                                                            <a [href]="['#/my-course/lesson/bai-giang-ly-thuyet/'+courseModel.slug]+';lesson='+row.slug"
+                                                                                (click)="getLessonById(row.lessonId,row.type,row.slug,row.lessonId,1)"
+                                                                                (click)="loadValue(row, row, 1)"
+                                                                                style="text-decoration: none;">{{row.lessonName}}</a>
+                                                                        </ng-container>
+                                                                        <ng-container *ngIf="row.type==1">
+                                                                            <a href="javascript:void(0)"
+                                                                                style="text-decoration: none;">{{row.lessonName}}</a>
+                                                                        </ng-container>
+                                                                    </h2>
+                                                                    <div
+                                                                        class="u-ps-type-xs ps-type-weight-book u-text-subtle u-flex u-align-items-center">
+                                                                        <svg class="module-clock-icon u-flex-none"
+                                                                            xmlns="http://www.w3.org/2000/svg"
+                                                                            width="24px" height="24px"
+                                                                            viewBox="0 0 24 24">
+                                                                            <path
+                                                                                d="M12 23.1a11.44 11.44 0 1 1 11.43-11.43c0 6.3-5.13 11.42-11.43 11.42zm0-20.87a9.44 9.44 0 0 0 0 18.87 9.44 9.44 0 0 0 0-18.87z">
+                                                                            </path>
+                                                                            <path d="M13 11V3.95h-2V11H4.36v2H13v-2z">
+                                                                            </path>
+                                                                        </svg>
+                                                                        <span class="screenreader-only">Module
+                                                                            length:</span>
+                                                                        <span
+                                                                            *ngIf="row.type==1">{{row.listLessonFrame|time}}</span>
+                                                                        <span *ngIf="row.type==2">00 : {{row.time}} :
+                                                                            00</span>
+                                                                        <span *ngIf="row.type==4">00 : 00 : 00</span>
+                                                                    </div>
+                                                                </div>&nbsp;
+                                                                <ng-container *ngIf="row.listLessonFrame.length>0">
+                                                                    <div class="u-py-md" style="margin-left: auto;">
+                                                                        <a href="javascript:void(0)"
+                                                                            aria-label="Collapse" data-css-c0y4i8=""
+                                                                            (click)="collapse(row)"
+                                                                            data-toggle="collapse" aria-expanded="false"
+                                                                            aria-controls="collapseExample"
+                                                                            style="margin-bottom: 20px;">
+                                                                            <div data-css-xnveog="">
+                                                                                <div data-css-7dab2f="">
+                                                                                    <span *ngIf="!row.col"><i
+                                                                                            style="font-size: 16px;color: 2a70b8;"
+                                                                                            class="fas fa-angle-down"></i>
+                                                                                    </span>
+                                                                                    <span *ngIf="row.col"><i
+                                                                                            style="font-size: 16px;color: 2a70b8;"
+                                                                                            class="fas fa-angle-up"></i>
+                                                                                    </span>
+                                                                                </div>
+                                                                            </div>
+                                                                        </a>
+                                                                    </div>
+                                                                </ng-container>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <ng-container *ngIf="row.listLessonFrame.length>0 && row.col==true">
+                                                    <ng-container
+                                                        *ngFor="let item of row.listLessonFrame; let j = index">
+                                                        <div data-css-v1c8as="">
+                                                            <div data-css-1j3g0qd="" aria-hidden="false"
+                                                                style="height: auto; overflow: visible; visibility: visible;">
+                                                                <div class="module-content">
+                                                                    <ng-container *ngIf="item.status==false">
+                                                                        <button
+                                                                            class="content-item u-flex u-align-items-stretch u-pr-lg u-mx-0"
+                                                                            [ngClass]="{'is-current':selectIndex==item.id }">
+                                                                            <div
+                                                                                class="circle-thing-container u-flex-none">
+                                                                                <div class="circle-thing">
+                                                                                    <span *ngIf="item.type==1"
+                                                                                        class="icon_item"><i
+                                                                                            class="fa fa-file-text"></i></span>
+                                                                                    <span *ngIf="item.type==2"><i
+                                                                                            class="fa fa-question-circle"></i></span>
+                                                                                    <span *ngIf="item.type==3"
+                                                                                        class="icon_item">
+                                                                                        <svg aria-label="selected"
+                                                                                            class="circle-thing__icon"
+                                                                                            xmlns="http://www.w3.org/2000/svg"
+                                                                                            viewBox="0 0 24 24">
+                                                                                            <path
+                                                                                                d="M6.23 20.7L19.77 12 6.23 3.3">
+                                                                                            </path>
+                                                                                        </svg>
+                                                                                    </span>
+                                                                                </div>
+                                                                            </div>
+                                                                            <a [href]="['#/my-course/lesson/bai-giang-ly-thuyet/'+courseModel.slug]+';lesson='+row.slug"
+                                                                                (click)="getLessonById(item.id,item.type,row.slug,row.lessonId,2)"
+                                                                                (click)="loadValue(item,row, 2)"
+                                                                                class="content-item-body u-flex u-align-items-center u-flex-1"
+                                                                                style="text-decoration: none;">
+                                                                                <h3
+                                                                                    class="u-flex-1 u-ps-type-sm u-ps-type-weight-book u-truncate">
+                                                                                    <div
+                                                                                        class="u-flex u-align-items-center">
+                                                                                        <div class="u-truncate"
+                                                                                            style="margin-bottom: 4px;">
+                                                                                            {{item.name}}</div>
+                                                                                    </div>
+                                                                                </h3>
+                                                                                <div
+                                                                                    class="content-item-duration u-flex-none u-pl-tiny u-ps-type-xs u-ps-type-weight-book">
+                                                                                    <span
+                                                                                        *ngIf="item.type!=2">{{item.estimatedTime|estimated}}</span>
+                                                                                    <span
+                                                                                        *ngIf="item.type==2">{{item.testTime}}
+                                                                                        : 00</span>
+                                                                                </div>
+                                                                            </a>
+                                                                        </button>
+                                                                    </ng-container>
+                                                                    <ng-container *ngIf="item.status==true">
+                                                                        <button
+                                                                            class="content-item u-flex u-align-items-stretch u-pr-lg u-mx-0 is-completed"
+                                                                            [ngClass]="{'is-current':selectIndex==item.id }">
+                                                                            <div
+                                                                                class="circle-thing-container u-flex-none">
+                                                                                <div class="circle-thing is-completed">
+                                                                                    <svg aria-label="completed"
+                                                                                        class="circle-thing__icon"
+                                                                                        xmlns="http://www.w3.org/2000/svg"
+                                                                                        viewBox="0 0 24 24">
+                                                                                        <path
+                                                                                            d="M2.6 12.3l-1.4 1.4a1 1 0 000 1.5l6.1 6.2c.4.4 1 .4 1.4 0L23 6.9c.4-.4.4-1 0-1.4L21.6 4A1 1 0 0020 4l-12 12.3-4-4a1 1 0 00-1.5 0z">
+                                                                                        </path>
+                                                                                    </svg><span
+                                                                                        class="screenreader-only">(completed)</span>
+                                                                                </div>
+                                                                            </div>
+                                                                            <a [href]="['#/my-course/lesson/bai-giang-ly-thuyet/'+courseModel.slug]+';lesson='+row.slug"
+                                                                                (click)="getLessonById(item.id,item.type,row.slug,row.lessonId,2)"
+                                                                                (click)="loadValue(item,row, 2)"
+                                                                                class="content-item-body u-flex u-align-items-center u-flex-1"
+                                                                                style="text-decoration: none;">
+                                                                                <h3
+                                                                                    class="u-flex-1 u-ps-type-sm u-ps-type-weight-book u-truncate">
+                                                                                    <div
+                                                                                        class="u-flex u-align-items-center">
+                                                                                        <div class="u-truncate"
+                                                                                            style="margin-bottom: 4px;">
+                                                                                            {{item.name}}</div>
+                                                                                    </div>
+                                                                                </h3>
+                                                                                <div
+                                                                                    class="content-item-duration u-flex-none u-pl-tiny u-ps-type-xs u-ps-type-weight-book">
+                                                                                    <span
+                                                                                        *ngIf="item.type!=2">{{item.estimatedTime|estimated}}</span>
+                                                                                    <span
+                                                                                        *ngIf="item.type==2">{{item.testTime}}
+                                                                                        : 00</span>
+                                                                                </div>
+                                                                            </a>
+                                                                        </button>
+                                                                    </ng-container>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </ng-container>
+                                                </ng-container>
+                                                <div class="module-headers"></div>
+                                            </div>
+                                        </ng-container>
+                                    </div>
+                                </div>
+                            </ng-container>
+                            <ng-container *ngIf="tabIndex==2">
+                                <div role="tabpanel" aria-labelledby="notes">
+                                    <div class="notes">
+                                        <div class="row">
+                                            <ng-container *ngIf="type==1 || type==3 || type==4">
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                                                    <section class="box">
+                                                        <div class="content-body">
+                                                            <div class="row">
+                                                                <ng-container
+                                                                    *ngFor="let row of listData; let i = index">
+                                                                    <div
+                                                                        class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mt-2">
+                                                                        <span>
+                                                                            <img width="30px" height="30px"
+                                                                                class="img-list"
+                                                                                style="border-radius: 100px;"
+                                                                                [src]="row.imagePath==null || row.imagePath=='' ? '/assets/img/noavatar.png':config.ServerApi + row.imagePath">
+                                                                        </span>&nbsp;
+                                                                        <span class="font-weight-bold"
+                                                                            style="font-size: 16px;">{{row.acountName}}</span>&nbsp;
+                                                                        <span
+                                                                            style="color: #9b9b9b;">{{row.commentDate|date:'dd/MM/yyyy
+                                                                            HH:mm:ss'}}</span>
+                                                                    </div>
+                                                                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12"
+                                                                        style="font-size: 14px;">
+                                                                        <span>{{row.content}}</span>
+                                                                    </div>
+                                                                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12"
+                                                                        style="font-size: 13px;">
+                                                                        <div class="row-actions">
+                                                                            <span class="accton mr-1"><a
+                                                                                    href="javascript:void(0)"
+                                                                                    (click)="reply(row)">Trả
+                                                                                    lời</a></span>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div
+                                                                        class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mt-2">
+                                                                        <span style="display: block;margin-left: 10px;">
+                                                                            <span class="comments commnetss"
+                                                                                *ngIf="row.listReply.length>0"></span>
+                                                                            <div class="comment">
+                                                                                <ng-container
+                                                                                    *ngFor="let row1 of row.listReply; let j = index">
+                                                                                    <div class="row">
+                                                                                        <div
+                                                                                            class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                                                                                            <span
+                                                                                                *ngIf="row1.objectType === 3">
+                                                                                                <img width="26px"
+                                                                                                    height="26px"
+                                                                                                    class="img-list"
+                                                                                                    style="border-radius: 100px;"
+                                                                                                    [ngClass]="{'image': row1.objectType === 3}"
+                                                                                                    [src]="row1.imagePath==null || row1.imagePath=='' ? '/assets/img/noavatar.png':config.ServerApi + row1.imagePath">
+                                                                                            </span>
+                                                                                            <span
+                                                                                                *ngIf="row1.objectType === 1">
+                                                                                                <img width="26px"
+                                                                                                    height="26px"
+                                                                                                    class="img-list"
+                                                                                                    style="border-radius: 100px;"
+                                                                                                    [ngClass]="{'image': row1.objectType === 1}"
+                                                                                                    [src]="row1.imagePath==null || row1.imagePath=='' ? '/assets/img/noavatar.png':config.ServerApi + row1.imagePath">
+                                                                                            </span>&nbsp;
+
+                                                                                            <span
+                                                                                                class="font-weight-bold"
+                                                                                                style="font-size: 16px;">{{row1.acountName}}</span>&nbsp;
+                                                                                            <span class="hdv"
+                                                                                                *ngIf="row1.objectType === 3">HDV</span>
+                                                                                            <span class="hdv"
+                                                                                                *ngIf="row1.objectType === 1">Admin</span>&nbsp;
+                                                                                            <span
+                                                                                                style="color: #9b9b9b;font-size: 14px;">{{row1.commentDate|date:'dd/MM/yyyy
+                                                                                                HH:mm:ss'}}
+                                                                                            </span>
+                                                                                        </div>
+                                                                                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12"
+                                                                                            style="font-size: 14px;">
+                                                                                            <span>{{row1.content}}</span>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </ng-container>
+                                                                            </div>
+                                                                        </span>
+                                                                        <ng-container *ngIf="row.repply">
+                                                                            <div class="row">
+                                                                                <div
+                                                                                    class="col-xl-12 col-md-12 col-sm-12 col-lg-12 mt-1">
+                                                                                    <div class="form-group"
+                                                                                        style="margin-left: 10px;">
+                                                                                        <textarea [name]="'contents'+i"
+                                                                                            class="form-control"
+                                                                                            [(ngModel)]="row.contentReply"
+                                                                                            rows="2"
+                                                                                            placeholder="Viết bình luận của bạn"></textarea>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div
+                                                                                    class="col-xl-12 col-md-12 col-sm-12 col-lg-12 text-right">
+                                                                                    <button type="button"
+                                                                                        class="btn btn-success"
+                                                                                        container="body"
+                                                                                        (click)="create(row.id,row.contentReply,row)">
+                                                                                        Gửi câu hỏi
+                                                                                    </button>
+                                                                                </div>
+                                                                            </div>
+                                                                        </ng-container>
+                                                                    </div>
+                                                                </ng-container>
+                                                            </div>
+                                                            <ng-container *ngIf="model.TotalItems > model.PageSize">
+                                                                <br>
+                                                                <div class="row">
+                                                                    <div
+                                                                        class="col-xl-12 col-lg-12 col-md-12 col-sm-12 d-flex justify-content-center">
+                                                                        <ngb-pagination
+                                                                            [collectionSize]="model.TotalItems"
+                                                                            [(page)]="model.PageNumber"
+                                                                            (pageChange)="searchComment()"
+                                                                            [pageSize]="model.PageSize" [maxSize]="5"
+                                                                            [rotate]="true" [boundaryLinks]="true">
+                                                                        </ngb-pagination>
+                                                                    </div>
+                                                                </div>
+                                                            </ng-container>
+                                                        </div>
+                                                    </section>
+                                                </div>
+                                            </ng-container>
+                                        </div>
+                                    </div>
+                                </div>
+                            </ng-container>
+
+                        </div>
+                        <ng-container
+                            *ngIf="type==1 && tabIndex==2 || type==3 && tabIndex==2 || type==4 && tabIndex==2">
+                            <div class="navigation-header">
+                                <div class="row">
+                                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                                        <section class="box">
+                                            <div class="content-body">
+                                                <div class="row">
+                                                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                                                        <div class="form-group ">
+                                                            <!-- <a style="color:white;" class="course-title">Hỏi đáp</a> -->
+                                                            <div class="course-content">
+                                                                <textarea name="content" style="margin-top:20px"
+                                                                    class="form-control"
+                                                                    [(ngModel)]="commnetModel.content" rows="2"
+                                                                    placeholder="Viết thắc mắc của bạn tại đây"></textarea>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-xl-12  col-lg-12 col-md-12 col-sm-12 text-right"
+                                                        style="margin-top:10px">
+                                                        <button type="button" class="btn btn-success" container="body"
+                                                            (click)="create(null, null,null)">
+                                                            Gửi câu hỏi
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </section>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </ng-container>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

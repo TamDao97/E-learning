@@ -1,0 +1,223 @@
+<div class="theme-list" [@openClose]="isOpen ? 'open' : 'closed'">
+    <div class="theme-header">
+        <h4>Cấu hình Theme</h4>
+        <button type="button" class="close" aria-label="Close" (click)="close()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <perfect-scrollbar [config]="constant.ScrollYConfig" style="width:100%;" [style.height.px]="height">
+        <div class="theme-body">
+            <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                    <div class="form-group ">
+                        <label class="form-label">Theme
+                            <span class='text-danger text-strong'>&nbsp;*</span>
+                        </label>
+                        <select class="form-control" [(ngModel)]="themeSelect" (ngModelChange)="changeTheme()">
+                            <option *ngFor="let row of themes" [ngValue]="row">{{row.Name}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                    <div class="form-group ">
+                        <label class="form-label">Màu nền trang
+                            <span class='text-danger text-strong'>&nbsp;*</span>
+                        </label>
+                        <input class="form-control" [value]="themeSelect.BodyBackground"
+                            [style.background]="themeSelect.BodyBackground" [(colorPicker)]="themeSelect.BodyBackground" 
+                            (colorPickerChange)="changeBodyBackground()" [cpPosition]="'left'" />
+                    </div>
+                </div>
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                    <div class="form-group ">
+                        <label class="form-label">Màu nền trang (px)
+                            <span class='text-danger text-strong'>&nbsp;*</span>
+                        </label>
+                        <input class="form-control" [(ngModel)]="themeSelect.BodyFontsize"
+                            (ngModelChange)="changeBodyFontsize()" />
+                    </div>
+                </div>
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                    <div class="form-group ">
+                        <label class="form-label">Màu nền topbar trên
+                            <span class='text-danger text-strong'>&nbsp;*</span>
+                        </label>
+                        <input class="form-control" [value]="themeSelect.TopbarAboveBackground"
+                            [style.background]="themeSelect.TopbarAboveBackground"
+                            [(colorPicker)]="themeSelect.TopbarAboveBackground"
+                            (colorPickerChange)="changeTopbarAboveBackground()" [cpPosition]="'left'" />
+                    </div>
+                </div>
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                    <div class="form-group ">
+                        <label class="form-label">Màu nền chữ topbar trên
+                            <span class='text-danger text-strong'>&nbsp;*</span>
+                        </label>
+                        <input class="form-control" [value]="themeSelect.TopbarAboveColor"
+                            [style.background]="themeSelect.TopbarAboveColor"
+                            [(colorPicker)]="themeSelect.TopbarAboveColor"
+                            (colorPickerChange)="changeTopbarAboveColor()" [cpPosition]="'left'" />
+                    </div>
+                </div>
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                    <div class="form-group ">
+                        <label class="form-label">Cỡ chư topbar trên (px)
+                            <span class='text-danger text-strong'>&nbsp;*</span>
+                        </label>
+                        <input class="form-control" [(ngModel)]="themeSelect.TopbarAboveSize"
+                            (ngModelChange)="changeTopbarAboveSize()" />
+                    </div>
+                </div>
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                    <div class="form-group ">
+                        <label class="form-label">Màu nền topbar dưới
+                            <span class='text-danger text-strong'>&nbsp;*</span>
+                        </label>
+                        <input class="form-control" [value]="themeSelect.TopbarUnderBackground"
+                            [style.background]="themeSelect.TopbarUnderBackground"
+                            [(colorPicker)]="themeSelect.TopbarUnderBackground"
+                            (colorPickerChange)="changeTopbarUnderBackground()" [cpPosition]="'left'" />
+                    </div>
+                </div>
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                    <div class="form-group ">
+                        <label class="form-label">Màu nền chữ topbar dưới
+                            <span class='text-danger text-strong'>&nbsp;*</span>
+                        </label>
+                        <input class="form-control" [value]="themeSelect.TopbarUnderColor"
+                            [style.background]="themeSelect.TopbarUnderColor"
+                            [(colorPicker)]="themeSelect.TopbarUnderColor"
+                            (colorPickerChange)="changeTopbarUnderColor()" [cpPosition]="'left'" />
+                    </div>
+                </div>
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                    <div class="form-group ">
+                        <label class="form-label">Cỡ chư topbar dưới (px)
+                            <span class='text-danger text-strong'>&nbsp;*</span>
+                        </label>
+                        <input class="form-control" [(ngModel)]="themeSelect.TopbarUnderSize"
+                            (ngModelChange)="changeTopbarUnderSize()" />
+                    </div>
+                </div>
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                    <div class="form-group ">
+                        <label class="form-label">Màu nền logo
+                            <span class='text-danger text-strong'>&nbsp;*</span>
+                        </label>
+                        <input class="form-control" [value]="themeSelect.LogoBackground"
+                            [style.background]="themeSelect.LogoBackground" [(colorPicker)]="themeSelect.LogoBackground"
+                            (colorPickerChange)="changeLogoBackground()" [cpPosition]="'left'" />
+                    </div>
+                </div>
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                    <div class="form-group ">
+                        <label class="form-label">Màu nền menu trái
+                            <span class='text-danger text-strong'>&nbsp;*</span>
+                        </label>
+                        <input class="form-control" [value]="themeSelect.LeftbarBackground"
+                            [style.background]="themeSelect.LeftbarBackground"
+                            [(colorPicker)]="themeSelect.LeftbarBackground"
+                            (colorPickerChange)="changeLeftbarBackground()" [cpPosition]="'left'" />
+                    </div>
+                </div>
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                    <div class="form-group ">
+                        <label class="form-label">Màu chữ menu trái
+                            <span class='text-danger text-strong'>&nbsp;*</span>
+                        </label>
+                        <input class="form-control" [value]="themeSelect.LeftbarColor"
+                            [style.background]="themeSelect.LeftbarColor" [(colorPicker)]="themeSelect.LeftbarColor"
+                            (colorPickerChange)="changeLeftbarColor()" [cpPosition]="'left'" />
+                    </div>
+                </div>
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                    <div class="form-group ">
+                        <label class="form-label">Màu nền khi hover menu trái
+                            <span class='text-danger text-strong'>&nbsp;*</span>
+                        </label>
+                        <input class="form-control" [value]="themeSelect.LeftbarBackgroundHover"
+                            [style.background]="themeSelect.LeftbarBackgroundHover"
+                            [(colorPicker)]="themeSelect.LeftbarBackgroundHover"
+                            (colorPickerChange)="changeLeftbarBackgroundHover()" [cpPosition]="'left'" />
+                    </div>
+                </div>
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                    <div class="form-group ">
+                        <label class="form-label">Màu nền khi sổ menu trái
+                            <span class='text-danger text-strong'>&nbsp;*</span>
+                        </label>
+                        <input class="form-control" [value]="themeSelect.LeftbarBackgroundActive"
+                            [style.background]="themeSelect.LeftbarBackgroundActive"
+                            [(colorPicker)]="themeSelect.LeftbarBackgroundActive"
+                            (colorPickerChange)="changeLeftbarBackgroundActive()" [cpPosition]="'left'" />
+                    </div>
+                </div>
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                    <div class="form-group ">
+                        <label class="form-label">Màu nền sub menu trái được chọn
+                            <span class='text-danger text-strong'>&nbsp;*</span>
+                        </label>
+                        <input class="form-control" [value]="themeSelect.LeftbarBackgroundMenuActive"
+                            [style.background]="themeSelect.LeftbarBackgroundMenuActive"
+                            [(colorPicker)]="themeSelect.LeftbarBackgroundMenuActive"
+                            (colorPickerChange)="changeLeftbarBackgroundMenuActive()" [cpPosition]="'left'" />
+                    </div>
+                </div>
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                    <div class="form-group ">
+                        <label class="form-label">Màu nền khi hover sub menu trái
+                            <span class='text-danger text-strong'>&nbsp;*</span>
+                        </label>
+                        <input class="form-control" [value]="themeSelect.LeftbarBackgroundMenuHover"
+                            [style.background]="themeSelect.LeftbarBackgroundMenuHover"
+                            [(colorPicker)]="themeSelect.LeftbarBackgroundMenuHover"
+                            (colorPickerChange)="changeLeftbarBackgroundMenuHover()" [cpPosition]="'left'" />
+                    </div>
+                </div>
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                    <div class="form-group ">
+                        <label class="form-label">Cỡ chư menu trái)
+                            <span class='text-danger text-strong'>&nbsp;*</span>
+                        </label>
+                        <input class="form-control" [(ngModel)]="themeSelect.LeftbarFontsize"
+                            (ngModelChange)="changeLeftbarFontsize()" />
+                    </div>
+                </div>
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                    <div class="form-group ">
+                        <label class="form-label">Màu nền header bảng
+                            <span class='text-danger text-strong'>&nbsp;*</span>
+                        </label>
+                        <input class="form-control" [value]="themeSelect.ContentTableHeaderBackground"
+                            [style.background]="themeSelect.ContentTableHeaderBackground"
+                            [(colorPicker)]="themeSelect.ContentTableHeaderBackground"
+                            (colorPickerChange)="changeContentTableHeaderBackground()" [cpPosition]="'left'" />
+                    </div>
+                </div>
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                    <div class="form-group ">
+                        <label class="form-label">Màu chữ header bảng
+                            <span class='text-danger text-strong'>&nbsp;*</span>
+                        </label>
+                        <input class="form-control" [value]="themeSelect.ContentTableHeaderColor"
+                            [style.background]="themeSelect.ContentTableHeaderColor"
+                            [(colorPicker)]="themeSelect.ContentTableHeaderColor"
+                            (colorPickerChange)="changeContentTableHeaderColor()" [cpPosition]="'left'" />
+                    </div>
+                </div>
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                    <div class="form-group ">
+                        <button type="button" class="btn btn-success" (click)="saveTheme()">
+                            <i class="fa fa-save"></i>&nbsp;
+                            <span>Lưu Theme</span>
+                        </button>
+                        <button type="button" class="btn btn-success" (click)="downloadTheme()">
+                            <i class="fa fa-download"></i>&nbsp;
+                            <span>Download</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </perfect-scrollbar>
+</div>

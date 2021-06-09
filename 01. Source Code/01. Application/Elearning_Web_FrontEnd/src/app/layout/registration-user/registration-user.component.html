@@ -1,0 +1,76 @@
+<div id="main" class="wrapper with-sidebar-first clearfix">
+    <div class="idealsteps-container">
+        <form name="form" class="form-validation signupforms" (ngSubmit)="f.form.valid && registration()" #f="ngForm"
+            novalidate>
+            <div class="alertMsg"></div>
+            <input type="hidden" name="a" value="" id="a">
+            <div class="title-signup">Đăng ký tài khoản</div>
+            <div class="sub-title-signup">
+                <p>Học tập mọi lúc mọi nơi</p>
+            </div>
+            <div class="clear-both"></div>
+            <div class="row-signup firt-row">
+                <div class="facebook-box" data-name="facebook">
+                    <a class="fb-social" href="#">
+                        <div class="facebook-link">Đăng ký qua Facebook</div>
+                    </a>
+                </div>
+                <div class="facebook-box" data-name="google">
+                    <a class="google-social" href="#">
+                        <div class="google-link">Đăng ký qua Google</div>
+                    </a>
+                </div>
+            </div>
+            <div class="clear-both"></div>
+            <div class="row-signup mg30">
+                <div class="light-hight-left"></div><span class="or-txt"> Hoặc </span>
+                <div class="light-hight-right"></div>
+            </div>
+            <div class="clear-both"></div>
+            <div class="row-signup">
+                <input type="text" id="username" name="username" [(ngModel)]="model.username" #username="ngModel"
+                    required placeholder="Họ và tên" aria-required="true" aria-invalid="false" class="valid">
+            </div>
+
+            <div class="clear-both"></div>
+            <div class="row-signup">
+                <input type="text" id="email" name="email" [(ngModel)]="model.email" #email="ngModel" required
+                    placeholder="Email" aria-required="true" aria-invalid="false" class="valid">
+            </div>
+
+            <div class="clear-both"></div>
+            <div class="row-signup">
+                <input type="text" id="phonenumber" name="phonenumber" [(ngModel)]="model.phonenumber" #email="ngModel"
+                    required placeholder="Số điện thoại" aria-required="true" aria-invalid="false" class="valid">
+            </div>
+
+
+            <div class="clear-both"></div>
+            <div class="row-signup">
+                <div class="password-hold-left">
+                    <div id="pass-strength" data-placement="left" data-trigger="manual" data-html="true"></div>
+                    <input type="password" id="passwordtxt" name="passwordtxt" value="" placeholder="Mật khẩu"
+                        aria-autocomplete="list">
+                    <div id="password-error" class="error"></div>
+                </div>
+
+                <div class="password-hold-right">
+                    <input type="password" id="repaswordtxt" required name="repaswordtxt" value=""
+                        placeholder="Xác nhận mật khẩu">
+                </div>
+            </div>
+
+            <div class="clear-both"></div>
+            <div class="row-signup">
+                <label>Mã captcha:{{captcha}}</label>
+            </div>
+            <div class="clear-both"></div>
+            <div class="row-signup mg30 margin-bottom-data">
+                <button [disabled]="!f.form.valid" class="btn btn-accent btn-block submit register-btn">ĐĂNG KÝ</button>
+            </div>
+        </form>
+        <div class="text-danger text-center">
+            {{message}}
+        </div>
+    </div>
+</div>

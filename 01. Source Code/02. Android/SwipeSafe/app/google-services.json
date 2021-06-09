@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "565371125610",
+    "project_id": "e-learning-296902",
+    "storage_bucket": "e-learning-296902.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:565371125610:android:c4ec57f4805ed81137af13",
+        "android_client_info": {
+          "package_name": "nts.swipesafe"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "565371125610-ulli9650sncl5c40982ps52p3cd3abpg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "nts.swipesafe",
+            "certificate_hash": "2ba2fbf93404d7c020bdffc82ccee01315663bf2"
+          }
+        },
+        {
+          "client_id": "565371125610-tjv8415en5f122l76sc2r6c0gat3qa51.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDn3Lkd4ok-3SffD0cjJgl0aOli7ab6AMc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "565371125610-tjv8415en5f122l76sc2r6c0gat3qa51.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

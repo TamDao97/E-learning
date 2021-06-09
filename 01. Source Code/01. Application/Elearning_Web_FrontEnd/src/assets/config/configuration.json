@@ -1,0 +1,13 @@
+{
+    "ServerApi": "http://localhost:12020/",
+    "ServerImage": "http://192.168.100.105:12020/",
+    "ServerWithApiUrl": "http://localhost:12020/api/",
+    "ClientId": "PCTPMT_Web",
+    "ClientSecret": "nhantinsoft",
+    "ServerUploadFile": "http://192.168.100.105:12020/api/",
+    "ImageOriginal": "ImageOriginal",
+    "ImageThumb": "ImageThumb",
+    "Document": "Document",
+    "Email":"Email",
+    "PhoneNumber":"PhoneNumber"
+}

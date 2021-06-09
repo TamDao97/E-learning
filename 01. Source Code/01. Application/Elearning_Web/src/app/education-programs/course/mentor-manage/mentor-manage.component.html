@@ -1,0 +1,55 @@
+<div class="row">
+    <div class="col-md-6 text-left">
+        <label class="form-label" style="line-height:35px;">Tổng số
+            <span class="bold text-danger">{{model.TotalItems}}</span> giảng viên</label>
+    </div>
+    <div class="col-md-6 text-right">
+        <ng-container>
+            <button type="button" class="btn btn-success" container="body" (click)="showCreateUpdate()">
+                <i class="fa fa-plus"></i>
+                Thêm mới
+            </button>
+        </ng-container>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-lg-12">
+        <perfect-scrollbar [config]="constant.ScrollXConfig" style="height:auto; width:100%;">
+            <table class="table table-bordered table-hover" style="min-width:1300px">
+                <thead>
+                    <tr>
+                        <th width="50px" class="text-center">STT</th>
+                        <th width="50px" class="text-center">Chức năng</th>
+                        <th width="100px" class="text-center">Họ tên</th>
+                        <th width="150px" class="text-center">Đơn vị</th>
+                        <th width="100px" class="text-center">Địa chỉ</th>
+                        <th width="100px" class="text-center">Email</th>
+                        <th width="200px" class="text-center">Số điện thoại</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let row of listMentor; let i = index">
+                        <td class="text-center">{{startIndex+i}}</td>
+                        <td class="text-center">
+                            <ng-container>
+                                <button class="btn btn-xs btn-danger" (click)="confirmDelete(row)">
+                                    <span class="fas fa-trash-alt" aria-hidden="true"></span>
+                                </button>
+                            </ng-container>
+                        </td>
+                        <td>{{row.name}}</td>
+                        <td>
+                            <span *ngIf="row.logo!=null && row.logo!=''">
+                                <img width="45px" height="45px" class="img-list"
+                                    [src]="config.ServerApi+row.logo">
+                            </span> {{row.manageUnit}}
+                        </td>
+                        <td>{{row.address}}</td>
+                        <td>{{row.email}}</td>
+                        <td>{{row.phoneNumber}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </perfect-scrollbar>
+    </div>
+</div>

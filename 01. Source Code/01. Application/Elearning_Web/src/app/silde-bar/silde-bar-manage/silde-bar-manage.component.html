@@ -1,0 +1,93 @@
+<div class="content-wrapper">
+    <section class="box">
+        <div class="content-body">
+            <form>
+                <div class="row">
+                    <div class="col-xl-8 col-lg-8 col-md-8">
+                        <nts-search-bar [(options)]="searchOptions" [(ngModel)]="model" name="searchSildeBar" (change)="searchSildeBar()">
+                        </nts-search-bar>
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-4 text-right">
+                        <button class="btn btn-success" (click)="searchSildeBar()">
+                            <i class="fa fa-search"></i> &nbsp;Tìm kiếm</button>
+                        <button class="btn btn-secondary" (click)="clear()">
+                            <i class="fas fa-redo-alt"></i> &nbsp;Làm mới</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="content-body">
+            <div class="row margin-bottom-10">
+                <div class="col-md-6 text-left">
+                    <label class="form-label" style="line-height:35px;">Tổng số
+                        <span class="bold text-danger font-weight-bold">{{model.TotalItems}}</span> silde bar</label>
+                </div>
+                <div class="col-md-6 text-right">
+                    <button *appUipermission="['F000851']" type="button" class="btn btn-success" (click)="showCreateUpdate('')" container="body">
+                        <i class="fa fa-plus"></i>
+                        Thêm mới
+                    </button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-lg-12">
+                    <perfect-scrollbar [config]="constant.ScrollXConfig" style="height:auto; width:100%;">
+                        <table class="table table-bordered table-hover" style="min-width:670px">
+                            <thead>
+                                <tr>
+                                    <th width="50px" class="text-center">STT</th>
+                                    <th width="80px" class="text-center">Xử lý</th>
+                                    <th width="100px" class="text-center">Ảnh</th>
+                                    <th width="120px" class="text-center">Trạng thái</th>
+                                    <th width="200px" class="text-center">Tiêu đề</th>
+                                    <th min-width="150" class="text-center">Mô tả</th>
+                                </tr>
+                            </thead>
+                            <tbody cdkDropList [cdkDropListData]="listData" class="example-list" (cdkDropListDropped)="drop($event)">
+                                <tr *ngFor="let row of listData; let i = index" cdkDrag>
+                                    <td class="text-center">{{startIndex+i}}</td>
+                                    <td class="text-center">
+                                        <button *appUipermission="['F000852']" type="button" (click)="showCreateUpdate(row.id)" class="btn btn-warning btn-xs" placement="bottom" ngbTooltip="Cập nhật" container="body">
+                                            <span class="fas fa-edit" aria-hidden="true"></span>
+                                        </button>
+                                        <button *appUipermission="['F000853']" class="btn btn-danger btn-xs" container="body" (click)="showConfirmDelete(row.id)" ngbTooltip="Xóa">
+                                            <span class="fas fa-trash-alt" aria-hidden="true"></span>
+                                        </button>
+                                    </td>
+                                    <td><img class="card-img-top" style="height: 60px; width: 80px;" [src]="row.imagePath==null || row.imagePath=='' ? '/assets/img/noavatar.gif':config.ServerApi + row.imagePath">
+                                    </td>
+                                    <td *ngIf="row.status == true">
+                                        <p class="badge badge-success">Hiển thị</p>
+                                    </td>
+                                    <td *ngIf="row.status == false">
+                                        <p class="badge badge-danger">Không hiển thị</p>
+                                    </td>
+                                    <td>{{row.title}}</td>
+                                    <td>{{row.description}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </perfect-scrollbar>
+                </div>
+            </div>
+
+            <hr />
+            <div class="row">
+                <div class="col-md-12">
+                    <button class="btn btn-view btn-warning">
+                        <i class="fas fa-pen-square"></i>
+                    </button>&nbsp;
+                    <small class="padding-right-20">Sửa silde bar</small>
+                    <button class="btn btn-view btn-danger">
+                        <i class="fas fa-trash-alt"></i>
+                    </button>&nbsp;
+                    <small class="padding-right-20">Xóa silde bar</small>
+                    <button class="btn btn-view btn-warning">
+                        <i class="fa fa-exclamation"></i>
+                    </button>&nbsp;
+                    <small class="padding-right-20">Giữ chuột vào bản ghi và kéo để di chuyển vị trí</small>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

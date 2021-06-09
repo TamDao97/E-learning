@@ -1,0 +1,88 @@
+import { Injectable } from '@angular/core';
+import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+
+@Injectable({
+    providedIn: 'root'
+  })
+export class DateUtils {
+    constructor() {
+
+    }
+
+    getDateNowYYYYMMDD(): any {
+        var dateNow = new Date();
+        var month = (dateNow.getMonth() + 1);
+        var day = dateNow.getDate();
+        return dateNow.getFullYear() + '-' + (month < 10 ? '0' + month : month) + "-" + (day < 10 ? '0' + day : day);
+    }
+
+    getDateNowToObject(): any {
+        var dateNow = new Date();
+        return { year: dateNow.getFullYear(), month: (dateNow.getMonth() + 1), day: dateNow.getDate() };
+    }
+
+    getObjectDateByDate(date: Date): any {
+        return { year: date.getFullYear(), month: (date.getMonth() + 1), day: date.getDate() };
+    }
+
+    convertDateToDate() {
+        var dateNow = new Date();
+        return dateNow.getFullYear + "-" + (dateNow.getMonth()+1) + "-" + dateNow.getDay();
+    }
+
+    getObjectDate(date: Date): any {
+        return { year: date.getFullYear()};
+    }
+    getTimetoDateString(date:string)
+    {
+        let newDate=new Date(date);
+        return newDate.getTime();
+    }
+    convertDateToObject(date: string) {
+        let temp = date.split('T')[0].split('-');
+        return { year: Number(temp[0]), month: Number(temp[1]), day: Number(temp[2]) };
+    }
+
+    convertObjectToDate(object: any) {
+        return object.year + "-" + object.month + "-" + object.day;
+    }
+    convertObjectToDateView(data: any) {
+
+        let dateArray1 = data.split('T')[0];
+        let dateValue1 = dateArray1.split('-');
+        let tempDateFromV1 = {
+          'day': parseInt(dateValue1[2]),
+          'month': parseInt(dateValue1[1]),
+          'year': parseInt(dateValue1[0])
+        };
+        return tempDateFromV1;
+    }
+    getNgbDateStructNow(): NgbDateStruct {
+        var dateNow = new Date();
+        var dateSubtract: NgbDateStruct = {
+            year: dateNow.getFullYear()
+            , month: dateNow.getMonth() + 1,
+            day: dateNow.getDate()
+        };
+        return dateSubtract;
+    }
+
+    getNgbDateStructMaxYear(): NgbDateStruct {
+        var dateNow = new Date();
+        var dateSubtract: NgbDateStruct = {
+            year: dateNow.getFullYear() - 6
+            , month: dateNow.getMonth() + 1,
+            day: dateNow.getDate()
+        };
+        return dateSubtract;
+    }
+
+    getNgbDateStructStartYear(year: number): NgbDateStruct {
+        var dateSubtract: NgbDateStruct = {
+            year: year
+            , month: 1,
+            day: 1
+        };
+        return dateSubtract;
+    }
+}

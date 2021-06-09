@@ -1,0 +1,48 @@
+<section class="ftco-section bg-light">
+    <div class="container-fluid px-4" *ngFor="let row of listData;">
+        <div class="row justify-content-center">
+            <div class="col-md-8 text-center heading-section ftco-animate fadeInUp ftco-animated">
+                <h2 style="font-size: 30px;" class="mb-4">{{row.title}}</h2>
+                <p>{{row.description}}</p>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-md-6 col-lg-3 ftco-animate fadeInUp ftco-animated"
+                *ngFor="let item of row.employeeSpecialistModel; let i = index">
+                <div class="staff">
+                    <div class="img-wrap d-flex align-items-stretch" *ngIf="item.avatar!=null && item.avatar!=''">
+                        <div class="img align-self-stretch"
+                            style="background-image: url({{config.ServerApi+item.avatar}});"></div>
+                    </div>
+                    <div class="text pt-3 text-center">
+                        <h3>{{item.name}}</h3>
+                        <!-- <span class="position mb-2">Teacher</span> -->
+                        <div class="faded">
+                            <p>{{item.description}}</p>
+                            <ul class="ftco-social text-center">
+                                <li class="ftco-animate fadeInUp ftco-animated"><a
+                                        [target]="(item.twitter != null && item.twitter !='') ? item.twitter: ('_blank'?'_self':'')"
+                                        [href]="(item.twitter != null && item.twitter !='') ? item.twitter: (item.twitter?item.twitter:'javascript:void(0)')"><span
+                                            class="fab fa-twitter"></span></a></li>
+                                <li class="ftco-animate fadeInUp ftco-animated"><a
+                                        [target]="(item.facebook != null && item.facebook !='') ? item.facebook: ('_blank'?'_self':'')"
+                                        [href]="(item.facebook != null && item.facebook !='') ? item.facebook: (item.facebook?item.facebook:'javascript:void(0)')"><span
+                                            class="fab fa-facebook-f"></span></a></li>
+                                <li class="ftco-animate fadeInUp ftco-animated"><a
+                                        [target]="(item.lotus != null && item.lotus !='') ? item.lotus: ('_blank'?'_self':'')"
+                                        [href]="(item.lotus != null && item.lotus !='') ? item.lotus: (item.lotus?item.lotus:'javascript:void(0)')"><img
+                                            src="/assets/img/lotus.png" style="    width: 16px;
+                                        height: 16px;">
+                                    </a></li>
+                                <li class="ftco-animate fadeInUp ftco-animated"><a
+                                        [target]="(item.instagram != null && item.instagram !='') ? item.instagram: ('_blank'?'_self':'')"
+                                        [href]="(item.instagram != null && item.instagram !='') ? item.instagram: (item.instagram?item.instagram:'javascript:void(0)')"><span
+                                            class="fab fa-instagram"></span></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,243 @@
+<div class='content-wrapper'>
+    <section class="box box-head mb-0">
+        <div class="content-body">
+            <div class="row">
+                <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3">
+                    <div class="form-group">
+                        <div class="title-search-left click-drop">
+                            <label class="form-label">Thời gian</label>
+                        </div>
+                        <div class="controls">
+                            <select class="form-control" (change)="reportLearnerProvince()" [(ngModel)]="model.TimeType" name="TimeType">
+                                <option *ngFor="let timetype of constant.SearchTimeType1" [value]="timetype.Id">
+                                    {{timetype.Name}}</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-lg-3 col-sm-12" style="margin-top: 28px;" *ngIf="model.TimeType=='8'||model.TimeType=='9'">
+                    <select class="form-control" (change)="reportLearnerProvince()" [(ngModel)]="model.Month" name="Month" *ngIf="model.TimeType=='8'">
+                        <option *ngFor="let month of listMonth" [value]="month">
+                            Tháng {{month}}</option>
+                    </select>
+
+                    <select class="form-control" (change)="reportLearnerProvince()" [(ngModel)]="model.Quarter" name="Quarters" *ngIf="model.TimeType=='9'">
+                        <option value="1"> Quý 1</option>
+                        <option value="2"> Quý 2</option>
+                        <option value="3"> Quý 3</option>
+                        <option value="4"> Quý 4</option>
+                    </select>
+                </div>
+                <div class="col-md-3 col-lg-3 col-sm-12" style="margin-top: 28px;" *ngIf="model.TimeType=='8'||model.TimeType=='9'||model.TimeType=='12'">
+                    <select class="form-control" (change)="reportLearnerProvince()" [(ngModel)]="model.Year" name="Year">
+                        <option *ngFor="let year of listYear" [value]="year">
+                            {{year}}</option>
+                    </select>
+                </div>
+
+                <div class="col-md-6 col-lg-6 col-sm-12" *ngIf="model.TimeType == 13">
+                    <div class="row">
+                        <div class="col-md-6 col-lg-6 col-sm-12">
+                            <div class="form-group">
+                                <label class="form-label">Ngày bắt đầu</label>
+                                <span class='text-danger text-strong'>&nbsp;</span>
+                                <div class="controls">
+                                    <div class="input-group">
+                                        <input class="form-control" placeholder="dd/mm/yyyy" name="startDate" [(ngModel)]="startDate" ngbDatepicker #d="ngbDatepicker">
+                                        <div class="input-group-append">
+                                            <span class="input-group-text pointer" (click)="d.toggle();$event.stopPropagation();">
+                                                <i class="far fa-calendar-alt" style="color: #999;"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-lg-6 col-sm-12">
+                            <div class="form-group">
+                                <label class="form-label">Ngày kết thúc</label>
+                                <span class='text-danger text-strong'>&nbsp;</span>
+                                <div class="controls">
+                                    <div class="input-group">
+                                        <input class="form-control" placeholder="dd/mm/yyyy" name="finishDate" [(ngModel)]="finishDate" ngbDatepicker #d3="ngbDatepicker">
+                                        <div class="input-group-append">
+                                            <span class="input-group-text pointer" (click)="d3.toggle();$event.stopPropagation();">
+                                                <i class="far fa-calendar-alt" style="color: #999;"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="col-xl-3 col-lg-3 col-md-3" style="padding-top: 28px;">
+                    <button class="btn btn-success" (click)="reportLearnerProvince()">
+                        <i class="fa fa-search"></i> &nbsp;Tìm kiếm</button>
+                    <button class="btn btn-secondary" (click)="clear()">
+                        <i class="fas fa-redo-alt"></i> &nbsp;Làm mới</button>
+                </div>
+
+            </div>
+        </div>
+
+    </section>
+    <section class="box box-head mb-0">
+        <div class="content-body">
+
+            <div class="row">
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12" style="margin-top: 25px;">
+                    <nts-search-bar [(options)]="searchOptions" [(ngModel)]="model" name="searchModel" (change)="reportLearnerProvince()">
+                    </nts-search-bar>
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 text-right">
+                    <div class="form-group">
+                        <div class="title-search-left click-drop">
+                            <label class="form-label"></label>
+                        </div>
+                        <button *appUipermission="['F000601']" class="btn btn-success" (click)="exportExcel(1,1)">
+                            <i class="fas fa-file-excel"></i> &nbsp;Xuất excel</button>
+                        <button *appUipermission="['F000602']" class="btn btn-success" (click)="exportPdf(1,2)">
+                            <i class="fas fa-file-pdf"></i> &nbsp;Xuất pdf</button>
+                    </div>
+                </div>
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                    <h3 *ngIf="model.ProvinceId == null || model.ProvinceId == ''" class="text-center">
+                        {{textViewChartProvin}}&nbsp;</h3>
+
+                    <h3 *ngIf="model.ProvinceId != null && model.ProvinceId != ''" class="text-center">
+                        {{textViewChartDistrict}}&nbsp;</h3>
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 mt-1" *ngIf="model.ProvinceId == null || model.ProvinceId == ''">
+                    <div style="display: block">
+                        <canvas id="myProvince" baseChart [datasets]="barChartDataProvin" [labels]="barListViewProvin" [options]="barChartOptionsProvin" [legend]="barChartLegendProvin" [chartType]="barChartTypeProvin" [colors]="doughnutChartColors"></canvas>
+                    </div>
+                </div>
+
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 mt-1" *ngIf="model.ProvinceId != null && model.ProvinceId != ''">
+                    <div style="display: block">
+                        <canvas id="myProvince" baseChart [datasets]="barChartDataDistrict" [labels]="barListViewProvin" [options]="barChartOptionsProvin" [legend]="barChartLegendProvin" [chartType]="barChartTypeProvin" [colors]="doughnutChartColors"></canvas>
+                    </div>
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 mt-1">
+                    <div #scrollHeaderOne style="height: auto; width:100%;overflow: hidden">
+                        <table class="table table-bordered mb-0" style="word-wrap: break-word ;min-width:400px;">
+                            <thead>
+                                <tr>
+                                    <th width="50px" class="text-center">STT</th>
+                                    <th *ngIf="model.ProvinceId == null || model.ProvinceId == ''" min-width="200px" class="text-center">Tỉnh/ Thành phố</th>
+                                    <th *ngIf="model.ProvinceId != null && model.ProvinceId != ''" min-width="200px" class="text-center">Huyện/ Quận</th>
+                                    <th width="150px" class="text-center">Số người học</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                    <perfect-scrollbar [config]="constant.ScrollConfig" [style.max-height.px]="heightProvin">
+                        <table class="table table-bordered table-fixed table-hover" style="min-width:400px;">
+                            <tbody>
+                                <tr *ngFor="let row of listProvin; let i = index">
+                                    <td width="50px" class="text-center">
+                                        {{i+1}}
+                                    </td>
+                                    <td min-width="200px">
+                                        {{row.name}}
+                                    </td>
+                                    <td width="150px" class="text-center">
+                                        {{row.total|number}}
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </perfect-scrollbar>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="box box-head">
+        <div class="content-body">
+            <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                    <h3 class="text-center">{{textViewChartGender}}
+                    </h3>
+                </div>
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 text-right">
+                    <button *appUipermission="['F000601']" class="btn btn-success" (click)="exportExcel(2,1)">
+                        <i class="fas fa-file-excel"></i> &nbsp;Xuất excel</button>
+                    <button *appUipermission="['F000602']" class="btn btn-success" (click)="exportPdf(2,2)">
+                        <i class="fas fa-file-pdf"></i> &nbsp;Xuất pdf</button>
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 mt-1">
+                    <div style="display: block">
+                        <canvas id="myGeder" baseChart [datasets]="barChartDataGender" [labels]="barListViewGender" [options]="barChartOptionsGender" [legend]="barChartLegendGender" [chartType]="barChartTypeGender" [colors]="chartGenderColors"></canvas>
+                    </div>
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 mt-1">
+                    <perfect-scrollbar [config]="constant.ScrollXConfig" [style.max-height.px]="heightGender" style="width:100%;border: 1px solid #dee2e6;">
+                        <table class="table table-bordered table-hover" style="min-width:550px">
+                            <thead>
+                                <tr>
+                                    <th width="50px" class="text-center">STT</th>
+                                    <th min-width="200px" class="text-center">Giới tính</th>
+                                    <th width="150px" class="text-center">Số người học</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let row of listGender; let i = index">
+                                    <td class="text-center">{{i+1}}</td>
+                                    <td>{{row.name}}
+                                    </td>
+                                    <td class="text-center">{{row.total|number}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </perfect-scrollbar>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="box box-head">
+        <div class="content-body">
+            <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                    <h3 class="text-center">{{textViewChartAge}}
+                    </h3>
+                </div>
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 text-right">
+                    <button *appUipermission="['F000601']" class="btn btn-success" (click)="exportExcel(3,1)">
+                        <i class="fas fa-file-excel"></i> &nbsp;Xuất excel</button>
+                    <button *appUipermission="['F000602']" class="btn btn-success" (click)="exportPdf(3,2)">
+                        <i class="fas fa-file-pdf"></i> &nbsp;Xuất pdf</button>
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
+                    <div style="display: block">
+                        <canvas id="myAge" baseChart [datasets]="barChartDataAge" [labels]="barListViewAge" [options]="barChartOptionsAge" [legend]="barChartLegendAge" [colors]="chartColors" [chartType]="barChartTypeAge"></canvas>
+                    </div>
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 mt-1">
+                    <perfect-scrollbar [config]="constant.ScrollXConfig" [style.max-height.px]="heightAge" style="width:100%;border: 1px solid #dee2e6;">
+                        <table class="table table-bordered table-hover" style="min-width:550px">
+                            <thead>
+                                <tr>
+                                    <th width="50px" class="text-center">STT</th>
+                                    <th min-width="200px" class="text-center">Độ tuổi</th>
+                                    <th width="150px" class="text-center">Số người học</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let row of listAge; let i = index">
+                                    <td class="text-center">{{i+1}}</td>
+                                    <td>{{row.name}}
+                                    </td>
+                                    <td class="text-center">{{row.total|number}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </perfect-scrollbar>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

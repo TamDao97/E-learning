@@ -1,0 +1,84 @@
+// .lesson-create-model {
+//     .modal-dialog {
+//         width: 100%;
+//     }
+
+//     @media (min-width: 576px) {
+//         .modal-dialog {
+//             max-width: 540px;
+//         }
+//     }
+
+//     @media (min-width: 768px) {
+//         .modal-dialog {
+//             max-width: 720px;
+//         }
+//     }
+
+//     @media (min-width: 992px) {
+//         .modal-dialog {
+//             max-width: 960px;
+//         }
+//     }
+
+//     @media (min-width: 1200px) {
+//         .modal-dialog {
+//             max-width: 1300px;
+//         }
+//     }
+
+//     .text-line {
+//         overflow: hidden;
+//         text-overflow: ellipsis;
+//         display: -webkit-box;
+//         -webkit-line-clamp: 2;
+//         -webkit-box-orient: vertical;
+//     }
+// }
+
+// .radio label.radio {
+//     display: inline-block;
+//     margin: 19px 20px 0 0;
+//     padding-left: 30px;
+// }
+
+// label.radio {
+//     padding: 0 0 0 25px;
+// }
+
+// .radio {
+//     position: relative;
+//     margin-bottom: 12px;
+//     cursor: pointer;
+//     -webkit-user-select: none;
+//     -moz-user-select: none;
+//     -ms-user-select: none;
+//     user-select: none;
+// }
+
+// .radio input:checked .checkround:after {
+//     display: block;
+// }
+// .radio .checkround:after {
+//     left: 2px;
+//     top: 2px;
+//     width: 10px;
+//     height: 10px;
+//     border-radius: 50%;
+//     background: #65a9f3;
+// }
+// .checkround:after {
+//     content: "";
+//     position: absolute;
+//     display: none;
+// }
+
+app-lesson-create {
+    div.mce-fullscreen {
+        z-index: 1050;
+    }
+
+    .selected {
+        background-color: #3bca66;
+    }
+}

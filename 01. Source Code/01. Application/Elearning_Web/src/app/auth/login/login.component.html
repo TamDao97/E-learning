@@ -1,0 +1,61 @@
+<div class="login-page">
+    <div class="login-wrapper">
+        <div class="row justify-content-center">
+            <div id="login" class="login loginpage col-xl-4 col-lg-4 col-md-6 col-sm-8">
+                <h3 class="title">PHẦN MỀM QUẢN LÝ ĐÀO TẠO TRỰC TUYẾN
+                </h3>
+                <form name="form" class="form-validation mt-5" (ngSubmit)="f.form.valid && login()" #f="ngForm"
+                    novalidate>
+                    <div class="row justify-content-center content-login">
+                        <div class="col-xl-10 col-lg-10 col-md-10">
+                            <div class="form-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-texts" id="basic-addon1">
+                                        <i class="fas fa-user" style="color: #999;"></i>
+                                    </span>
+                                    <input style="border-radius: 0px 0.25rem 0.25rem 0px !important;" type="text"
+                                        name="text" class="form-control" placeholder="Tên đăng nhập.."
+                                        [(ngModel)]="model.username" #username="ngModel" required />
+                                </div>
+                            </div>
+                            <div *ngIf="f.submitted && !username.valid" class="help-block text-center text-danger">Username is required
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-texts" id="basic-addon1">
+                                        <i class="fas fa-lock" style="color: #999;"></i>
+                                    </span>
+                                    <input placeholder="Mật khẩu.."
+                                        style="padding-right: 20px; height: 40px;border-radius: 0px 0.25rem 0.25rem 0px !important;"
+                                        id="password-field" type="password" [(ngModel)]="model.password"
+                                        class="form-control" name="password">
+                                </div>
+
+                                <span toggle="#password-field"
+                                    class="fa fa-fw fa-eye field-icons toggle-password"></span>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <input type="text" [(ngModel)]="model.captcha" class="form-control"
+                                        name="captcha" />
+                                    <div id="captcha">
+                                    </div>
+                                    <img class="imgrefesh" src="/assets/img/refresh_icon.png" (click)="createCaptcha()">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <button class="btn btn-success">ĐĂNG NHẬP</button>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </form>
+                <div class="text-danger text-center mt-2">
+                    {{message}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,263 @@
+<div class='content-wrapper'>
+    <div class="row">
+        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12">
+            <section class="box box-head">
+                <div class="content-body gradient-scooter" style="height: 150px;">
+                    <div class="row">
+                        <div class="media align-items-center">
+                            <div class="w-icon">
+                                <i class="fa fa-comments-o text-white"></i>
+                            </div>
+                            <div class="media-body ml-3 border-left-xs border-white-2">
+                                <h1 class="mb-0 ml-3 text-white">{{totalLearner|number}}</h1>
+                                <p class="mb-0 ml-3 extra-small-font text-white">Số người học đã đăng ký khóa học trong năm
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12">
+            <section class="box box-head">
+                <div class="content-body gradient-bloody" style="height: 150px;">
+                    <div class="row">
+                        <div class="media align-items-center">
+                            <div class="w-icon">
+                                <i class="fa fa-comments-o text-white"></i>
+                            </div>
+                            <div class="media-body ml-3 border-left-xs border-white-2">
+                                <h1 class="mb-0 ml-3 text-white">{{totalLearnerStatus|number}}</h1>
+                                <p class="mb-0 ml-3 extra-small-font text-white">Số người học đang học trong năm</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12">
+            <section class="box box-head">
+                <div class="content-body gradient-quepal" style="height: 150px;">
+                    <div class="row">
+                        <div class="media align-items-center">
+                            <div class="w-icon">
+                                <i class="fa fa-comments-o text-white"></i>
+                            </div>
+                            <div class="media-body ml-3 border-left-xs border-white-2">
+                                <h1 class="mb-0 ml-3 text-white">{{totalRegister|number}}</h1>
+                                <p class="mb-0 ml-3 extra-small-font text-white">Số người học đăng ký tài khoản trong năm
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12">
+            <section class="box box-head">
+                <div class="content-body gradient-blooker" style="height: 150px;">
+                    <div class="row">
+                        <div class="media align-items-center">
+                            <div class="w-icon">
+                                <i class="fa fa-comments-o text-white"></i>
+                            </div>
+                            <div class="media-body ml-3 border-left-xs border-white-2">
+                                <h1 class="mb-0 ml-3 text-white">{{totalHistoryLogin|number}}</h1>
+                                <p class="mb-0 ml-3 extra-small-font text-white">Số người học đăng nhập tài khoản trong năm
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
+            <section class="box">
+                <header class="panel_header panel_header_body">
+                    <h2 class="title pull-left div-system" style="color: #fff;">Biểu đồ đăng ký khóa học</h2>
+                    <!-- <div class="actions panel_actions pull-right">
+                        <div ngbDropdown class="d-inline-block aligns">
+                            <i class="fas fa-ellipsis-h" id="dropdownBasic1" ngbDropdownToggle></i>
+                            <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                                <button ngbDropdownItem (click)="getRegisterCourse(constant.TimeType_ThisYear)">Năm này</button>
+                                <button ngbDropdownItem (click)="getRegisterCourse(constant.TimeType_LastYear)">Năm
+                                    trước</button>
+                            </div>
+                        </div>
+                        <i class="box_toggle material-icons">expand_more</i>
+                    </div> -->
+                </header>
+                <div class="content-body padding-15">
+                    <div class="row">
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                            <h3 class="text-center">
+                                {{textViewChartCourse}}&nbsp;({{courseMode.Year}})
+                                <!-- <span
+                                    *ngIf="modelViolation.TimeType==constant.TimeType_ThisMonth || modelViolation.TimeType==constant.TimeType_LastMonth">(Tháng
+                                    {{modelViolation.Month}}/{{modelViolation.Year}})</span>
+                                <span
+                                    *ngIf="modelViolation.TimeType==constant.TimeType_ThisQuarter || modelViolation.TimeType==constant.TimeType_LastQuarter">(Quý
+                                    {{modelViolation.Quarter}})</span>
+                                <span
+                                    *ngIf="modelViolation.TimeType==constant.TimeType_ThisYear || modelViolation.TimeType==constant.TimeType_LastYear">(Năm
+                                    {{modelViolation.Year}})</span> -->
+                            </h3>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                            <div style="display: block">
+                                <canvas baseChart [datasets]="barChartDataCourse" [labels]="barListViewCourse" [options]="barChartOptionsCourse" [legend]="barChartLegendCourse" [colors]="chartColorsCourse" [chartType]="barChartTypeCourse"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
+            <section class="box">
+                <header class="panel_header panel_header_body">
+                    <h2 class="title pull-left div-system" style="color: #fff;">Biểu đồ đăng ký tài khoản</h2>
+                    <!-- <div class="actions panel_actions pull-right">
+                        <div ngbDropdown class="d-inline-block aligns">
+                            <i class="fas fa-ellipsis-h" id="dropdownBasic1" ngbDropdownToggle></i>
+                            <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                                <button ngbDropdownItem (click)="payment(constant.TimeType_ThisMonth)">Tháng
+                                    này</button>
+                                <button ngbDropdownItem (click)="payment(constant.TimeType_LastMonth)">Tháng
+                                    trước</button>
+                                <button ngbDropdownItem (click)="payment(constant.TimeType_ThisQuarter)">Quý
+                                    này</button>
+                                <button ngbDropdownItem (click)="payment(constant.TimeType_LastQuarter)">Quý
+                                    trước</button>
+                                <button ngbDropdownItem (click)="payment(constant.TimeType_ThisYear)">Năm này</button>
+                                <button ngbDropdownItem (click)="payment(constant.TimeType_LastYear)">Năm
+                                    trước</button>
+                            </div>
+                        </div>
+                        <i class="box_toggle material-icons">expand_more</i>
+                    </div> -->
+                </header>
+                <div class="content-body padding-15">
+                    <div class="row">
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                            <h3 class="text-center">{{textViewChartRegister}}&nbsp;({{registerModel.Year}})
+                                <!-- <span
+                                    *ngIf="modelPayment.TimeType==constant.TimeType_ThisMonth || modelPayment.TimeType==constant.TimeType_LastMonth">(Tháng
+                                    {{modelPayment.Month}}/{{modelPayment.Year}})</span>
+                                <span
+                                    *ngIf="modelPayment.TimeType==constant.TimeType_ThisQuarter || modelPayment.TimeType==constant.TimeType_LastQuarter">(Quý
+                                    {{modelPayment.Quarter}})</span>
+                                <span
+                                    *ngIf="modelPayment.TimeType==constant.TimeType_ThisYear || modelPayment.TimeType==constant.TimeType_LastYear">(Năm
+                                    {{modelPayment.Year}})</span> -->
+                            </h3>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                            <div style="display: block">
+                                <canvas baseChart [datasets]="barChartDataRegister" [labels]="barListViewRegister" [options]="barChartOptionsRegister" [legend]="barChartLegendRegister" [colors]="chartColorsRegister" [chartType]="barChartTypeRegister"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
+            <section class="box">
+                <header class="panel_header panel_header_body">
+                    <h2 class="title pull-left div-system" style="color: #fff;">Biểu đồ đăng ký khóa học</h2>
+                </header>
+                <div class="content-body padding-15">
+                    <div class="row">
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                            <h3 class="text-center">
+                                {{textViewChartProvince}}&nbsp;({{provinceModel.Year}})
+                            </h3>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                            <div style="display: block">
+                                <canvas baseChart [datasets]="barChartDataProvince" [labels]="barListViewProvince" [options]="barChartOptionsProvince" [legend]="barChartLegendProvince" [colors]="chartColorsProvince" [chartType]="barChartTypeProvince"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+            <section class="box">
+                <header class="panel_header panel_header_body">
+                    <h2 class="title pull-left div-system" style="color: #fff;">Khóa học mới</h2>
+                </header>
+                <div class="course">
+                    <div class="notification-content">
+                        <table class="table m-0">
+                            <tbody>
+                                <ng-container *ngFor="let row of listCourse; let i = index">
+                                    <tr height="93px">
+                                        <td width="70px">
+                                            <img width="auto" height="60px" class="img-list" [src]="config.ServerApi+row.imagePath">
+                                        </td>
+                                        <td min-width="200px">
+                                            <h5 class="people-right"><a href="javascript:void(0)">{{row.name}}</a>
+                                            </h5>
+                                            <span class="des-notifi">
+                                                <i
+                                                    class="far fa-calendar-alt"></i><span>&nbsp;{{row.startDate|date:'dd/MM/yyyy'}}</span>
+                                            </span>&nbsp;
+                                            <span class="des-notifi"><i
+                                                    class="fas fa-users"></i><span>&nbsp;{{row.totalLearner|number}}</span>
+                                            </span><br>
+                                            <span class="des-notifi" style="font-size: 13px;">{{row.description|limitTo:75}}</span>
+                                        </td>
+                                    </tr>
+                                </ng-container>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+        </div>
+        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+            <section class="box">
+                <header class="panel_header panel_header_body">
+                    <h2 class="title pull-left div-system" style="color: #fff;">Khóa học tiêu biểu</h2>
+                </header>
+                <div class="course">
+                    <div class="notification-content">
+                        <table class="table m-0">
+                            <tbody>
+                                <ng-container *ngFor="let row of listCourseTop; let i = index">
+                                    <tr height="93px">
+                                        <td width="70px">
+                                            <img width="auto" height="60px" class="img-list" [src]="config.ServerApi+row.imagePath">
+                                        </td>
+                                        <td min-width="200px">
+                                            <h5 class="people-right"><a href="javascript:void(0)">{{row.name}}</a>
+                                            </h5>
+                                            <span class="des-notifi">
+                                                <i
+                                                    class="far fa-calendar-alt"></i><span>&nbsp;{{row.startDate|date:'dd/MM/yyyy'}}</span>
+                                            </span>&nbsp;
+                                            <span class="des-notifi"><i
+                                                    class="fas fa-users"></i><span>&nbsp;{{row.totalLearner|number}}</span>
+                                            </span><br>
+                                            <span class="des-notifi" style="font-size: 13px;">{{row.description|limitTo:75}}</span>
+                                        </td>
+                                    </tr>
+                                </ng-container>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>

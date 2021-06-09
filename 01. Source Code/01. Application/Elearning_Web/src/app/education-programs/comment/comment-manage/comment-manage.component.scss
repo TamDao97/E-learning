@@ -1,0 +1,76 @@
+app-comment-manage {
+    .row-actions {
+        display: inline;
+        margin-left: 10px;
+        color: #0073aa;
+    }
+
+    .accton:hover {
+        color: red;
+        text-decoration-line: underline;
+    }
+
+    .comment {
+        box-sizing: border-box;
+        display: block;
+        padding: 0 8px;
+        min-width: 24px;
+        height: 2em;
+        border-radius: 5px;
+        background-color: #72777c;
+        color: #fff;
+        font-size: 11px;
+        line-height: 1.9090909;
+        text-align: center;
+        width: 10px;
+    }
+
+    .commnets {
+        border: 0;
+        clip: rect(1px, 1px, 1px, 1px);
+        -webkit-clip-path: inset(50%);
+        clip-path: inset(50%);
+        height: 1px;
+        margin: -1px;
+        overflow: hidden;
+        padding: 0;
+        position: absolute;
+        width: 1px;
+        word-wrap: normal !important;
+    }
+
+    .commnetss {
+        content: "";
+        display: block;
+        margin-left: 8px;
+        width: 0;
+        height: 0;
+        border-top: 5px solid #72777c;
+        border-right: 5px solid transparent;
+    }
+
+    .typeColor {
+    color: red;
+    }
+
+    // .imag {
+    //     position: relative;
+    //     width: 400px;
+    //     height: 120px;
+    //     background-color: #fafafa;
+    //     border: solid 1px lightgray;
+    //   }
+      .imag > img {
+        // position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        margin: auto;
+      }
+      .textbox > span{
+        top: 0;
+        right: 0;
+        bottom: 0;
+        margin: auto;
+      }
+}

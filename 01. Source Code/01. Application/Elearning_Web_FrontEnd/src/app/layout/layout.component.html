@@ -1,0 +1,11 @@
+<app-topbar>
+</app-topbar>
+<section class="wrapper main-wrapper" style="padding-top: 70px;" [@routeAnimations]="prepareRoute(outlet)">
+    <!-- <app-home-silder></app-home-silder>
+    <app-home-service></app-home-service>
+    <app-home-program></app-home-program>
+    <app-home-expert></app-home-expert>
+    <app-course-details></app-course-details> -->
+    <router-outlet #outlet="outlet"></router-outlet>
+</section>
+<app-footer></app-footer>

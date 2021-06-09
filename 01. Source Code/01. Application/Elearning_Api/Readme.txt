@@ -1,0 +1,2 @@
+1. Update entity
+Scaffold-DbContext "Server=14.248.84.128,1445;Database=Elearning;User Id=sa;Password=Admin@123#456;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Entities -StartupProject "Elearning.Model" -f

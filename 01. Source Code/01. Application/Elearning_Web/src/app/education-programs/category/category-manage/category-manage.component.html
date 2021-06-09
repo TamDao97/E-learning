@@ -1,0 +1,97 @@
+<div class="content-wrapper">
+    <section class="box">
+        <div class="content-body">
+            <form>
+                <div class="row">
+                    <div class="col-xl-8 col-lg-8 col-md-8">
+                        <nts-search-bar [(options)]="searchOptions" [(ngModel)]="model" name="model"
+                            (change)="searchCategory()">
+                        </nts-search-bar>
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-4 text-right">
+                        <button class="btn btn-success" (click)="searchCategory()">
+                            <i class="fa fa-search"></i> &nbsp;Tìm kiếm</button>
+                        <button class="btn btn-secondary" (click)="clear()">
+                            <i class="fas fa-redo-alt"></i> &nbsp;Làm mới</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="content-body">
+            <div class="row margin-bottom-10">
+                <div class="col-md-6 text-left">
+                    <label class="form-label" style="line-height:35px;">Tổng số
+                        <span class="bold text-danger">{{model.TotalItems}}</span> danh mục</label>
+                </div>
+                <div class="col-md-6 text-right">
+                    <button type="button" class="btn btn-success" (click)="showCreateUpdate('')" container="body">
+                        <i class="fa fa-plus"></i>
+                        Thêm mới
+                    </button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-lg-12">
+                    <perfect-scrollbar [config]="constant.ScrollXConfig" style="height:auto; width:100%;">
+                        <table class="table table-bordered table-hover" style="min-width:550px">
+                            <thead>
+                                <tr>
+                                    <th width="50px" class="text-center">STT</th>
+                                    <th width="100px" class="text-center">Xử lý</th>
+                                    <th min-width="400px" class="text-center">Tên danh mục</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let row of listData; let i = index">
+                                    <td class="text-center">{{startIndex+i}}</td>
+                                    <td class="text-center">
+                                        <button type="button" (click)="showCreateUpdate(row.id)"
+                                            class="btn btn-warning btn-xs" placement="bottom" ngbTooltip="Cập nhật"
+                                            container="body">
+                                            <span class="fas fa-edit" aria-hidden="true"></span>
+                                        </button>
+                                        <button class="btn btn-danger btn-xs" container="body"
+                                            (click)="showConfirmDelete(row.id)" ngbTooltip="Xóa">
+                                            <span class="fas fa-trash-alt" aria-hidden="true"></span>
+                                        </button>
+                                    </td>
+                                    <td>{{row.name}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </perfect-scrollbar>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-12 d-flex justify-content-start">
+                    <div class="controls ">
+                        <select class="form-control" style="border: 1px solid #ddd;" [(ngModel)]="model.PageSize"
+                            (ngModelChange)="searchCategory()" name="pageSize">
+                            <option *ngFor="let item of constant.ListPageSize" [value]="item">{{item}}</option>
+                        </select>
+                    </div>
+                    <label class="form-label " style="padding: 4px;">bản ghi/Trang</label>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12  d-flex justify-content-end">
+                    <ngb-pagination [collectionSize]="model.TotalItems" [(page)]="model.PageNumber"
+                        (pageChange)="searchCategory()" [pageSize]="model.PageSize" [maxSize]="5" [rotate]="true"
+                        [boundaryLinks]="true"></ngb-pagination>
+                </div>
+            </div>
+            <hr />
+            <div class="row">
+                <div class="col-md-12">
+                    <button class="btn btn-view btn-warning">
+                        <i class="fas fa-pen-square"></i>
+                    </button>&nbsp;
+                    <small class="padding-right-20">Sửa danh mục</small>
+                    <button class="btn btn-view btn-danger">
+                        <i class="fas fa-trash-alt"></i>
+                    </button>&nbsp;
+                    <small class="padding-right-20">Xóa danh mục</small>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

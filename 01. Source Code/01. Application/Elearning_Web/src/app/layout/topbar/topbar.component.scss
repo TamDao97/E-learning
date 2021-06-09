@@ -1,0 +1,29 @@
+app-topbar {
+    .material-icons.md-blue {
+        color: #0056ac;
+    }
+    .img-fluid {
+        max-height: 55px;
+    }
+
+    .img-fluid-small {
+        max-height: 35px;
+    }
+
+    .sidebar_shift .img-fluid {
+        margin-top: 10px;
+    }
+
+    .page-topbar .logo-area {
+        text-align: center;
+    }
+
+    .dropdown-item:active a {
+        color: #ffffff !important;
+    }
+
+    .update-user-model .modal-dialog{
+        max-width: 1000px !important;
+        width: 1000px !important;
+    }
+}

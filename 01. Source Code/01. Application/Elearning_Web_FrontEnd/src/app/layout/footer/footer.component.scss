@@ -1,0 +1,22 @@
+app-footer {
+    .text1 {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        /* number of lines to show */
+        -webkit-box-orient: vertical;
+    }
+    .ftco-footer {
+        font-size: 14px;
+        background: #232323;
+        padding: 20px;
+    }
+    .ftco-footer .ftco-footer-widget h2 {
+        font-weight: normal;
+        color: #fff;
+        margin-bottom: 15px;
+        font-size: 22px;
+        font-weight: 500;
+    }
+}

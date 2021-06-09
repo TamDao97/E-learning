@@ -1,0 +1,66 @@
+app-test {
+    .box {
+        background-color: #e9ecef;
+        margin: 15px 0 15px 0;
+        border-radius: 0;
+    }
+
+    .custtom-check-box {
+        margin: 0px 10px 0px 0px;
+    }
+
+    .form-group {
+        margin-bottom: 1rem;
+    }
+
+    .form-control {
+        font-size: 14px !important;
+        height: 30px !important;
+        width: 100% !important;
+    }
+
+    .form-control {
+        display: block;
+        width: 100%;
+        height: calc(1.5em + 0.75rem + 2px);
+        padding: 0.375rem 0.75rem;
+        font-size: 1rem;
+        font-weight: 400;
+        line-height: 1.5;
+        color: #495057;
+        background-color: #fff;
+        background-clip: padding-box;
+        border: 1px solid #ced4da;
+        border-radius: 0.25rem;
+        transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    }
+
+    .countdownType {
+        font-size: 38px;
+        padding-left: 19px;
+    }
+
+    .type {
+        font-size: 38px;
+        padding-left: 38px;
+    }
+
+    .icon {
+        font-size: 35px;
+    }
+
+    .checkIndex {
+        background-color: #df394f;
+        border-color: black;
+    }
+
+    .checkIndex:hover {
+        background-color: #df394f;
+        border-color: black;
+    }
+
+    .checkIndex:link {
+        background-color: #df394f;
+        border-color: black;
+    }
+}

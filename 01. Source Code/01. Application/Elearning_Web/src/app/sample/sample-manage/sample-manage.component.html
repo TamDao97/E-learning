@@ -1,0 +1,58 @@
+<div class="content-wrapper">
+    <section class="box">
+        <div class="content-body">
+            <form>
+                <div class="row">
+                    <div class="col-xl-8 col-lg-8 col-md-8">
+                        <nts-search-bar [(options)]="searchOptions" [(ngModel)]="searchModel" name="searchModel"
+                            (change)="saerchSample()">
+                        </nts-search-bar>
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-4 text-right">
+                        <button class="btn btn-success" (click)="saerchSample()">
+                            <i class="fa fa-search"></i> &nbsp;Tìm kiếm</button>
+                          <button class="btn btn-secondary" (click)="clear()">
+                            <i class="fas fa-redo-alt"></i> &nbsp;Làm mới</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="content-body">
+            <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12">
+                    <table class="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th width="60px">STT</th>
+                                <th width="300px">Tên case</th>
+                                <th>Ghi chu</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="text-center">1</td>
+                                <td>Case 1</td>
+                                <td>Ghi chú case1</td>
+                            </tr>
+                            <tr>
+                                <td class="text-center">1</td>
+                                <td>Case 1</td>
+                                <td>Ghi chú case1</td>
+                            </tr>
+                            <tr>
+                                <td class="text-center">1</td>
+                                <td>Case 1</td>
+                                <td>Ghi chú case1</td>
+                            </tr>
+                            <tr>
+                                <td class="text-center">1</td>
+                                <td>Case 1</td>
+                                <td>Ghi chú case1</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

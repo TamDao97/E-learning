@@ -1,0 +1,383 @@
+<div class="content-wrapper">
+    <section class="box">
+        <div class="content-body">
+            <form name="form" #f="ngForm" novalidate>
+                <div class="row">
+                    <div class="col-md-12 col-lg-12 col-sm-12 col-xl-12">
+                        <div class="row">
+                            <div class="col-xl-4 col-md-4 col-lg-4 col-sm-12">
+                                <div class="form-group ">
+                                    <label class="form-label">Tên bài giảng
+                                        <span class='text-danger text-strong'>&nbsp;*</span>
+                                    </label>
+                                    <input type="text" class="form-control" name="Name" [(ngModel)]="model.name"
+                                        maxlength="300" required [disabled]="statusApproval === 2">
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-md-4 col-lg-4 col-sm-12">
+                                <div class="form-group ">
+                                    <label class="form-label">Loại bài giảng
+                                        <span class='text-danger text-strong'>&nbsp;*</span>
+                                    </label>
+                                    <ng-select [items]="constant.LessonType" bindLabel="Name" bindValue="Id"
+                                        [(ngModel)]="model.type" name="lessonType" (change)="isExam()" required
+                                        [disabled]="statusApproval === 2">
+                                    </ng-select>
+                                </div>
+                            </div>
+                            <!-- <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 radio">
+                                    <div class="form-group">
+                                        <label class="form-label">Hiển thị
+                                            <span class='text-danger text-strong'>&nbsp;*</span>
+                                        </label> <br>
+                                        <div class="custom-control custom-radio custom-control-inline">
+                                            <input type="radio" class="custom-control-input" id="defaultInline1"
+                                                name="inlineDefaultRadiosExample" [(ngModel)]="model.status" required [value]="true"
+                                                [disabled]="statusApproval === 2">
+                                            <label class="custom-control-label" for="defaultInline1">Hiển thị</label>
+                                        </div>
+                                        <div class="custom-control custom-radio custom-control-inline">
+                                            <input type="radio" class="custom-control-input" id="defaultInline2"
+                                                name="inlineDefaultRadiosExample" [(ngModel)]="model.status" required
+                                                [value]="false" [disabled]="statusApproval === 2">
+                                            <label class="custom-control-label" for="defaultInline2">Không hiển thị</label>
+                                        </div>
+                                    </div>
+                                </div> -->
+                            <div class="col-xl-4 col-md-4 col-lg-4 col-sm-12">
+                                <div class="form-group ">
+                                    <label class="form-label">Danh mục
+                                        <span class='text-danger text-strong'>&nbsp;*</span>
+                                    </label>
+                                    <span class="add-from float-right">
+                                        <ng-container *ngIf="statusApproval !== 2">
+                                            <button type="button" class="btn btn-xs btn-success"
+                                                style="border-radius: 100px;" (click)="showCreateUpdate('',null)"
+                                                container="body">
+                                                <i class="fa fa-plus"></i>
+                                            </button>
+                                        </ng-container>
+                                    </span>
+                                    <!-- <ng-select [items]="listCategory" bindLabel="name" bindValue="id"
+                                            [(ngModel)]="model.categoryId" name="Type" required>
+                                        </ng-select> -->
+                                    <div class="input-group mb-3">
+                                        <nz-tree-select class="form-control" [nzNodes]="listCategory"
+                                            nzShowSearch="true" nzPlaceHolder="Chọn danh mục"
+                                            [(ngModel)]="model.categoryId" nzVirtualHeight="300px"
+                                            [nzDefaultExpandAll]="true" [nzAllowClear]="false" [nzMultiple]="false"
+                                            [ngModelOptions]="{standalone: true}"
+                                            (input)="onChange($event.target.value.toUpperCase())"
+                                            [disabled]="statusApproval === 2">
+                                            <ng-template #nzTreeTemplate let-node>
+                                                <div class="row">
+                                                    <div class="col-xl-9 col-md-9 col-lg-9 col-sm-12">
+                                                        <span> {{ node.title }} </span>
+                                                    </div>
+                                                    <div class="col-xl-3 col-md-3 col-lg-3 col-sm-12 text-right">
+                                                        <!-- <ng-container>
+                                                                <button type="button" (click)="showCreateUpdate(null,node.key)"
+                                                                    class="item-add" nz-tooltip nzTooltipTitle="Thêm danh mục">
+                                                                    <i class="fas fa-plus"></i></button>
+                                                            </ng-container> -->
+                                                        <ng-container>
+                                                            <button type="button"
+                                                                (click)="showCreateUpdate(node.key,null)"
+                                                                class="item-update" nz-tooltip
+                                                                nzTooltipTitle="Sửa danh mục">
+                                                                <i class="fa fa-edit"></i></button>
+                                                        </ng-container>
+                                                        <ng-container>
+                                                            <button type="button"
+                                                                (click)="showConfirmDeleteCategory(node)"
+                                                                class="item-delete" nz-tooltip
+                                                                nzTooltipTitle="Xóa danh mục">
+                                                                <i class="fas fa-trash-alt"></i></button>
+                                                        </ng-container>
+                                                    </div>
+                                                </div>
+                                            </ng-template>
+                                        </nz-tree-select>
+                                    </div>
+                                </div>
+                            </div>
+                            <ng-container *ngIf="model.type == constant.Lesson_Type.Lesson_Type_Study">
+                                <div class="col-xl-4 col-md-4 col-lg-4 col-sm-12">
+                                    <div class="form-group ">
+                                        <label class="form-label">Số câu trả lời cần đạt</label>
+                                        <input type="text" ntsNumberInt class="form-control"
+                                            name="totalRequestCorrectModel" [(ngModel)]="model.totalRequestCorrect"
+                                            maxlength="10" [disabled]="statusApproval === 2">
+                                    </div>
+                                </div>
+                                <div class="col-xl-4 col-md-4 col-lg-4 col-sm-12">
+                                    <div class="form-group ">
+                                        <label class="form-label">Thời gian (phút)
+                                            <span class='text-danger text-strong'>&nbsp;*</span>
+                                        </label>
+                                        <!-- <input type="text" class="form-control" [(ngModel)]="model.examTime" name="Examtime" matInput
+                                                        mask="00:00:00" placeholder="00:00:00"/> -->
+                                        <input type="text" ntsNumberInt class="form-control" name="Examtime"
+                                            [(ngModel)]="model.examTime" maxlength="10" required
+                                            [disabled]="statusApproval === 2">
+                                    </div>
+                                </div>
+                            </ng-container>
+                            <!-- <div class="col-xl-12 col-md-12 col-lg-12 col-sm-12">
+                                <div class="form-group ">
+                                    <label class="form-label">Mô tả
+                                    </label>
+                                    <textarea name="Description" class="form-control" [(ngModel)]="model.description"
+                                        rows="3" maxlength="500" [disabled]="statusApproval === 2"></textarea>
+                                </div>
+                            </div> -->
+                        </div>
+                    </div>
+                    <!-- <div class="col-md-3 col-lg-3 col-sm-12 col-xl-3 text-center">
+                        <div class="col-md-12 img-avata">
+                            <img class="img-thumbnail"
+                                [src]="fileImage && fileImage.Data?fileImage.Data: (filedata?filedata:'/assets/img/noavatar.gif')">
+                        </div>
+                        <div class="col-md-12">
+                            <i class="box_toggle material-icons actions-camera btn-file padding-top-5"
+                                ngbTooltip="Thay ảnh">
+                                photo_camera
+                                <input type="file" id="fileInput" #fileInput accept="image/*"
+                                    (change)="onFileChange($event)" [disabled]="statusApproval === 2" />
+                            </i>
+                        </div>
+                    </div> -->
+                    <ng-container *ngIf="model.type == constant.Lesson_Type.Lesson_Type_Theory && statusTinymce==true">
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                            <!-- <div class="form-group ">
+                                    <label class="form-label">Nội dung
+                                    </label>
+                                    <div class="controls">
+                                        <nts-app-tinymce name="content" [config]="discoveryConfig" [(ngModel)]="model.content">
+                                        </nts-app-tinymce>
+                                    </div>
+                                </div> -->
+                            <div class="row">
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                                    <perfect-scrollbar [config]="constant.ScrollXConfig"
+                                        style="height:auto; width:100%;">
+                                        <table class="table table-bordered table-hover" style="min-width:700px">
+                                            <thead>
+                                                <tr>
+                                                    <th width="50px" class="text-center"><i
+                                                            class="fas fa-align-justify"></i></th>
+                                                    <th min-width="200px" class="text-center">Bài giảng chi tiết</th>
+                                                    <th width="250px" class="text-center">Thời lượng ước tính</th>
+                                                    <th width="200px" class="text-center">
+                                                        <a (click)="chooseLessonType()"><i class="fa fa-plus"
+                                                                style="color: #2cef59;"></i> Thêm nội dung</a>
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody cdkDropList [cdkDropListData]="model.listLessonFrame"
+                                                class="example-list" (cdkDropListDropped)="drop($event)">
+                                                <tr *ngFor="let row of model.listLessonFrame; let i = index" cdkDrag>
+                                                    <!-- <td class="text-center">
+                                                        <button class="btn btn-danger btn-xs" container="body"
+                                                            (click)="showConfirmDeleteLessonFrame(i)" ngbTooltip="Xóa"
+                                                            [disabled]="statusApproval === 2">
+                                                            <span class="fas fa-trash-alt" aria-hidden="true"></span>
+                                                        </button>
+                                                        <ng-container *ngIf="selectIndex==i">
+                                                            <button class="btn btn-success btn-xs" container="body"
+                                                                (click)="updateLessonFrame()" ngbTooltip="Lưu"
+                                                                [disabled]="statusApproval === 2">
+                                                                <span class="fa fa-save" aria-hidden="true"></span>
+                                                            </button>
+                                                        </ng-container>
+                                                    </td> -->
+                                                    <td class="text-center"><i class="fas fa-align-justify"></i></td>
+                                                    <td>
+                                                        <ng-container *ngIf="row.type==1">
+                                                            <i class="fa fa-file-text"></i>&nbsp;{{row.name}}
+                                                        </ng-container>
+                                                        <ng-container *ngIf="row.type==2">
+                                                            <i class="fa fa-question-circle"></i>&nbsp;{{row.name}}
+                                                        </ng-container>
+                                                        <ng-container *ngIf="row.type==3">
+                                                            <i class="fas fa-play-circle"></i>&nbsp;{{row.name}}
+                                                        </ng-container>
+                                                    </td>
+                                                    <td class="text-right">
+                                                        <span *ngIf="row.type==1 || row.type==3">{{row.estimatedTime|
+                                                            split}}</span>
+                                                        <span *ngIf="row.type==2">{{row.testTime}} : 00</span>
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <button type="button" [disabled]="statusApproval === 2"
+                                                            (click)="updateLessonFrames(row, i)"
+                                                            class="btn btn-warning btn-xs" placement="bottom"
+                                                            ngbTooltip="Cập nhật" container="body">
+                                                            <span class="fas fa-edit" aria-hidden="true"></span>
+                                                        </button>
+                                                        <button class="btn btn-danger btn-xs" container="body"
+                                                            [disabled]="statusApproval === 2"
+                                                            (click)="showConfirmDeleteLessonFrame(i)"
+                                                            ngbTooltip="Xóa">
+                                                            <span class="fas fa-trash-alt" aria-hidden="true"></span>
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                                <!-- <tr (click)="clearLessonFrame()">
+                                                    <td class="text-center">
+                                                        <button type="button" class="btn btn-xs btn-success"
+                                                            ngbTooltip="Thêm dòng" (click)="addRowLessonFrameName()">
+                                                            <i class="fa fa-plus"></i>
+                                                        </button>
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" [(ngModel)]="lessonFrameName"
+                                                            class="form-control" name="lessonFrameName">
+                                                    </td>
+                                                </tr> -->
+                                            </tbody>
+                                        </table>
+                                    </perfect-scrollbar>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-container>
+                    <ng-container
+                        *ngIf="model.type == constant.Lesson_Type.Lesson_Type_Study||model.type==constant.Lesson_Type.Lesson_Type_Exam">
+                        <div class="col-md-6 text-left">
+                            <label class="form-label" style="line-height:35px;">Tổng số
+                                <span class="bold text-danger">{{model.listQuestion.length}}</span> câu hỏi</label>
+                        </div>
+                        <div class="col-md-6 text-right">
+                            <button type="button" class="btn btn-success" (click)="showChooseQuestion()"
+                                container="body" [disabled]="statusApproval === 2">
+                                <i class="fa fa-plus"></i>
+                                Tự chọn
+                            </button>
+                            <button type="button" class="btn btn-success" (click)="showChooseQuestionRandom()"
+                                container="body" [disabled]="statusApproval === 2">
+                                <i class="fas fa-random"></i>
+                                Ngẫu nhiên
+                            </button>
+                        </div>
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                            <perfect-scrollbar [config]="constant.ScrollXConfig" style="height:auto; width:100%;">
+                                <table class="table table-bordered table-hover" style="min-width:950px">
+                                    <thead>
+                                        <tr>
+                                            <th width="50px" class="text-center">STT</th>
+                                            <th width="100px" class="text-center">Xử lý</th>
+                                            <th width="200px" class="text-center">Chủ đề</th>
+                                            <th width="200px" class="text-center">Loại câu hỏi</th>
+                                            <th min-width="200px" class="text-center">Nội dung câu hỏi</th>
+                                            <th width="200px" class="text-center">Chi tiết câu hỏi</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let row of model.listQuestion; let i = index">
+                                            <td class="text-center">{{i+1}}</td>
+                                            <td class="text-center">
+                                                <button class="btn btn-danger btn-xs" container="body"
+                                                    (click)="showConfirmDelete(i)" ngbTooltip="Xóa"
+                                                    [disabled]="statusApproval === 2">
+                                                    <span class="fas fa-trash-alt" aria-hidden="true"></span>
+                                                </button>
+                                            </td>
+                                            <td>{{row.topicName}}</td>
+                                            <td>
+                                                <nts-status [value]="row.type" [items]="constant.QuestionType">
+                                                </nts-status>
+                                            </td>
+                                            <td>
+                                                <p class="text-line" [innerHTML]="row.content | safeHtml"></p>
+                                            </td>
+                                            <td class="text-center">
+                                                <button class="btn btn-warning btn-xs" container="body"
+                                                    (click)="showQuestion(row.id)" ngbTooltip="Xem nội dung">
+                                                    <span class="fas fa-eye" aria-hidden="true"></span>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </perfect-scrollbar>
+                        </div>
+                    </ng-container>
+                    <ng-container *ngIf="model.type == 4">
+                        <div class="col-xl-4 col-md-4 col-lg-4 col-sm-12">
+                            <div class="form-group ">
+                                <label class="form-label">File SCORM
+                                </label>
+                                <div class="input-group">
+                                    <label type="text" class="form-control" name="model.content">{{
+                                        model.content}}</label>
+                                    <div class="input-group-append">
+                                        <button class="btn btn-success" (click)="fileInput.click()">
+                                            <input #fileInput type="file" accept=".zip" (change)="onFileChange($event)"
+                                                style="display:none;" />
+                                            <i class="fas fa-file-archive"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-container>
+                </div>
+                <!-- Footer -->
+                <div class="row">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 text-right">
+                        <ng-container
+                            *ngIf="model.approvalStatus===0 || model.approvalStatus===3 || model.approvalStatus===4">
+                            <button *appUipermission="['F000305']" type="button" class="btn btn-info"
+                                (click)="requestLesson()">
+                                <i class="fas fa-share"></i>&nbsp;
+                                <span>Yêu cầu duyệt</span>
+                            </button>
+                        </ng-container>
+                        <ng-container *ngIf="model.approvalStatus===1">
+                            <button *appUipermission="['F000306']" type="button" class="btn btn-success"
+                                (click)="approvalLesson()">
+                                <i class="fas fa-check"></i>&nbsp;
+                                <span>Duyệt</span>
+                            </button>
+                        </ng-container>
+                        <ng-container *ngIf="model.approvalStatus===1">
+                            <button *appUipermission="['F000306']" type="button" class="btn btn-danger"
+                                (click)="notApprovalLesson()">
+                                <i class="fas fa-exclamation"></i>&nbsp;
+                                <span>Không duyệt</span>
+                            </button>
+                        </ng-container>
+                        <ng-container *ngIf="model.approvalStatus===2">
+                            <button *appUipermission="['F000306']" type="button" class="btn btn-danger"
+                                (click)="canceLesson()">
+                                <i class="fas fa-ban"></i>&nbsp;
+                                <span>Hủy duyệt</span>
+                            </button>
+                        </ng-container>
+                        <ng-container *ngIf="statusApproval !== 2">
+                            <button type="button" class="btn btn-success" [disabled]="!f.form.valid"
+                                (click)="save(false)">
+                                <i class="fa fa-save"></i>&nbsp;
+                                <span>Lưu</span>
+                            </button>
+                        </ng-container>
+                        <ng-container *ngIf="id== null || id == ''">
+                            <button type="button" class="btn btn-success" [disabled]="!f.form.valid"
+                                (click)="saveAndContinue()">
+                                <i class="fa fa-save"></i>&nbsp;
+                                <span>Lưu & tiếp tục</span>
+                            </button>
+                        </ng-container>
+                        <button type="button" class="btn btn-danger" (click)="closeModal(false)">
+                            <i class="fa fa-power-off"></i> &nbsp;
+                            <span>
+                                Đóng
+                            </span>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+</div>

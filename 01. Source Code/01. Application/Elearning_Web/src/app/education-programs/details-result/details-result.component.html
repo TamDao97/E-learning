@@ -1,0 +1,85 @@
+<div class="modal-header">
+    <h4 class="modal-title text-uppercase">Danh sách câu hỏi</h4>
+    <a href="javascript:;" style="outline: none; color: white" (click)="closeModal()">
+        <i class="fa fa-close"></i>
+    </a>
+</div>
+<div class="modal-body padding-10">
+    <div class="row" *ngFor="let row of listData;let i = index">
+        <div class="col-md-10">
+            <div>
+                <b>Câu {{i+1}}: <span [innerHTML]="row.content | safeHtml"></span></b>
+            </div>
+            <div *ngIf="row.type==constant.Question_Type.Question_Type_1Answer">
+                <div *ngFor="let a of row.answers">
+                    <div *ngIf="a.isCorrect==true">
+                        <input name="{{row.questionId}}" type="radio" [checked]="a.isChecked === true" disabled><span style="color: green;font-weight: bolder;">{{a.answerLabel}}: {{a.answerContent}}</span>
+                    </div>
+                    <div *ngIf="a.isCorrect==false">
+                        <input name="{{row.questionId}}" type="radio" [checked]="a.isChecked === true" disabled><span>{{a.answerLabel}}: {{a.answerContent}}</span>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="row.type==constant.Question_Type.Question_Type_MoreAnswer">
+                <div *ngFor="let a of row.answers">
+                    <div *ngIf="a.isCorrect==true">
+                        <input name="{{row.questionId}}" type="checkbox" [checked]="a.isChecked === true" disabled><span style="color: green;font-weight: bolder;">{{a.answerLabel}}: {{a.answerContent}}</span>
+                    </div>
+                    <div *ngIf="a.isCorrect==false">
+                        <input name="{{row.questionId}}" type="checkbox" [checked]="a.isChecked === true" disabled><span>{{a.answerLabel}}: {{a.answerContent}}</span>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="row.type==constant.Question_Type.Question_Type_YesNo">
+                <div *ngFor="let a of row.answers">
+                    <div *ngIf="a.isCorrect==true">
+                        <input name="{{row.questionId}}" type="radio" [checked]="a.isChecked === true" disabled><span style="color: green;font-weight: bolder;">{{a.answerLabel}}</span>
+                    </div>
+                    <div *ngIf="a.isCorrect==false">
+                        <input name="{{row.questionId}}" type="radio" [checked]="a.isChecked === true" disabled><span>{{a.answerLabel}}</span>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="row.type==constant.Question_Type.Question_Type_Fill">
+                <p>
+                    Đáp án của người học:
+                </p>
+                <div *ngFor="let a of row.answerLearners; let i1=index">
+                    {{i1+1}}: {{a.answerContent}}
+                </div>
+                <p>
+                    Đáp án đúng
+                </p>
+                <div *ngFor="let b of row.answers; let i2=index">
+                    {{i2+1}}: {{b.answerContent}}
+                </div>
+            </div>
+            <div *ngIf="row.type==constant.Question_Type.Question_Type_Sort">
+                <p>
+                    Đáp án của người học:
+                </p>
+                <div *ngFor="let a of row.answerLearners; let i1=index">
+                    {{i1+1}}: {{a.answerContent}}
+                </div>
+                <p>
+                    Đáp án đúng
+                </p>
+                <div *ngFor="let b of row.answers; let i2=index">
+                    {{i2+1}}: {{b.answerContent}}
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2 text-right">
+            <i *ngIf="row.isCorrect==true" class="fas fa-check-circle text-success"></i>
+            <i *ngIf="row.isCorrect==false" class="fas fa-times-circle text-danger"></i>
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+<div class="modal-footer">
+    <button type="button" class="btn btn-danger" (click)="closeModal()">
+        <i class="fa fa-power-off"></i> &nbsp;
+        <span>Đóng</span>
+    </button>
+</div>

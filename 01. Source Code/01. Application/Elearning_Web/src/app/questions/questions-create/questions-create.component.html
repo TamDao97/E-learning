@@ -1,0 +1,300 @@
+<div class="content-wrapper">
+    <section class="box box-head">
+        <div class="content-body">
+            <form name="form" #f="ngForm" novalidate>
+                <div class="row">
+                    <div class="col-md-12 col-lg-12 col-sm-12 col-xl-12">
+                        <div class="row">
+                            <div class="col-md-4 col-lg-4 col-sm-4 col-xl-4">
+                                <div class="form-group ">
+                                    <label class="form-label">Chủ đề
+                                        <span class='text-danger text-strong'>&nbsp;*</span>
+                                    </label>
+                                    <div class="input-group mb-3">
+                                        <nz-tree-select class="form-control" [nzNodes]="topics" nzShowSearch
+                                            nzPlaceHolder="Chọn chủ đề" [(ngModel)]="model.topicId"
+                                            nzVirtualHeight="250px" [ngModelOptions]="{standalone: true}"
+                                            (ngModelChange)="onChange($event)" [disabled]="model.approvalStatus===2">
+                                            <ng-template #nzTreeTemplate let-node>
+                                                <div class="roww">
+                                                    <div class="nameTitle">
+                                                        <span class="ant-tree-node-content-wrapper"
+                                                            (click)="nodeClicked(node)"
+                                                            [class.ant-tree-node-selected]="node.isSelected">
+                                                            <p fxFlex style="word-wrap: break-word;"> {{ node.title }}
+                                                            </p>
+                                                        </span>
+                                                    </div>
+                                                    <div class="buttonIcon text-right">
+                                                        <button type="button" (click)="showModalCreateTopic(node.key)"
+                                                            class="item-update" nz-tooltip nzTooltipTitle="Sửa chủ đề"
+                                                            [disabled]="model.approvalStatus===2">
+                                                            <i class="fa fa-edit"></i></button>
+                                                        <button type="button" (click)="showConfirmDelete(node)"
+                                                            class="item-delete" nz-tooltip nzTooltipTitle="Xóa chủ đề"
+                                                            [disabled]="model.approvalStatus===2">
+                                                            <i class="fas fa-trash-alt"></i></button>
+                                                    </div>
+                                                </div>
+                                            </ng-template>
+                                        </nz-tree-select>
+                                        <div class="input-group-append">
+                                            <button type="button" class="btn btn-success" placement="bottom"
+                                                (click)="showModalCreateTopic(null)" ngbTooltip="Thêm chủ đề"
+                                                container="body" [disabled]="model.approvalStatus===2">
+                                                <span class="fa fa-plus" aria-hidden="true"></span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-lg-4 col-sm-4 col-xl-4">
+                                <div class="form-group ">
+                                    <label class="form-label">Dạng câu
+                                        <span class='text-danger text-strong'>&nbsp;*</span>
+                                    </label>
+                                    <select class="form-control" [(ngModel)]="model.type" required name="Type"
+                                        (ngModelChange)="changeType()" [ngModelOptions]="{standalone: true}">
+                                        <option *ngFor="let item of constant.QuestionType" [ngValue]="item.Id"
+                                            [disabled]="model.approvalStatus===2">
+                                            {{item.Name}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <!-- <div class="col-md-4 col-lg-4 col-sm-4 col-xl-4">
+                                <div class="form-group ">
+                                    <label class="form-label">Trạng thái
+                                        <span class='text-danger text-strong'>&nbsp;*</span>
+                                    </label>
+                                    <div class="control pb-3">
+                                        <div class="form-check-inline" *ngFor="let item of constant.QuestionStatus">
+                                            <label class="form-check-label">
+                                                <input type="radio" class="form-check-input" [value]="item.Id"
+                                                    [(ngModel)]="model.status" name="optradio"
+                                                    [disabled]="model.approvalStatus===2">{{item.Name}}
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> -->
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 col-lg-12 col-sm-12 col-xl-12">
+                                <ng-container *ngIf="statusApp==true">
+                                    <div class="form-group">
+                                        <label class="form-label">Nội dung câu hỏi
+                                            <span class='text-danger text-strong'>&nbsp;*</span>
+                                        </label>
+                                        <div class="controls">
+                                            <nts-app-tinymce name="Content" [config]="discoveryConfig" required
+                                                [(ngModel)]="model.content">
+                                            </nts-app-tinymce>
+                                        </div>
+                                    </div>
+                                </ng-container>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="jumbotron jumbotron-fluid" style="padding-bottom: 15px;padding-top: 15px;">
+                    <div class="container-fluid">
+                        <div class="row" *ngIf="model.type!=3">
+                            <div class="col-md-12 col-lg-12 col-sm-12 col-xl-12">
+                                <div class="form-group">
+                                    <button class="btn btn-success" (click)="addElemt()"
+                                        [disabled]="model.approvalStatus===2">
+                                        <i class="fa fa-plus"></i> Thêm đáp án
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class=" row" *ngIf="model.type==5">
+                            <div class="col-md-12 col-lg-12 col-sm-12 col-xl-12">
+                                <label class="label form-label">
+                                    Thứ tự sắp xếp thành câu hoàn chỉnh
+                                </label>
+                            </div>
+                            <div class="col-md-3 col-lg-3 col-sm-3 col-xl-3"
+                                *ngFor="let item of model.listAnswer; let i=index;">
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <label style="margin-top: 9px;">{{item.answerLabel}} -&nbsp; </label>
+                                        <input type="text" class="form-control" placeholder="Thứ tự câu trả lời"
+                                            ntsNumberInt [(ngModel)]="item.displayIndex" name="displayIndex"
+                                            [disabled]="model.approvalStatus===2">
+                                    </div>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" placeholder="Nội dung đáp án..."
+                                            (keyup)="validate()" [(ngModel)]="item.answerContent"
+                                            [ngModelOptions]="{standalone: true}"
+                                            [disabled]="model.approvalStatus===2" />
+                                        <div class="input-group-append">
+                                            <button class="btn btn-danger" (click)="removeElemt(i)"
+                                                [disabled]="model.approvalStatus===2">
+                                                <i class="fa fa-times"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" *ngIf="model.type==4">
+                            <div class="col-md-12 col-lg-12 col-sm-12 col-xl-12">
+                                <label class="label form-label">
+                                    Thứ tự điền vào chỗ trống
+                                </label>
+                            </div>
+                            <div class="col-md-3 col-lg-3 col-sm-3 col-xl-3"
+                                *ngFor="let item of model.listAnswer; let i=index;">
+                                <div class="form-group">
+                                    <div class="form-check form-check-inline">
+                                        <label class="form-check-label">{{item.answerLabel}}</label>
+                                    </div>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" placeholder="Nội dung đáp án..."
+                                            (keyup)="validate()" [(ngModel)]="item.answerContent"
+                                            [ngModelOptions]="{standalone: true}"
+                                            [disabled]="model.approvalStatus===2" />
+                                        <div class="input-group-append">
+                                            <button class="btn btn-danger" (click)="removeElemt(i)"
+                                                [disabled]="model.approvalStatus===2">
+                                                <i class="fa fa-times"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" *ngIf="model.type==3">
+                            <div class="col-md-12 col-lg-12 col-sm-12 col-xl-12">
+                                <div class="form-group">
+                                    <label class="form-label">Đáp án
+                                        <span class='text-danger text-strong'>&nbsp;*</span>
+                                    </label>
+                                    <div class="col-md-3 col-lg-3 col-sm-3 col-xl-3"
+                                        *ngFor="let item of model.listAnswer; let i=index;">
+                                        <div class="form-group">
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="radio" required
+                                                    [checked]="item.isCorrect" (click)="changeStatus(item)"
+                                                    [disabled]="model.approvalStatus===2" />
+                                                <label class="form-check-label">{{item.answerLabel}}</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" *ngIf="model.type==2">
+                            <div class="col-md-12 col-lg-12 col-sm-12 col-xl-12">
+                                <label class="label form-label">
+                                    Chọn đáp án đúng
+                                </label>
+                            </div>
+                            <div class="col-md-3 col-lg-3 col-sm-3 col-xl-3"
+                                *ngFor="let item of model.listAnswer; let i=index;">
+                                <div class="form-group">
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="checkbox" name="checkbox" required
+                                            [checked]="item.isCorrect" (click)="changeStatus(item)"
+                                            [disabled]="model.approvalStatus===2">
+                                        <label class="form-check-label">{{item.answerLabel}}</label>
+                                    </div>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" [(ngModel)]="item.answerContent"
+                                            (keyup)="validate()" [ngModelOptions]="{standalone: true}"
+                                            placeholder="Nội dung đáp án..." />
+                                        <div class="input-group-append">
+                                            <button class="btn btn-danger" (click)="removeElemt(i)"
+                                                [disabled]="model.approvalStatus===2">
+                                                <i class="fa fa-times"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" *ngIf="model.type==1">
+                            <div class="col-md-12 col-lg-12 col-sm-12 col-xl-12">
+                                <label class="label form-label">
+                                    Chọn đáp án đúng
+                                </label>
+                            </div>
+                            <div class="col-md-3 col-lg-3 col-sm-3 col-xl-3"
+                                *ngFor="let item of model.listAnswer; let i=index;">
+                                <div class="form-group">
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="radio" required
+                                            [checked]="item.isCorrect" (click)="changeStatus(item)"
+                                            [disabled]="model.approvalStatus===2" />
+                                        <label class="form-check-label">{{item.answerLabel}}</label>
+                                    </div>
+                                    <div class=" input-group">
+                                        <input type="text" class="form-control" [(ngModel)]="item.answerContent"
+                                            (keyup)="validate()" [ngModelOptions]="{standalone: true}"
+                                            placeholder="Nội dung đáp án..." [disabled]="model.approvalStatus===2">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-danger" (click)="removeElemt(i)"
+                                                [disabled]="model.approvalStatus===2">
+                                                <i class="fa fa-times"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 col-lg-12 col-sm-12 col-xl-12">
+                        <ng-container
+                            *ngIf="model.approvalStatus === 0 || model.approvalStatus === 3 || model.approvalStatus === 4">
+                            <button *appUipermission="['F000406']" type="button" class="btn btn-info"
+                                (click)="requestQuestion()">
+                                <i class="fas fa-share"></i>&nbsp;
+                                <span>Yêu cầu duyệt</span>
+                            </button>
+                        </ng-container>
+                        <ng-container *ngIf="model.approvalStatus===1">
+                            <button *appUipermission="['F000407']" type="button" class="btn btn-success"
+                                (click)="approvalQuestion()">
+                                <i class="fas fa-check"></i>&nbsp;
+                                <span>Duyệt</span>
+                            </button>
+                        </ng-container>
+                        <ng-container *ngIf="model.approvalStatus===1">
+                            <button *appUipermission="['F000407']" type="button" class="btn btn-danger"
+                                (click)="notApprovalQuestion()">
+                                <i class="fas fa-exclamation"></i>&nbsp;
+                                <span>Không duyệt</span>
+                            </button>
+                        </ng-container>
+                        <ng-container *ngIf="model.approvalStatus===2">
+                            <button *appUipermission="['F000407']" type="button" class="btn btn-danger"
+                                (click)="canceQuestion()">
+                                <i class="fas fa-ban"></i>&nbsp;
+                                <span>Hủy duyệt</span>
+                            </button>
+                        </ng-container>
+                        <button type="button" class="btn btn-success"
+                            [disabled]="!f.form.valid || isDisable||isValidateCheckbox ||isValidateTopic"
+                            (click)="save(false)" [hidden]="model.approvalStatus===2">
+                            <i class="fa fa-save"></i>&nbsp;
+                            <span>Lưu</span>
+                        </button>
+                        <button type="button" class="btn btn-info no-animate"
+                            [disabled]="!f.form.valid  || isDisable||isValidateCheckbox||isValidateTopic"
+                            (click)="save(true)" [hidden]="model.id">
+                            <i class="fa fa-save"></i>&nbsp;
+                            <span>Lưu & tiếp tục</span>
+                        </button>
+                        <button type="button" class="btn btn-danger" (click)="back()">
+                            <i class="fa fa-arrow-left"></i> &nbsp;
+                            <span> Trở về</span>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+</div>

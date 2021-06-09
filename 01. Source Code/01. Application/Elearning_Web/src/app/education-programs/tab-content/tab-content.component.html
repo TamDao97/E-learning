@@ -1,0 +1,60 @@
+<div class="row">
+    <div class="col-md-6 text-left">
+        <label class="form-label" style="line-height:35px;">Tổng số
+            <span class="bold text-danger font-weight-bold">{{listData.length}}</span> bài giảng</label>
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text-right">
+        <ng-container *ngIf="status!==2">
+            <button class="btn btn-success btn-upload" (click)="selectLesson()">
+                <i class="fas fa-plus"> &nbsp;</i>Chọn bài giảng
+            </button>
+        </ng-container>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <perfect-scrollbar [config]="constant.ScrollXConfig" style="height:auto; width:100%;">
+            <table class="table table-bordered table-fixed" style="min-width:700px">
+                <thead>
+                    <tr>
+                        <th width="50px" class="text-center">STT</th>
+                        <th width="100px" class="text-center">Xử lý</th>
+                        <th width="200px" class="text-center">Danh mục</th>
+                        <th min-width="200px" class="text-center">Tên bài giảng</th>
+                        <th width="150px" class="text-center">Loại bài giảng</th>
+                    </tr>
+                </thead>
+                <tbody cdkDropList [cdkDropListData]="listData" class="example-list"
+                    (cdkDropListDropped)="drop($event)">
+                    <tr class="example-box" *ngFor="let row of listData; let i = index" cdkDrag>
+                        <td class="text-center">{{i+1}}</td>
+                        <td class="text-center">
+                            <ng-container>
+                                <button type="button" (click)="showConfirmDelete(row)" class="btn  btn-xs btn-danger"
+                                    ngbTooltip="Xóa" container="body" [disabled]="status==2">
+                                    <span class="fas fa-trash-alt" aria-hidden="true"></span>
+                                </button>
+                            </ng-container>
+                        </td>
+                        <td [ngbTooltip]="row.categoryName" container="body">{{row.categoryName|limitTo:45}}
+                        </td>
+                        <td>{{row.name}}</td>
+                        <td>
+                            <nts-status [value]="row.type" [items]="constant.LessonType">
+                            </nts-status>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </perfect-scrollbar>
+    </div>
+</div>
+<hr />
+<div class="row">
+    <div class="col-md-12">
+        <button class="btn btn-view btn-warning">
+            <i class="fa fa-exclamation"></i>
+        </button>&nbsp;
+        <small class="padding-right-20">Giữ chuột vào bản ghi và kéo để di chuyển vị trí</small>
+    </div>
+</div>

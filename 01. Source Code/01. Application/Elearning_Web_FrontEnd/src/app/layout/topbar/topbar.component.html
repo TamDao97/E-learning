@@ -1,0 +1,85 @@
+<div class="bg-top navbar-light header">
+    <div class="container headerheight">
+        <div class="row d-block  no-gutters d-flex align-items-center align-items-stretch">
+            <div class="col-md-4 d-flex align-items-center">
+                <a class="navbar-brand" href="https://nhantinsoft.vn:9506/#/">
+                    <img class="img-fluid" [src]="config.ServerApi+model.logo">
+                </a>
+            </div>
+            <div class="col-md d-flex topper align-items-center align-items-stretch md-4 headerheight">
+                <div class="icon d-flex justify-content-center align-items-center"><span class="far fa-envelope"></span></div>
+                <div class="text" style="margin-top: 15px;">
+                    <span>Email</span>
+                    <span>{{model.gmail}}</span>
+                </div>
+            </div>
+            <div class="col-md d-flex topper align-items-center align-items-stretch md-4 headerheight">
+                <div class="icon d-flex justify-content-center align-items-center"><span class="fas fa-phone-alt"></span></div>
+                <div class="text" style="margin-top: 15px;">
+                    <span>Call</span>
+                    <span><a class="call" href="tel:{{model.phone}}">{{model.phone}}</a></span>
+                </div>
+            </div>
+            <div class="col-md topper d-flex align-items-center justify-content-end md-4 headerheight">
+                <div class='pull-right quickright headerheight' *ngIf="isLogin ==false">
+                    <ul class="info-menu right-links list-inline list-unstyled headerheight">
+                        <li class="profile tab list-inline-item" placement="bottom-right" ngbDropdown>
+                            <a href="javascript:;" class="dropdown-toggle toggle" ngbDropdownToggle>
+                                <p class="ng-star-inserted"><a href="javascript:;" (click)="showPopUpLoginEmail()" style="margin-top: 13px !important;border-radius: 0.25rem;" class="btn py-2 px-3 btn-primary d-flex align-items-center justify-content-center">Đăng
+                                        nhập</a></p>
+                                <span class="profile-status available"></span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class='pull-right quickright' *ngIf="isLogin==true">
+                    <ul class="info-menu right-links list-inline list-unstyled">
+                        <li class="profile tab list-inline-item" placement="bottom-right" ngbDropdown>
+                            <a href="javascript:;" class="dropdown-toggle toggle" ngbDropdownToggle>
+                                <img style="height: 50px; width: 50px; margin-top: 10px !important;" [src]="modelUser.avatar" alt="user-image" class="rounded-circle img-inline">
+                                <span class="profile-status available"></span>
+                            </a>
+                            <ul class="profile-menu" style="margin-top: 25px;" ngbDropdownMenu>
+                                <li class="dropdown-item" (click)="showUpdateUser(modelUser.id)">
+                                    <a href="javascript:;">
+                                        <i class="material-icons notranslate">person</i> {{modelUser?modelUser.name:''}}
+                                    </a>
+                                </li>
+
+                                <li class="dropdown-item" [routerLink]="['/my-course']">
+                                    <a href="javascript:;" >
+                                        <i class="material-icons notranslate">book</i> Khóa học của tôi
+                                    </a>
+                                </li>
+
+                                <li class="dropdown-item" *ngIf="modelUser.provider == 'Email'" (click)="showFromResetPassword()">
+                                    <a href="javascript:;">
+                                        <i class="material-icons notranslate">lock</i> Đổi mật khẩu
+                                    </a>
+                                </li>
+
+                                <li class="dropdown-item" (click)="signOut()">
+                                    <a href="javascript:;">
+                                        <i class="material-icons notranslate">exit_to_app</i> Đăng xuất
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- <div class="col-lg-8 d-block headerheight">
+                <div class="row d-flex headerheight">
+
+                </div>
+            </div> -->
+        </div>
+    </div>
+</div>
+
+<style>
+    .dropdown-toggle::after {
+        content: initial;
+    }
+</style>

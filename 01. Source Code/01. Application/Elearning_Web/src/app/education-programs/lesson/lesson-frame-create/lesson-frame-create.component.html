@@ -1,0 +1,209 @@
+<div class="modal-header">
+    <h4 class="modal-title text-uppercase" style="line-height: 20px;">{{modalInfo.Title}}</h4>
+    <a href="javascript:;" style="outline: none; color: white" (click)="closeModal()">
+        <i class="fa fa-close"></i>
+    </a>
+</div>
+<form name="form" #f="ngForm" novalidate>
+    <div class="modal-body">
+        <div class="row">
+            <ng-container *ngIf="lessonFrameModel.type==1 || lessonFrameModel.type==2">
+                <div class="col-xl-6 col-md-6 col-lg-6 col-sm-12">
+                    <div class="form-group ">
+                        <label class="form-label">Tên bài giảng chi tiết
+                            <span class='text-danger text-strong'>&nbsp;*</span>
+                        </label>
+                        <input type="text" class="form-control" name="name" [(ngModel)]="lessonFrameModel.name"
+                            maxlength="300" required>
+                    </div>
+                </div>
+                <ng-container *ngIf="lessonFrameModel.type==1">
+                    <div class="col-xl-6 col-md-6 col-lg-6 col-sm-12">
+                        <div class="form-group ">
+                            <label class="form-label">Thời lượng ước tính</label>
+                            <input type="text" matInput mask="m0:s0" class="form-control" name="estimatedTime"
+                                [(ngModel)]="lessonFrameModel.estimatedTime" maxlength="10">
+                        </div>
+                    </div>
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                        <div class="form-group ">
+                            <label class="form-label">Nội dung
+                            </label>
+                            <div class="controls">
+                                <nts-app-tinymce name="contentLF" [config]="discoveryConfig"
+                                    [(ngModel)]="lessonFrameModel.content">
+                                </nts-app-tinymce>
+                            </div>
+                        </div>
+                    </div>
+                </ng-container>
+                <ng-container *ngIf="lessonFrameModel.type==2">
+                    <div class="col-xl-6 col-md-6 col-lg-6 col-sm-12">
+                        <div class="form-group ">
+                            <label class="form-label">Thời gian làm bài (phút)</label>
+                            <input type="text" ntsNumberInt class="form-control" name="testTime"
+                                [(ngModel)]="lessonFrameModel.testTime" maxlength="10">
+                        </div>
+                    </div>
+                    <div class="col-xl-6 col-md-6 col-lg-6 col-sm-12">
+                        <div class="form-group ">
+                            <label class="form-label">Số câu trả lời cần đạt</label>
+                            <input type="text" ntsNumberInt class="form-control" name="totalRequestCorrect"
+                                [(ngModel)]="lessonFrameModel.totalRequestCorrect" maxlength="10">
+                        </div>
+                    </div>
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                        <div class="row">
+                            <div class="col-md-6 text-left">
+                                <label class="form-label" style="line-height:35px;">Tổng số
+                                    <span class="bold text-danger">{{lessonFrameModel.listQuestion.length}}</span>
+                                    câu hỏi</label>
+                            </div>
+                            <div class="col-md-6 text-right">
+                                <button type="button" class="btn btn-success" (click)="showChooseQuestion()"
+                                    container="body">
+                                    <i class="fa fa-plus"></i>
+                                    Tự chọn
+                                </button>
+                                <button type="button" class="btn btn-success" (click)="showChooseQuestionRandom()"
+                                    container="body">
+                                    <i class="fas fa-random"></i>
+                                    Ngẫu nhiên
+                                </button>
+                            </div>
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                                <perfect-scrollbar [config]="constant.ScrollXConfig" style="height:auto; width:100%;">
+                                    <table class="table table-bordered table-hover" style="min-width:950px">
+                                        <thead>
+                                            <tr>
+                                                <th width="50px" class="text-center">STT</th>
+                                                <th width="100px" class="text-center">Xử lý</th>
+                                                <th width="200px" class="text-center">Chủ đề
+                                                </th>
+                                                <th width="200px" class="text-center">Loại câu
+                                                    hỏi</th>
+                                                <th min-width="200px" class="text-center">Nội
+                                                    dung câu hỏi</th>
+                                                <th width="200px" class="text-center">Chi tiết
+                                                    câu hỏi</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let row of lessonFrameModel.listQuestion; let i = index">
+                                                <td class="text-center">{{i+1}}</td>
+                                                <td class="text-center">
+                                                    <button class="btn btn-danger btn-xs" container="body"
+                                                        (click)="showConfirmDeleteLessonFrameQuestion(i)"
+                                                        ngbTooltip="Xóa">
+                                                        <span class="fas fa-trash-alt" aria-hidden="true"></span>
+                                                    </button>
+                                                </td>
+                                                <td>{{row.topicName}}</td>
+                                                <td>
+                                                    <nts-status [value]="row.type" [items]="constant.QuestionType">
+                                                    </nts-status>
+                                                </td>
+                                                <td>
+                                                    <p class="text-line" [innerHTML]="row.content | safeHtml">
+                                                    </p>
+                                                </td>
+                                                <td class="text-center">
+                                                    <button class="btn btn-warning btn-xs" container="body"
+                                                        (click)="showQuestion(row.id)" ngbTooltip="Xem nội dung">
+                                                        <span class="fas fa-eye" aria-hidden="true"></span>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </perfect-scrollbar>
+                            </div>
+                        </div>
+                    </div>
+                </ng-container>
+            </ng-container>
+            <ng-container *ngIf="lessonFrameModel.type==3">
+                <div class="col-xl-6 col-md-6 col-lg-6 col-sm-12">
+                    <div class="row">
+                        <div class="col-xl-12 col-md-12 col-lg-12 col-sm-12">
+                            <div class="form-group ">
+                                <label class="form-label">Tiêu đề
+                                    <span class='text-danger text-strong'>&nbsp;*</span>
+                                </label>
+                                <input type="text" class="form-control" name="name" [(ngModel)]="lessonFrameModel.name"
+                                    maxlength="300" required>
+                            </div>
+                        </div>
+                        <div class="col-xl-12 col-md-12 col-lg-12 col-sm-12">
+                            <div class="form-group ">
+                                <label class="form-label">Thời lượng ước tính</label>
+                                <input type="text" matInput mask="00:00" class="form-control" name="estimatedTime"
+                                    [(ngModel)]="lessonFrameModel.estimatedTime" maxlength="10">
+                            </div>
+                        </div>
+                        <div class="col-xl-12 col-md-12 col-lg-12 col-sm-12">
+                            <div class="form-group ">
+                                <label class="form-label">Link video
+                                </label>
+                                <div class="input-group">
+                                    <input id="txtSelectedFile" #fondovalor type="text" class="form-control" name="contentVideo"
+                                        [(ngModel)]="lessonFrameModel.content" maxlength="300"
+                                        (ngModelChange)="linkVideo(lessonFrameModel.content)">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-success" (click)="RoxyFileBrowser()">
+                                            <i class="fas fa-search"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-6 col-md-6 col-lg-6 col-sm-12">
+                    <div class="row">
+                        <div class="col-xl-12 col-md-12 col-lg-12 col-sm-12">
+                            <!-- <p>
+                                <video controls="controls" style="max-width: 100%;width: 100%;">
+                                    <source [src]="link" type="video/mp4">
+                                </video>
+                            </p> -->
+                            <ng-container *ngIf="link && lessonFrameModel.content">
+                                <iframe id="txtSelectedFile" width="100%" height="400px" [src]="link"
+                                    title="YouTube video player" frameborder="0"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                    allowfullscreen>
+                                </iframe>
+                            </ng-container>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12" hidden="true">
+                    <div class="form-group ">
+                        <label class="form-label">Nội dung
+                        </label>
+                        <div class="controls">
+                            <nts-app-tinymce id="videos" name="contentS" [config]="discoveryConfig"
+                                [(ngModel)]="linkServer" (ngModelChange)="changeLink()">
+                            </nts-app-tinymce>
+                        </div>
+                    </div>
+                </div>
+            </ng-container>
+        </div>
+    </div>
+    <!-- Footer -->
+    <div class="modal-footer">
+        <ng-container>
+            <button type="button" class="btn btn-success" [disabled]="!f.form.valid" (click)="save()">
+                <i class="fa fa-save"></i>&nbsp;
+                <span>Lưu</span>
+            </button>
+        </ng-container>
+        <button type="button" class="btn btn-danger" (click)="closeModal()">
+            <i class="fa fa-power-off"></i> &nbsp;
+            <span>
+                Đóng
+            </span>
+        </button>
+    </div>
+</form>

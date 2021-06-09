@@ -1,0 +1,191 @@
+<div class="content-wrapper">
+    <section class="box">
+        <div class="content-body">
+            <form>
+                <div class="row">
+                    <div class="col-xl-8 col-lg-8 col-md-8">
+                        <nts-search-bar [(options)]="searchOptions" [(ngModel)]="model" name="model" (change)="searchComment()">
+                        </nts-search-bar>
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-4 text-right">
+                        <button class="btn btn-success" (click)="searchComment()">
+                            <i class="fa fa-search"></i> &nbsp;Tìm kiếm</button>
+                        <button class="btn btn-secondary" (click)="clear()">
+                            <i class="fas fa-redo-alt"></i> &nbsp;Làm mới</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="content-body">
+            <div class="row margin-bottom-10">
+                <div class="col-md-6 text-left">
+                    <label class="form-label" style="line-height:35px;">Tổng số
+                        <span class="bold text-danger">{{model.TotalItems}}</span> bình luận</label>&nbsp;|
+                    <!-- <a *ngIf="model.Status != null" href="javascript:void(0)" name="selectAllPage"
+                        [(ngModel)]="selectAllPage" (click)="selectAllPages()">
+                        Chọn tất cả </a> | -->
+                    <label class="form-label accton" style="line-height:35px;color:  #0073aa;"><a
+                            href="javascript:void(0)" [ngClass]="{'typeColor':model.Status==0}" (click)="search(0)">
+                            Chưa phê duyệt (
+                            <span class="bold text-danger">{{model.Pending}}</span> )</a></label>&nbsp;|
+
+                    <label class="form-label accton" style="line-height:35px;color:  #0073aa;"><a
+                            href="javascript:void(0)" [ngClass]="{'typeColor':model.Status==1}" (click)="search(1)">
+                            Phê duyệt (
+                            <span class="bold text-danger">{{model.Approved}}</span> )</a></label>&nbsp;|
+
+                    <label class="form-label accton" style="line-height:35px;color:  #0073aa;"><a
+                            href="javascript:void(0)" [ngClass]="{'typeColor':model.Status==2}" (click)="search(2)">
+                            Ẩn (
+                            <span class="bold text-danger">{{model.UnApproved}}</span> )</a></label>
+                </div>
+                <div class="col-md-6 text-right" *ngIf="model.Status==0||model.Status==1||model.Status==2">
+                    <button *appUipermission="['F000251']" type="button" class="btn btn-success" (click)="approvedComment()" container="body">
+                        <i class="fa fa-plus"></i>
+                        Phê duyệt
+                    </button>
+                    <button *appUipermission="['F000253']" type="button" class="btn btn-success" (click)="unapprovedComment()" container="body">
+                        <i class="fa fa-plus"></i>
+                        Ẩn
+                    </button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-lg-12">
+                    <perfect-scrollbar [config]="constant.ScrollXConfig" style="height:auto; width:100%;">
+                        <table class="table table-bordered table-hover" style="min-width:1050px">
+                            <thead>
+                                <tr>
+                                    <th class="text-center" width="50px" *ngIf="model.Status != null">
+                                        <input type="checkbox" [(ngModel)]="selectAll" name="selectAll" (change)="selectAlls()" style="height:20px; width:20px;">
+                                    </th>
+                                    <th width="50px" class="text-center">STT</th>
+                                    <th width="250px" class="text-center">Tài khoản</th>
+                                    <th min-width="400px" class="text-center">Bình luận</th>
+                                    <th width="300px" class="text-center">Khóa học, Bài giảng</th>
+                                    <!-- <th width="160px" class="text-center">Ngày bình luận</th> -->
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let row of listData; let i = index">
+                                    <td class="text-center" *ngIf="model.Status != null">
+                                        <input type="checkbox" [(ngModel)]="row.Checked" name="{{'Checked'+row.Name+i}}" style="height:20px; width:20px;" (change)="checkItems(row)">
+                                    </td>
+                                    <td class="text-center">{{startIndex+i}}</td>
+                                    <td>
+                                        <div class="row">
+                                            <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12 imag">
+                                                <img style="border-radius: 15px;" width="32px" height="32px" class="img-list" [src]="row.imagePath==null || row.imagePath=='' ? '/assets/img/noavatar.gif':config.ServerApi + row.imagePath">
+                                            </div>
+                                            <div class="col-xl-10 col-lg-10 col-md-10 col-sm-12 textbox">
+                                                <span style="word-wrap:break-word">{{row.acountName}}</span> <br>
+                                                <span style="word-wrap:break-word">{{row.email}}</span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="row">
+                                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                                                <span>{{row.content}}</span>&nbsp;
+                                                <span
+                                                    style="font-size: 12px;color: #9b9b9b;">{{row.commentDate|date:'dd/MM/yyyy
+                                                    HH:mm:ss'}}</span>
+                                            </div>
+                                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                                                <div class="row-actions">
+                                                    <ng-container *appUipermission="['F000251']">
+                                                        <span *ngIf="row.status == 0 || row.status == 2" (click)="approve(row.id)" class="accton mr-1">Phê
+                                                            duyệt |</span><span *ngIf="row.status == 0"> </span>
+                                                    </ng-container>
+                                                    <ng-container *appUipermission="['F000254']">
+                                                        <span *ngIf="row.status == 0 || row.status== 1" (click)="reply(row)" class="accton mr-1">Trả lời |</span>
+                                                    </ng-container>
+
+                                                    <ng-container *appUipermission="['F000253']">
+                                                        <span *ngIf="row.status== 0 || row.status == 1" (click)="unapprove(row.id)" class="accton mr-1">Ẩn |</span>
+                                                    </ng-container>
+                                                    <ng-container *appUipermission="['F000252']">
+                                                        <span (click)="showConfirmDelete(row.id)" class="accton mr-1">Xóa</span>
+                                                    </ng-container>
+                                                </div>
+                                            </div>
+                                            <ng-container *ngFor="let row1 of row.listReply; let j = index">
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12" style="margin-left: 10px;margin-top: 10px;">
+                                                    <ng-container *ngIf="row1.objectType==3||row1.objectType==1">
+                                                        <span>
+                                                            <img width="25px" height="25px" class="img-list"
+                                                                style="border-radius: 100px;"
+                                                                [src]="row1.imagePath==null || row1.imagePath=='' ? '/assets/img/noavatar.gif':row1.objectType==3||row1.objectType==1?config.ServerApi + row1.imagePath:row1.imagePath"
+                                                                [ngbTooltip]="row1.acountName">
+                                                        </span>&nbsp;
+                                                        <span>{{row1.content}}</span>&nbsp;
+                                                        <span
+                                                            style="font-size: 12px;color: #9b9b9b;">{{row1.commentDate|date:'dd/MM/yyyy
+                                                            HH:mm:ss'}}</span>
+                                                        <div class="row-actions">
+                                                            <span *appUipermission="['F000255']" (click)="showCreateUpdate(row1.id)" class="accton mr-1">Chỉnh
+                                                                sửa</span>|
+                                                            <span *appUipermission="['F000252']" (click)="showConfirmDelete(row1.id)" class="accton mr-1">Xóa</span>
+                                                        </div>
+                                                    </ng-container>
+                                                    <ng-container *ngIf="row1.objectType==4">
+                                                        <span>
+                                                            <img width="25px" height="25px" class="img-list"
+                                                                style="border-radius: 100px;"
+                                                                [src]="row1.imagePath==null || row1.imagePath=='' ? '/assets/img/noavatar.gif':config.ServerApi + row1.imagePath"
+                                                                [ngbTooltip]="row1.acountName">
+                                                        </span>&nbsp;
+                                                        <span>{{row1.content}}</span>&nbsp;
+                                                        <span
+                                                            style="font-size: 12px;color: #9b9b9b;">{{row1.commentDate|date:'dd/MM/yyyy HH:mm:ss'}}</span>
+                                                        <div class="row-actions">
+                                                            <ng-container *appUipermission="['F000251']">
+                                                                <span *ngIf="row1.status == 0 || row1.status == 2" (click)="approve(row1.id)" class="accton mr-1">Phê
+                                                                    duyệt |</span><span *ngIf="row.status == 0"> </span>
+                                                            </ng-container>
+                                                            <!-- <ng-container *appUipermission="['F000254']">
+                                                                <span *ngIf="row.status == 0 || row.status== 1" (click)="reply(row)" class="accton mr-1">Trả lời
+                                                                    |</span>
+                                                            </ng-container> -->
+
+                                                            <ng-container *appUipermission="['F000253']">
+                                                                <span *ngIf="row1.status == 0 || row1.status == 1" (click)="unapprove(row1.id)" class="accton mr-1">Ẩn
+                                                                    |</span>
+                                                            </ng-container>
+                                                            <ng-container *appUipermission="['F000252']">
+                                                                <span (click)="showConfirmDelete(row1.id)" class="accton mr-1">Xóa</span>
+                                                            </ng-container>
+                                                        </div>
+                                                    </ng-container>
+                                                    <br>
+                                                </div>
+                                            </ng-container>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span>{{row.categoryName}}
+                                        </span>/ <span>{{row.lessonName}}</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </perfect-scrollbar>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-12 d-flex justify-content-start">
+                    <div class="controls ">
+                        <select class="form-control" style="border: 1px solid #ddd;" [(ngModel)]="model.PageSize" (ngModelChange)="searchComment()" name="pageSize">
+                            <option *ngFor="let item of constant.ListPageSize" [value]="item">{{item}}</option>
+                        </select>
+                    </div>
+                    <label class="form-label " style="padding: 4px;">bản ghi/Trang</label>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12  d-flex justify-content-end">
+                    <ngb-pagination [collectionSize]="totalItem" [(page)]="model.PageNumber" (pageChange)="searchComment()" [pageSize]="model.PageSize" [maxSize]="5" [rotate]="true" [boundaryLinks]="true"></ngb-pagination>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

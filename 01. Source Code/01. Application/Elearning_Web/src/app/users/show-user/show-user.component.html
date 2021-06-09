@@ -1,0 +1,276 @@
+<div class="content-wrapper">
+    <div class="content-body">
+        <div class="row mt-3">
+            <div class="col-md-3 col-lg-3 col-sm-12 col-xl-3">
+                <img class="img-thumbnail" [src]="filedata?filedata:'/assets/img/noavatar.gif'">
+            </div>
+
+            <div class="col-md-9 col-lg-9 col-sm-12 col-xl-9">
+                <div class="row">
+
+                    <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+                        <div class="form-group ">
+                            <label class="form-label">Họ và tên
+                                <span class='text-danger text-strong'>&nbsp;*</span>
+                            </label>
+                            <div class="controls">
+                                <input readonly type="text" class="form-control" name="Name" [(ngModel)]="model.name"
+                                    maxlength="100" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+                        <div class="form-group ">
+                            <label class="form-label">Ngày sinh
+                                <span class='text-danger text-strong'>&nbsp;</span>
+                            </label>
+                            <div class="input-group">
+                                <input readonly class="form-control" placeholder="dd/mm/yyyy" name="DateOfBirth"
+                                    [(ngModel)]="dateOfBirth" ngbDatepicker #DateOfBirth="ngbDatepicker">
+                                <div class="input-group-append">
+                                    <span readonly class="input-group-text pointer"
+                                        (click)="DateOfBirth.toggle(); $event.stopPropagation();" name="DateOfBirth">
+                                        <i class="far fa-calendar-alt" style="color: #999;"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 radio">
+                        <div class="form-group ">
+                            <label class="form-label">Giới tính
+                                <span class='text-danger text-strong'>&nbsp;*</span>
+                            </label>
+                            <div class="controls">
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input disabled type="radio" id="customRadioInline1" [(ngModel)]="model.gender"
+                                        required name="gender" [value]='false' class="custom-control-input">
+                                    <label class="custom-control-label" for="customRadioInline1">Nam</label>
+                                </div>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input disabled type="radio" id="customRadioInline2" [(ngModel)]="model.gender"
+                                        required name="gender" [value]='true' class="custom-control-input">
+                                    <label class="custom-control-label" for="customRadioInline2">Nữ</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+                        <div class="form-group ">
+                            <label class="form-label">Địa chỉ
+                                <span class='text-danger text-strong'></span>
+                            </label>
+                            <div class="controls">
+                                <input disabled type="text" class="form-control" name="Address"
+                                    [(ngModel)]="model.address" maxlength="500">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+                        <div class="form-group ">
+                            <label class="form-label">Email
+                                <span class='text-danger text-strong'>&nbsp; *</span>
+                            </label>
+                            <div class="controls">
+                                <input disabled placeholder="name@example.com" required type="email"
+                                    class="form-control" [(ngModel)]="model.email" name="email" maxlength="300">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+                        <div class="form-group ">
+                            <label class="form-label">Số điện thoại
+                                <span class='text-danger text-strong'></span>
+                            </label>
+                            <div class="controls">
+                                <input type="text" disabled class="form-control" name="PhoneNumber"
+                                    [(ngModel)]="model.phoneNumber" maxlength="50" ntsNumberInt>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+                        <div class="form-group ">
+                            <label class="form-label">Nơi làm việc
+                                <span class='text-danger text-strong'></span>
+                            </label>
+                            <div class="controls">
+                                <input disabled type="text" class="form-control" readonly name="workUnit"
+                                    [(ngModel)]="model.workUnit">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+                        <div class="form-group ">
+                            <label class="form-label">Mô tả
+                                <span class='text-danger text-strong'></span>
+                            </label>
+                            <div class="controls">
+                                <textarea disabled type="text" readonly class="form-control" name="Description"
+                                    [(ngModel)]="model.description"> </textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-3">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                <div class="form-group ">
+                    <label class="form-label">Tên tài khoản
+                        <span class='text-danger text-strong'>&nbsp;*</span>
+                    </label>
+                    <div class="controls">
+                        <input type="text" class="form-control"
+                            name="UserName" [(ngModel)]="model.userName" maxlength="100" required disabled>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 radio">
+                <div class="form-group ">
+                    <label class="form-label">Kích hoạt tài khoản
+                        <span class='text-danger text-strong'>&nbsp;*</span>
+                    </label>
+                    <div class="controls">
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input disabled type="radio" id="isDisable1" [(ngModel)]="model.isDisable" required
+                                name="IsLock" [value]='false' class="custom-control-input">
+                            <label class="custom-control-label" for="isDisable1">Kích hoạt</label>
+                        </div>
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input disabled type="radio" id="isDisable2" [(ngModel)]="model.isDisable" required
+                                name="IsLock" [value]='true' class="custom-control-input">
+                            <label class="custom-control-label" for="isDisable2">Không kích hoạt</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6" #scrollPracticeMaterial>
+                <div class="row">
+                    <div class="col-md-12" style="padding-bottom: 5px">
+                        <h4>Danh sách nhóm chức năng</h4>
+                        <label class="form-label" style="line-height:35px;">Tổng số
+                            <span class="bold text-danger">{{groupFunctions.length}}</span> nhóm chức năng</label>
+                    </div>
+
+                    <div class="col-md-12" #scrollPracticeMaterialHeader
+                        style="padding-bottom: 5px; overflow-x: auto;overflow: hidden;">
+                        <table class="table table-bordered table-fixed mb-0"
+                            style="margin-bottom:0px !important; min-width: 350px;">
+                            <thead>
+                                <tr>
+                                    <th width="50px" class="text-center">STT</th>
+                                    <th width="50px" class="text-center">Chọn</th>
+                                    <th min-width="100px">Tên nhóm chức năng</th>
+                                    <th width="150px">Quyền/Tổng quyền</th>
+                                </tr>
+                            </thead>
+                        </table>
+                        <perfect-scrollbar [config]="constant.ScrollConfig" [style.height.px]="height">
+                            <table class="table table-bordered table-fixed table-hover" style="min-width: 350px;">
+                                <colgroup>
+                                    <col width="50px">
+                                    <col width="50px">
+                                    <col min-width="100px">
+                                    <col width="150px">
+                                </colgroup>
+                                <tbody>
+                                    <tr *ngFor="let row of groupFunctions; let i = index"
+                                        [ngClass]="{'selected':groupSelectIndex == i}" (click)="selectGroupFunction(row,i)">
+                                        <td class="text-center" width="50px"> {{i+1}}</td>
+                                        <td class="text-center" width="50px">
+                                            <div class="custom-control custom-checkbox">
+                                                <input disabled class="text-center" [(ngModel)]="row.isChecked" type="checkbox"
+                                                    class="custom-control-input" [id]="'b'+i" [name]="'b'+i"
+                                                    [indeterminate]="row.isIndeterminate">
+                                                <label class="custom-control-label" [for]="'b'+i"></label>
+                                            </div>
+                                        </td>
+                                        <td min-width="100px">{{row.name}}</td>
+                                        <td width="150px">{{row.checkCount}}/{{row.permissionTotal}}
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </perfect-scrollbar>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 padding-left-0" #scrollPracticeMaterial>
+                <div class="row">
+                    <div class="col-md-12" style="padding-bottom: 5px">
+                        <h4> Danh sách quyền</h4>
+                        <label class="form-label" style="line-height:35px;">Tổng số
+                            <span class="bold text-danger">{{listFunctions}}</span> quyền</label>
+                    </div>
+                    <div class="col-md-12" #scrollPracticeMaterialHeader
+                        style="padding-bottom: 5px; overflow-x: auto;overflow: hidden;">
+                        <table class="table table-bordered table-fixed"
+                            style="margin-bottom:0px !important; min-width: 150px;">
+                            <thead>
+                                <tr>
+                                    <th width="50px" class="text-center">
+                                        <div class="custom-control custom-checkbox">
+                                            <input disabled class="text-center" [disabled]="groupSelectIndex==-1"
+                                                [(ngModel)]="isSelectAll" type="checkbox" class="custom-control-input"
+                                                id="checkAll" name="checkAll">
+                                            <label class="custom-control-label" for="checkAll"></label>
+                                        </div>
+                                    </th>
+                                    <th min-width="100px" class="center">Tên quyền</th>
+                                </tr>
+                            </thead>
+                        </table>
+                        <perfect-scrollbar [config]="constant.ScrollConfig" [style.height.px]="height">
+                            <table class="table table-bordered table-fixed" style="min-width:150px">
+                                <colgroup>
+                                    <col width="50px">
+                                    <col min-width="100px">
+                                </colgroup>
+                                <tbody>
+                                    <ng-container *ngIf="groupSelectIndex!=-1">
+                                        <tr
+                                            *ngFor="let row of groupFunctions[groupSelectIndex].permissions; let i= index">
+                                            <td width="50px" class="text-center">
+                                                <div class="custom-control custom-checkbox">
+                                                    <input disabled class="text-center" [(ngModel)]="row.isChecked"
+                                                        type="checkbox" class="custom-control-input" [id]="'a'+i"
+                                                        [name]="'a'+i">
+                                                    <label class="custom-control-label" [for]="'a'+i"></label>
+                                                </div>
+                                            </td>
+                                            <td min-width="100px">
+                                                <a><span>{{row.name}}</span></a>
+                                            </td>
+                                        </tr>
+                                    </ng-container>
+                                </tbody>
+                            </table>
+                        </perfect-scrollbar>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="content-body">
+        <div class="content-body  padding-15 text-right">
+            <button type="button" class="btn btn-danger" (click)="closeModal(false)">
+                <i class="fa fa-power-off"></i> &nbsp;
+                <span>
+                    Đóng
+                </span>
+            </button>
+        </div>
+    </div>
+</div>

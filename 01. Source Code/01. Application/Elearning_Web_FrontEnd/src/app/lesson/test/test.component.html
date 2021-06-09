@@ -1,0 +1,186 @@
+<section class="ftco-section ftco-counter img" id="section-counter" style="background-image: url({{config.ServerApi+model.imagePath}});
+     background-position: 100% 10px;padding: 60px 0px 0px 0px;" data-stellar-background-ratio="0.5">
+    <div class="container">
+        <div class="row justify-content-center mb-3 pb-2 d-flex">
+            <div class="col-md-12 col-xl-12 col-sm-12 col-lg-12 ">
+                <h1 class="mb-4 text-white">{{model.name}}</h1>
+                <p class="text-white">{{model.description}}</p>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="ftco-section">
+    <div class="container px-4">
+        <div class="row">
+            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                <div class="row">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                        <label class="font-weight-bold">Bài giảng lý thuyết:</label>&nbsp;<label>{{model.name}}</label>
+                    </div>
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                        <label class="font-weight-bold">Ngày làm
+                            bài:</label>&nbsp;<label>{{date|date:'dd/MM/yyyy'}}</label>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12">
+                <div class="row">
+                    <ng-container *ngIf="model.isExam">
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                            <label class="font-weight-bold">Thời gian làm bài (phút)</label>
+                        </div>
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                            <countdown class="countdownType" #cd [config]="{leftTime: model.examTime}"
+                                (event)="handleEvent($event)">
+                            </countdown>
+                        </div>
+                    </ng-container>
+                </div>
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12">
+                <div class="row" style="padding-left: 64px;">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                        <label class="font-weight-bold">Kết quả làm bài</label>
+                    </div>
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                        <div class="type">
+                            <span>{{totalCorrect}}/{{totalQuestion}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-9 col-lg-9 col-md-9 col-sm-12">
+                <!-- <ng-container *ngFor="let row of listData; let i = index"> -->
+                <div class="row">
+
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                        <div class="form-group">
+                            <section class="box" style="height: 400px;">
+                                <div [innerHTML]="listData[index].content"></div>
+                            </section>
+                        </div>
+                    </div>
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                        <div class="row">
+                            <ng-container *ngFor="let item of listData[index].listAnswer; let j = index">
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                                    <ng-container *ngIf="listData[index].type===1">
+                                        <!-- <div class="form-group">
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio"
+                                                    [name]="listData[index].content" [checked]="item.checked" />
+                                                <label
+                                                    class="form-check-label">{{item.answerLabel}}.&nbsp;{{item.answerContent}}</label>
+                                            </div>
+                                        </div> -->
+
+                                        <div class="form-group">
+                                            <div class="custom-control custom-radio custom-control-inline">
+                                                <input type="radio" class="custom-control-input"
+                                                    [id]="j+listData[index].content" [name]="listData[index].content"
+                                                    [(ngModel)]="item.checked" [value]="'true'+j" [disabled]="isTest">
+                                                <label class="custom-control-label"
+                                                    [for]="j+listData[index].content">{{item.answerLabel}}.&nbsp;{{item.answerContent}}</label>
+                                            </div>
+                                        </div>
+                                    </ng-container>
+                                    <ng-container *ngIf="listData[index].type===2">
+                                        <!-- <div class="form-group">
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="checkbox" [name]="'checkboxtest'+j"
+                                                    [checked]="item.checked">
+                                                <label
+                                                    class="form-check-label">{{item.answerLabel}}.&nbsp;{{item.answerContent}}</label>
+                                            </div>
+                                        </div> -->
+
+                                        <div class="form-group">
+                                            <div class="custom-control custtom-check custom-control-inline">
+                                                <input type="checkbox" class="form-check-input"
+                                                    [(ngModel)]="item.checked" [name]="'checkboxtest'+j"
+                                                    style="height:16px; width:16px;" [disabled]="isTest">
+
+                                                <label class="form-check-label"
+                                                    style="padding-left: 5px;">{{item.answerLabel}}.&nbsp;{{item.answerContent}}</label>
+                                            </div>
+                                        </div>
+                                    </ng-container>
+                                    <ng-container *ngIf="listData[index].type===3">
+                                        <div class="form-group">
+                                            <div class="custom-control custom-radio custom-control-inline">
+                                                <input type="radio" class="custom-control-input"
+                                                    [id]="'defaultInline1'+j" [name]="listData[index].content"
+                                                    [(ngModel)]="item.checked" [value]="'true'+j" [disabled]="isTest">
+                                                <label class="custom-control-label"
+                                                    [for]="'defaultInline1'+j">Đúng</label>
+                                            </div>
+                                            <div class="custom-control custom-radio custom-control-inline">
+                                                <input type="radio" class="custom-control-input"
+                                                    [id]="'defaultInline2'+j" [name]="listData[index].content"
+                                                    [(ngModel)]="item.checked" [value]="'false'+j" [disabled]="isTest">
+                                                <label class="custom-control-label"
+                                                    [for]="'defaultInline2'+j">Sai</label>
+                                            </div>
+                                        </div>
+                                    </ng-container>
+                                    <ng-container *ngIf="listData[index].type===4">
+                                        <div class="form-group">
+                                            <label class="form-label">{{item.answerLabel}}
+                                            </label>
+                                            <input type="text" class="form-control" [name]="listData[index].content+j"
+                                                [(ngModel)]="item.checked" [disabled]="isTest">
+                                        </div>
+                                    </ng-container>
+                                    <ng-container *ngIf="listData[index].type===5">
+                                        <div class="form-group">
+                                            <label class="form-label">{{item.answerLabel}}
+                                            </label>
+                                            <input type="text" class="form-control" [name]="listData[index].content+j"
+                                                [(ngModel)]="item.checked" [disabled]="isTest">
+                                        </div>
+                                    </ng-container>
+                                </div>
+                            </ng-container>
+                        </div>
+                    </div>
+                </div>
+                <!-- </ng-container> -->
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12">
+                <div class="row" style="padding-top: 15px;">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12" style="height: 400px;">
+                        <div class="row">
+                            <!-- <ng-container *ngFor="let row of listData; let i = index">
+                                <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 text-center">
+                                    <button type="button" class="btn btn-success" style="border-radius: 0px;"
+                                        [disabled]="isTest" [ngClass]="{'checkIndex':i==index}" (click)="clickIndex(i)"
+                                        container="body">
+                                        {{i+1}}
+                                    </button>
+                                </div>
+                            </ng-container> -->
+                            <ngb-pagination [collectionSize]="question.TotalItems" [(page)]="question.PageNumber"
+                                (pageChange)="getbyid()" [pageSize]="question.PageSize" [maxSize]="5" [rotate]="true"
+                                [boundaryLinks]="true"></ngb-pagination>
+                        </div>
+                    </div>
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
+                        <span class="icon"><a href="javascript:void(0)" (click)="back()">
+                                <i class="fas fa-chevron-left"></i></a>
+                        </span>&nbsp;
+                        <span class="icon"><a href="javascript:void(0)" (click)="next()">
+                                <i class="fas fa-chevron-right"></i></a>
+                        </span>
+                    </div>
+                    <div class="col-xl-5 col-lg-5 col-md-5 col-sm-5 col-md-5 text-right">
+                        <label style="padding-top: 27px;"></label>
+                        <button type="button" class="btn btn-success" (click)="done()" [disabled]="isTest"
+                            container="body">
+                            Nộp bài
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

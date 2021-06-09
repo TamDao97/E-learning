@@ -1,0 +1,66 @@
+app-program-details {
+    @media (max-width: 575px) {
+        .menu-header-detail {
+            max-width: 100%;
+            margin-top: 150px;
+        }
+        .wrapper {
+            margin: auto 20px;
+        }
+        img {
+            width: 300px !important;
+            height: auto;
+        }
+    }
+    @media (min-width: 576px) {
+        .menu-header-detail {
+            max-width: 100%;
+            margin-top: 150px;
+        }
+        .wrapper {
+            margin: auto 20px;
+        }
+    }
+    @media (min-width: 768px) {
+        .menu-header-detail {
+            max-width: 100%;
+            margin-top: 0px;
+        }
+        .wrapper {
+            margin: auto 208px;
+        }
+    }
+    @media (min-width: 992px) {
+        .menu-header-detail {
+            max-width: 100%;
+            margin-top: 0px;
+        }
+        .wrapper {
+            margin: auto 208px;
+        }
+    }
+    @media (min-width: 1200px) {
+        .menu-header-detail {
+            max-width: 100%;
+            margin-top: 0px;
+        }
+        .wrapper {
+            margin: auto 208px;
+        }
+    }
+    .dropdown:hover>.dropdown-menu {
+        display: block;
+    }
+    .course-title {
+        color: #fff;
+        background-color: #fd7e14;
+        border-radius: 5px 5px 0 0;
+        font-weight: 500;
+        font-size: 20px;
+        display: inline-block;
+        padding: 5px 15px;
+    }
+    .course-content {
+        border-top: 2px solid #fd7e14;
+    }
+}

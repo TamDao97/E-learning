@@ -1,0 +1,78 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <CodeAnalysisRuleSet />
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <CodeAnalysisRuleSet />
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NoWarn>$(NoWarn);1591</NoWarn>
+    <UserSecretsId>b34a6ad4-97dc-4590-a92d-7c7b193a1bef</UserSecretsId>
+    <AssemblyName>Elearning.Api</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Controllers\Client\**" />
+    <Content Remove="Controllers\Client\**" />
+    <EmbeddedResource Remove="Controllers\Client\**" />
+    <None Remove="Controllers\Client\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include=".config\dotnet-tools.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="9.0.0" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
+    <PackageReference Include="HTTPRequest" Version="0.5.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.1">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.1" />
+    <PackageReference Include="Microsoft.Graph" Version="3.21.0" />
+    <PackageReference Include="Microsoft.Graph.Auth" Version="1.0.0-preview.6" />
+    <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="6.6.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.4" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="Serilog.Extensions.Logging.File" Version="2.0.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.4.1" />
+    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="5.4.1" />
+    <PackageReference Include="Syncfusion.DocIO.Net.Core" Version="18.3.0.52" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.6.0" />
+    <PackageReference Include="Wangkanai.Detection" Version="3.0.0" />
+    <PackageReference Include="Wangkanai.Detection.Browser" Version="2.0.1" />
+    <PackageReference Include="Wangkanai.Detection.Device" Version="2.0.1" />
+    <PackageReference Include="Wangkanai.Detection.Engine" Version="2.0.1" />
+    <PackageReference Include="Wangkanai.Responsive" Version="2.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Elearning.Mobile.Service\Elearning.Mobile.Service.csproj" />
+    <ProjectReference Include="..\Elearning.Models\Elearning.Model.csproj" />
+    <ProjectReference Include="..\Elearning.Services\Elearning.Services.csproj" />
+    <ProjectReference Include="..\NTS.Common\NTS.Common.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Export\" />
+    <Folder Include="FileUpload\program\" />
+    <Folder Include="obj\" />
+    <Folder Include="Template\" />
+    <Folder Include="FileUpload\Template\" />
+    <Folder Include="Template\" />
+  </ItemGroup>
+
+
+</Project>

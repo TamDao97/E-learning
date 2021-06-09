@@ -1,0 +1,162 @@
+<div class="content-wrapper">
+    <section class="box box-head mb-0">
+        <div class="content-body">
+            <form>
+                <div class="row">
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12">
+                        <div class="form-group">
+                            <div class="title-search-left click-drop">
+                                <label class="form-label">Thời gian</label>
+                            </div>
+                            <div class="controls">
+                                <select class="form-control" (change)="reportLearner()" [(ngModel)]="model.TimeType" name="TimeType">
+                                    <option *ngFor="let timetype of constant.SearchTimeType1" [value]="timetype.Id">
+                                        {{timetype.Name}}</option>
+                                </select>
+
+                                <div class="row pt-1">
+                                    <div class="col-md-6 col-lg-6 col-sm-12" *ngIf="model.TimeType=='8'||model.TimeType=='9'">
+                                        <select class="form-control" (change)="reportLearner()" [(ngModel)]="model.Month" name="Month" *ngIf="model.TimeType=='8'">
+                                            <option *ngFor="let month of listMonth" [value]="month">
+                                                Tháng {{month}}</option>
+                                        </select>
+
+                                        <select class="form-control" (change)="reportLearner()" [(ngModel)]="model.Quarter" name="Quarters" *ngIf="model.TimeType=='9'">
+                                            <option value="1"> Quý 1</option>
+                                            <option value="2"> Quý 2</option>
+                                            <option value="3"> Quý 3</option>
+                                            <option value="4"> Quý 4</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6 col-lg-6 col-sm-12" *ngIf="model.TimeType=='8'||model.TimeType=='9'||model.TimeType=='12'">
+                                        <select class="form-control" (change)="reportLearner()" [(ngModel)]="model.Year" name="Year">
+                                            <option *ngFor="let year of listYear" [value]="year">
+                                                {{year}}</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6 col-lg-6 col-sm-12" *ngIf="model.TimeType == '13'">
+                                        <div class="input-group">
+                                            <input class="form-control" placeholder="dd/mm/yyyy" name="startDate" [(ngModel)]="startDate" ngbDatepicker #d="ngbDatepicker">
+                                            <div class="input-group-append">
+                                                <span class="input-group-text pointer" (click)="d.toggle();$event.stopPropagation();">
+                                                    <i class="far fa-calendar-alt" style="color: #999;"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-lg-6 col-sm-12" *ngIf="model.TimeType == '13'">
+                                        <div class="input-group">
+                                            <input class="form-control" placeholder="dd/mm/yyyy" name="finishDate" [(ngModel)]="finishDate" ngbDatepicker #d3="ngbDatepicker">
+                                            <div class="input-group-append">
+                                                <span class="input-group-text pointer" (click)="d3.toggle();$event.stopPropagation();">
+                                                    <i class="far fa-calendar-alt" style="color: #999;"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-3" style="padding-top: 28px;">
+                        <button class="btn btn-success" (click)="reportLearner()">
+                            <i class="fa fa-search"></i> &nbsp;Tìm kiếm</button>
+                        <button class="btn btn-secondary" (click)="clear()">
+                            <i class="fas fa-redo-alt"></i> &nbsp;Làm mới</button>
+                    </div>
+                    <!-- <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12" style="margin-top: 25px;">
+                        <nts-search-bar [(options)]="searchOptions" [(ngModel)]="model" name="searchModel" (change)="reportLearner()">
+                        </nts-search-bar>
+                    </div> -->
+
+                    <div class="col-xl-6 col-lg-6 col-md-6 text-right">
+                        <div class="form-group">
+                            <div class="title-search-left click-drop">
+                                <label class="form-label"></label>
+                            </div>
+                            <div class="controls">
+                                <button *appUipermission="['F000551']" class="btn btn-success" (click)="exportExcel()">
+                                    <i class="fas fa-file-excel"></i> &nbsp;Xuất excel</button>
+                                <button *appUipermission="['F000552']" class="btn btn-success" (click)="exportPdf()">
+                                    <i class="fas fa-file-pdf"></i> &nbsp;Xuất pdf</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="content-body">
+            <div class="row">
+                <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3" style="padding-top: 70px;">
+                    <div #scrollHeaderOne style="height: auto; width:100%;overflow: hidden">
+                        <table class="table table-bordered mb-0" style="word-wrap: break-word ;min-width:280px;">
+                            <thead>
+                                <tr>
+                                    <th width="100px" class="text-center">
+                                        <span *ngIf="model.TimeType=='3' || model.TimeType=='4' || model.TimeType=='5' || model.TimeType=='6' || model.TimeType=='7' || model.TimeType=='8'|| model.TimeType=='13'">
+                                            Ngày
+                                        </span>
+                                        <span *ngIf="model.TimeType=='9' || model.TimeType=='10' || model.TimeType=='11' || model.TimeType=='12'">
+                                            Tháng
+                                        </span>
+                                    </th>
+                                    <th min-width="180px" class="text-center">Số lượng người học</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                    <perfect-scrollbar [config]="constant.ScrollConfig" [style.max-height.px]="heightChart">
+                        <table class="table table-bordered table-fixed table-hover" style="min-width:300px; ">
+                            <tbody>
+                                <tr *ngFor="let row of listData; let i = index">
+                                    <td width="100px" class="text-center">
+                                        {{row.name}}
+                                    </td>
+                                    <td min-width="180px" class="text-center">
+                                        {{row.total|number}}
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <!-- <tfoot>
+                                <tr>
+                                    
+                                </tr>
+                            </tfoot> -->
+                        </table>
+                    </perfect-scrollbar>
+
+
+
+                    <!-- <perfect-scrollbar [config]="constant.ScrollXConfig" style="height:auto; width:100%;">
+                        <table class="table table-bordered table-hover" style="min-width:300px">
+                            <thead>
+                                <tr>
+                                    <th width="100px" class="text-center">Ngày</th>
+                                    <th min-width="200px" class="text-center">Số lượng người học</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let row of listData; let i = index">
+                                    <td class="text-center">
+                                        {{row.name}}
+                                    </td>
+                                    <td class="text-center">
+                                        {{row.total}}
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </perfect-scrollbar> -->
+                </div>
+                <div class="col-xl-9 col-lg-9 col-md-9 col-sm-9">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                        <h3 class="text-center">{{textViewChart}}</h3>
+                        <div style="display: block">
+                            <canvas id="myChart" baseChart [datasets]="barChartData" [labels]="barListView" [options]="barChartOptions" [legend]="barChartLegend" [colors]="chartColors" [chartType]="barChartType"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
